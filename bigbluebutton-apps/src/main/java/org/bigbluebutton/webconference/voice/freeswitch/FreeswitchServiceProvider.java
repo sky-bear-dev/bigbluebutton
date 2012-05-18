@@ -21,8 +21,6 @@
 */
 package org.bigbluebutton.webconference.voice.freeswitch;
 
-import java.net.ConnectException;
-
 import org.freeswitch.esl.client.inbound.Client;
 import org.freeswitch.esl.client.inbound.InboundConnectionFailure;
 import org.freeswitch.esl.client.manager.ManagerConnection;

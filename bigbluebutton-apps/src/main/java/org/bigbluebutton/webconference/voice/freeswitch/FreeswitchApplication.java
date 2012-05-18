@@ -22,12 +22,17 @@
 package org.bigbluebutton.webconference.voice.freeswitch;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Observable;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
+
+import org.bigbluebutton.deskshare.client.net.Message;
 import org.bigbluebutton.webconference.voice.ConferenceServiceProvider;
 import org.bigbluebutton.webconference.voice.events.ConferenceEventListener;
 import org.bigbluebutton.webconference.voice.events.ParticipantJoinedEvent;
@@ -52,6 +57,11 @@ import org.slf4j.Logger;
 public class FreeswitchApplication extends Observable implements ConferenceServiceProvider, IEslEventListener {
     private static Logger log = Red5LoggerFactory.getLogger(FreeswitchApplication.class, "bigbluebutton");
 
+	private final Executor exec = Executors.newSingleThreadExecutor();
+	private Runnable voiceCommandProcessor;
+	private volatile boolean processVoiceCommand = false;	
+    private final BlockingQueue<VoiceCommand> blockDataQ = new LinkedBlockingQueue<VoiceCommand>();
+    
     private ManagerConnection manager;
     private ConferenceEventListener conferenceEventListener;
     private FreeswitchHeartbeatMonitor heartbeatMonitor;
@@ -63,9 +73,34 @@ public class FreeswitchApplication extends Observable implements ConferenceServi
     private static final String STOP_TALKING_EVENT = "stop-talking";
     private static final String START_RECORDING_EVENT = "start-recording";
     private static final String STOP_RECORDING_EVENT = "stop-recording";
-        
+    
+	public void send(VoiceCommand message) {
+		blockDataQ.offer(message);
+	}
+    
+	
+	private void startExecutor() {
+		processVoiceCommand = true;	 
+		voiceCommandProcessor = new Runnable() {
+    		public void run() {
+    			processVoiceCommand();   			
+    		}
+    	};
+    	exec.execute(voiceCommandProcessor);		
+	}
+	
+    private void stopExecutor() {
+    	processVoiceCommand = false;
+    }
+    
+    private void processVoiceCommand() {
+    	
+    }
+	
     @Override
     public boolean startup() {    	
+
+    	
         Client c = manager.getESLClient();
         if (c.canSend()) {
             c.addEventListener( this );
