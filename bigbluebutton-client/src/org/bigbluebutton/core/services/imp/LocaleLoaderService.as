@@ -42,8 +42,8 @@ package org.bigbluebutton.core.services.imp
             var locale:XML;
             
             for each(locale in list){
-                localeCodes.push(locale.@code);
-                localeNames.push(locale.@name);
+    //            localeCodes.push(locale.@code);
+   //             localeNames.push(locale.@name);
             }							
         }
     }
