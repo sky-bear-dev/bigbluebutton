@@ -73,6 +73,10 @@ package org.bigbluebutton.core.model.imp
             dispatch(new Event(Event.CHANGE));
         }
         
+		public function get localeVersion():String {
+			return getString('bbb.mainshell.locale.version');
+		}
+		
         [Bindable("change")]
         public function getString(resourceName:String, parameters:Array = null, locale:String = null):String{
             /**

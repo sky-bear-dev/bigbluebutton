@@ -4,11 +4,14 @@ package org.bigbluebutton.core
     
     import org.bigbluebutton.core.controllers.commands.StartupBigBlueButtonCommand;
     import org.bigbluebutton.core.controllers.commands.config.LoadConfigCommand;
+    import org.bigbluebutton.core.controllers.commands.locale.CompareLocaleVersionCommand;
     import org.bigbluebutton.core.controllers.commands.locale.LoadDefaultLocaleCommand;
     import org.bigbluebutton.core.controllers.commands.locale.LoadMasterLocaleCommand;
     import org.bigbluebutton.core.controllers.commands.locale.SwitchLocaleCommand;
+    import org.bigbluebutton.core.controllers.events.config.ConfigLoadEvent;
     import org.bigbluebutton.core.controllers.events.locale.LocaleEvent;
     import org.bigbluebutton.core.controllers.events.locale.SwitchLocaleEvent;
+    import org.bigbluebutton.core.model.imp.ConfigModel;
     import org.bigbluebutton.core.model.imp.LocaleModel;
     import org.bigbluebutton.core.model.imp.LoggerModel;
     import org.bigbluebutton.core.services.ILocaleService;
@@ -38,7 +41,7 @@ package org.bigbluebutton.core
             injector.mapSingleton(LocaleLoaderService);
             injector.mapSingleton(LocaleConfigLoaderService);
             injector.mapSingleton(LocaleModel);
- //           injector.mapSingletonOf(ILocaleModel, LocaleModel);
+            injector.mapSingleton(ConfigModel);
             
             mediatorMap.mapView(MainApplicationShell, MainApplicationShellMediator);
             mediatorMap.mapView(MainCanvas, MainCanvasMediator);
@@ -49,6 +52,7 @@ package org.bigbluebutton.core
             commandMap.mapEvent(LocaleEvent.LIST_OF_AVAILABLE_LOCALES_LOADED_EVENT, LoadMasterLocaleCommand);
             commandMap.mapEvent(LocaleEvent.MASTER_LOCALE_LOADED_EVENT, LoadDefaultLocaleCommand);
             commandMap.mapEvent(LocaleEvent.PREFERRED_LOCALE_LOADED_EVENT, LoadConfigCommand);
+			commandMap.mapEvent(ConfigLoadEvent.CONFIG_LOADED_EVENT, CompareLocaleVersionCommand);
             commandMap.mapEvent(SwitchLocaleEvent.SWITCH_TO_NEW_LOCALE_EVENT, SwitchLocaleCommand);
             
             dispatchEvent(new ContextEvent(ContextEvent.STARTUP_COMPLETE));
