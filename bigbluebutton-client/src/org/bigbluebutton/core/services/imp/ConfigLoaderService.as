@@ -8,6 +8,7 @@ package org.bigbluebutton.core.services.imp
 	
 	import org.bigbluebutton.core.controllers.events.config.ConfigLoadEvent;
 	import org.bigbluebutton.core.model.imp.ConfigModel;
+	import org.bigbluebutton.core.model.imp.ModuleModel;
 	import org.robotlegs.mvcs.Actor;
 
     public class ConfigLoaderService extends Actor
@@ -15,7 +16,10 @@ package org.bigbluebutton.core.services.imp
 		public static const LOCALES_FILE:String = "conf/config.xml";
 		
 		[Inject]
-		public var model:ConfigModel;
+		public var configModel:ConfigModel;
+		
+		[Inject]
+		public var moduleParser:ConfigToModuleDataParser;
 		
 		public function determineAvailableLocales():void {            
 			var _urlLoader:URLLoader = new URLLoader();
@@ -29,7 +33,8 @@ package org.bigbluebutton.core.services.imp
 		}
 		
 		private function handleComplete(e:Event):void {
-			model.setConfig((new XML(e.target.data));	
+			configModel.setConfig(new XML(e.target.data));	
+			moduleParser.parseConfig(new XML(e.target.data));
 			dispatch(new ConfigLoadEvent(ConfigLoadEvent.CONFIG_LOADED_EVENT));
 		}
 				

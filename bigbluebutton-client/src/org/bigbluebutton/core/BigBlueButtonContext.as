@@ -14,7 +14,9 @@ package org.bigbluebutton.core
     import org.bigbluebutton.core.model.imp.ConfigModel;
     import org.bigbluebutton.core.model.imp.LocaleModel;
     import org.bigbluebutton.core.model.imp.LoggerModel;
+    import org.bigbluebutton.core.model.imp.ModuleModel;
     import org.bigbluebutton.core.services.ILocaleService;
+    import org.bigbluebutton.core.services.imp.ConfigToModuleDataParser;
     import org.bigbluebutton.core.services.imp.LocaleConfigLoaderService;
     import org.bigbluebutton.core.services.imp.LocaleLoaderService;
     import org.bigbluebutton.main.views.LoadingBar;
@@ -42,7 +44,9 @@ package org.bigbluebutton.core
             injector.mapSingleton(LocaleConfigLoaderService);
             injector.mapSingleton(LocaleModel);
             injector.mapSingleton(ConfigModel);
-            
+			injector.mapSingleton(ModuleModel);
+			injector.mapSingleton(ConfigToModuleDataParser);
+			
             mediatorMap.mapView(MainApplicationShell, MainApplicationShellMediator);
             mediatorMap.mapView(MainCanvas, MainCanvasMediator);
             mediatorMap.mapView(LoadingBar, LoadingBarMediator);
