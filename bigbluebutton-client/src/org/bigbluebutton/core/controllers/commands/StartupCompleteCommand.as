@@ -1,4 +1,4 @@
-package org.bigbluebutton.core.commands
+package org.bigbluebutton.core.controllers.commands
 {
     import org.bigbluebutton.core.Logger;
     import org.robotlegs.mvcs.Command;

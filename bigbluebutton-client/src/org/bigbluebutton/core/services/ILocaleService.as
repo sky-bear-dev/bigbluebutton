@@ -2,7 +2,7 @@ package org.bigbluebutton.core.services
 {
     public interface ILocaleService
     {
-        function getDefaultLocale():String;
+    //    function getDefaultLocale():String;
         
         function determineAvailableLocales():void;
         

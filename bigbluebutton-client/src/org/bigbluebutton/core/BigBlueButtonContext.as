@@ -2,8 +2,10 @@ package org.bigbluebutton.core
 {
     import flash.display.DisplayObjectContainer;
     
-    import org.bigbluebutton.core.commands.StartupCompleteCommand;
+    import org.bigbluebutton.core.controllers.commands.StartupCompleteCommand;
     import org.bigbluebutton.core.model.imp.LoggerModel;
+    import org.bigbluebutton.core.services.ILocaleService;
+    import org.bigbluebutton.core.services.imp.LocaleLoaderService;
     import org.robotlegs.base.ContextEvent;
     import org.robotlegs.mvcs.Context;
     
@@ -17,7 +19,7 @@ package org.bigbluebutton.core
         override public function startup():void {
             injector.mapSingletonOf(Logger, LoggerModel);
             
- //           injector.mapSingletonOf(ILocaleService, LocaleLoaderService);
+            injector.mapSingletonOf(ILocaleService, LocaleLoaderService);
  //           injector.mapSingletonOf(ILocale, LocaleModel);
  //           injector.mapSingletonOf(ILocaleModel, LocaleModel);
             
