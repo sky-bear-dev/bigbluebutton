@@ -18,11 +18,8 @@
 */
 package org.bigbluebutton.main.model.modules
 {
-	import flash.utils.Dictionary;
-	
+	import flash.utils.Dictionary;	
 	import mx.collections.ArrayCollection;
-	import mx.controls.Alert;
-	
 	import org.bigbluebutton.common.LogUtil;
 
 	public class DependancyResolver
@@ -67,7 +64,7 @@ package org.bigbluebutton.main.model.modules
 				}
 			}
 			LogUtil.debug("Dependency Order: ");
-			for (var u:int = 0; u<sorted.length; u++){
+			for (var u:int = 0; u<sorted.length; u++) {
 				LogUtil.debug(((sorted.getItemAt(u) as ModuleDescriptor).getName()));
 				//Alert.show((sorted.getItemAt(u) as ModuleDescriptor).getAttribute("name") as String);
 			}

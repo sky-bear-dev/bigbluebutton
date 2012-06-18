@@ -1,4 +1,4 @@
-package org.bigbluebutton.core.controllers.events
+package org.bigbluebutton.core.controllers.events.locale
 {
     import flash.events.Event;
     
