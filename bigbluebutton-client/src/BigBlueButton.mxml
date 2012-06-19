@@ -25,6 +25,7 @@
 	xmlns:maps="org.bigbluebutton.main.maps.*"
 	xmlns:mate="http://mate.asfusion.com/"
 	xmlns:m="library://melomel/2010"
+    xmlns:rlegs="org.bigbluebutton.core.*"
 	pageTitle="BigBlueButton"
 	layout="absolute" preinitialize="init()"
 	preloader="org.bigbluebutton.main.model.BigBlueButtonPreloader">
@@ -214,6 +215,8 @@
 	
 	<m:Melomel/>
 	
+    <rlegs:BigBlueButtonContext contextView="{this}"/>
+    
 	<maps:ApplicationEventMap />	
 	<views:MainApplicationShell id="mainShell"/>	
 	

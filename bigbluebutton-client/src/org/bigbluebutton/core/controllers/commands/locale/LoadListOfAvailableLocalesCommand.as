@@ -4,6 +4,7 @@ package org.bigbluebutton.core.controllers.commands.locale
     
     public class LoadListOfAvailableLocalesCommand extends Command
     {
+        
         public function LoadListOfAvailableLocalesCommand()
         {
             super();

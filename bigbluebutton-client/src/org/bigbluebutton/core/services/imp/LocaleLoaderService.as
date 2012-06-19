@@ -1,50 +1,47 @@
 package org.bigbluebutton.core.services.imp
 {
-    import flash.events.Event;
-    import flash.net.URLLoader;
-    import flash.net.URLRequest;
+    import flash.events.IEventDispatcher;
     
-    import mx.resources.IResourceManager;
-    import mx.resources.ResourceManager;
+    import mx.events.ResourceEvent;
     
-    import org.bigbluebutton.core.services.ILocaleService;
+    import org.bigbluebutton.core.controllers.events.locale.LocaleEvent;
+    import org.bigbluebutton.core.model.imp.LocaleModel;
     import org.robotlegs.mvcs.Actor;
 
-    public class LocaleLoaderService  extends Actor implements ILocaleService
+    public class LocaleLoaderService extends Actor
     {
-        public static const LOCALES_FILE:String = "conf/locales.xml";
-        public static const VERSION:String = "0.8";
-        private var inited:Boolean = false;
+        private var resEventDispatcher:IEventDispatcher;
         
-        private static var BBB_RESOURCE_BUNDLE:String = 'bbbResources';
-       
-        private var resourceManager:IResourceManager;
+        [Inject]
+        public var localeModel: LocaleModel;
         
-        public function LocaleLoaderService()
-        {
-            resourceManager = ResourceManager.getInstance();
-        }
+        private var _localeBeingLoaded:String;
         
-        public function determineAvailableLocales():void {            
-            // Add a random string on the query so that we always get an up-to-date config.xml
+        public function loadLocaleResource(locale:String):void {    
+            // Add a random string on the query so that we don't get a cached version.            
             var date:Date = new Date();
-            var _urlLoader:URLLoader = new URLLoader();
-            _urlLoader.addEventListener(Event.COMPLETE, handleComplete);
-            _urlLoader.load(new URLRequest(LOCALES_FILE + "?a=" + date.time));
-        }
-        
-        private function handleComplete(e:Event):void{
-            parse(new XML(e.target.data));		
-        }
-        
-        private function parse(xml:XML):void{		 	
-            var list:XMLList = xml.locale;
-            var locale:XML;
+            var localeURI:String = 'locale/' + locale + '_resources.swf?a=' + date.time;            
             
-            for each(locale in list){
-    //            localeCodes.push(locale.@code);
-   //             localeNames.push(locale.@name);
-            }							
+            // Store the locale being loaded. We need this to dispatch when we get the loading result.
+            _localeBeingLoaded = locale;
+            
+            resEventDispatcher = localeModel.resourceManager.loadResourceModule(localeURI, false);
+            resEventDispatcher.addEventListener(ResourceEvent.COMPLETE, localeChangeComplete);
+            resEventDispatcher.addEventListener(ResourceEvent.ERROR, handleResourceNotLoaded);
         }
+        
+        private function localeChangeComplete(event:ResourceEvent):void {
+            localeModel.localeLoaded(_localeBeingLoaded);
+        }
+        
+  
+        private function handleResourceNotLoaded(event:ResourceEvent):void{
+            localeModel.localeLoadingFailed(_localeBeingLoaded);
+            var e: LocaleEvent = new LocaleEvent(LocaleEvent.LOAD_LOCALE_FAILED_EVENT);
+            e.loadedLocale = _localeBeingLoaded;
+            dispatch(e);
+        }
+        
+
     }
 }
