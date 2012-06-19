@@ -1,6 +1,7 @@
 package org.bigbluebutton.core.model.imp
 {
 	import flash.events.Event;
+	import flash.external.ExternalInterface;
 	
 	import mx.collections.ArrayCollection;
 	import mx.resources.IResourceManager;
@@ -39,6 +40,10 @@ package org.bigbluebutton.core.model.imp
         
         public function get resourceManager():IResourceManager {
             return _resourceManager;
+        }
+        
+        public function get defaultLocale():String {
+            return ExternalInterface.call("getLanguage");
         }
         
         public function localeLoaded(code: String):void {

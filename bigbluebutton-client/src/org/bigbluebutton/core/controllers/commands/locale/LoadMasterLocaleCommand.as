@@ -7,10 +7,10 @@ package org.bigbluebutton.core.controllers.commands.locale
     public class LoadMasterLocaleCommand extends Command
     {
         [Inject]
-        public var localeModel: LocaleModel;
+        public var localeModel:LocaleModel;
         
         [Inject]
-        public var service: LocaleLoaderService;
+        public var service:LocaleLoaderService;
         
         override public function execute():void
         {

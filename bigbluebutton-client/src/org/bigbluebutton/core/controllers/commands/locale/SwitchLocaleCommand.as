@@ -8,10 +8,10 @@ package org.bigbluebutton.core.controllers.commands.locale
     {
         
         [Inject]
-        public var event: SwitchLocaleEvent;
+        public var event:SwitchLocaleEvent;
         
         [Inject]
-        public var service: LocaleLoaderService;
+        public var service:LocaleLoaderService;
         
         override public function execute():void
         {

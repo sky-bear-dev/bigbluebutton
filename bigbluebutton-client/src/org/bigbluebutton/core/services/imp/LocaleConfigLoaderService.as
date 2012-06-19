@@ -6,6 +6,7 @@ package org.bigbluebutton.core.services.imp
     import flash.net.URLLoader;
     import flash.net.URLRequest;
     
+    import mx.controls.Alert;
     import mx.resources.IResourceManager;
     import mx.resources.ResourceManager;
     
@@ -35,6 +36,7 @@ package org.bigbluebutton.core.services.imp
         }
         
         private function handleComplete(e:Event):void {
+            Alert.show(new XML(e.target.data));
             parse(new XML(e.target.data));		
         }
         

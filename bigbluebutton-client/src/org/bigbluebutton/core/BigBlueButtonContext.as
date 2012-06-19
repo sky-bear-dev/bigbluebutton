@@ -2,7 +2,9 @@ package org.bigbluebutton.core
 {
     import flash.display.DisplayObjectContainer;
     
-    import org.bigbluebutton.core.controllers.commands.StartupCompleteCommand;
+    import org.bigbluebutton.core.controllers.commands.StartupBigBlueButtonCommand;
+    import org.bigbluebutton.core.controllers.commands.config.LoadConfigCommand;
+    import org.bigbluebutton.core.controllers.commands.locale.LoadDefaultLocaleCommand;
     import org.bigbluebutton.core.controllers.commands.locale.LoadMasterLocaleCommand;
     import org.bigbluebutton.core.controllers.commands.locale.SwitchLocaleCommand;
     import org.bigbluebutton.core.controllers.events.locale.LocaleEvent;
@@ -11,6 +13,7 @@ package org.bigbluebutton.core
     import org.bigbluebutton.core.model.imp.LoggerModel;
     import org.bigbluebutton.core.services.ILocaleService;
     import org.bigbluebutton.core.services.imp.LocaleConfigLoaderService;
+    import org.bigbluebutton.core.services.imp.LocaleLoaderService;
     import org.bigbluebutton.main.views.LoadingBar;
     import org.bigbluebutton.main.views.LoadingBarMediator;
     import org.bigbluebutton.main.views.MainApplicationShell;
@@ -32,8 +35,9 @@ package org.bigbluebutton.core
         override public function startup():void {
             injector.mapSingletonOf(Logger, LoggerModel);
             
-            injector.mapSingletonOf(ILocaleService, LocaleConfigLoaderService);
-            injector.mapSingletonOf(LocaleModel, LocaleModel);
+            injector.mapSingleton(LocaleLoaderService);
+            injector.mapSingleton(LocaleConfigLoaderService);
+            injector.mapSingleton(LocaleModel);
  //           injector.mapSingletonOf(ILocaleModel, LocaleModel);
             
             mediatorMap.mapView(MainApplicationShell, MainApplicationShellMediator);
@@ -41,8 +45,10 @@ package org.bigbluebutton.core
             mediatorMap.mapView(LoadingBar, LoadingBarMediator);
             mediatorMap.mapView(MainToolbar, MainToolbarMediator);
             
-            commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCompleteCommand, ContextEvent);
+            commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupBigBlueButtonCommand, ContextEvent);
             commandMap.mapEvent(LocaleEvent.LIST_OF_AVAILABLE_LOCALES_LOADED_EVENT, LoadMasterLocaleCommand);
+            commandMap.mapEvent(LocaleEvent.MASTER_LOCALE_LOADED_EVENT, LoadDefaultLocaleCommand);
+            commandMap.mapEvent(LocaleEvent.PREFERRED_LOCALE_LOADED_EVENT, LoadConfigCommand);
             commandMap.mapEvent(SwitchLocaleEvent.SWITCH_TO_NEW_LOCALE_EVENT, SwitchLocaleCommand);
             
             dispatchEvent(new ContextEvent(ContextEvent.STARTUP_COMPLETE));
