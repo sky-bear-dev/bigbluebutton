@@ -22,7 +22,7 @@ package org.bigbluebutton.core.services.imp
         public static const LOCALES_FILE:String = "conf/locales.xml";
       
         [Inject]
-        private var localeModel: LocaleModel;
+        public var localeModel:LocaleModel;
                 
         public function determineAvailableLocales():void {            
             var _urlLoader:URLLoader = new URLLoader();
