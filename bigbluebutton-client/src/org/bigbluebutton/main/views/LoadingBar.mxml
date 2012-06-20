@@ -21,14 +21,14 @@
 -->
 
 <mx:ProgressBar xmlns:mate="http://mate.asfusion.com/" xmlns:mx="http://www.adobe.com/2006/mxml" labelPlacement="bottom" minimum="0" maximum="100" mode="manual" >
-	
+<!--	
 	<mate:Listener type="{ModuleLoadEvent.MODULE_LOADING_STARTED}" method="moduleLoadingStarted" />
 	<mate:Listener type="{ModuleLoadEvent.MODULE_LOAD_PROGRESS}" method="moduleLoadProgress" />
 	<mate:Listener type="{ModuleLoadEvent.ALL_MODULES_LOADED}" method="allModulesLoaded" />
 	<mate:Listener type="{PortTestEvent.TEST_RTMP}" method="testRTMP" />
 	<mate:Listener type="{PortTestEvent.PORT_TEST_UPDATE}" method="testRTMPupdate" />
 	<mate:Listener type="{PortTestEvent.TUNNELING_FAILED}" method="tunnelingFailed" />
-		
+-->		
 	<mx:Script>
 		<![CDATA[
 			import mx.controls.Alert;
@@ -41,6 +41,7 @@
 			private var modules:Dictionary = new Dictionary();
 			private var numModules:int = 0;
 			private var portUpdateStr:String = 'Connecting to the server';
+            
 			private function moduleLoadingStarted(e:ModuleLoadEvent):void{
 				var list:XMLList = e.modules;
 				var item:XML;

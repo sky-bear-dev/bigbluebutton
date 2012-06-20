@@ -164,7 +164,7 @@ package org.bigbluebutton.main.model.modules
 			var trimmedString:String = StringUtil.trimArrayElements(dependString, ",");
 			var dependancies:Array = trimmedString.split(",");
 			
-			for (var i:int = 0; i<dependancies.length; i++){
+			for (var i:int = 0; i < dependancies.length; i++){
 				unresolvedDependancies.addItem(dependancies[i]);
 			}
 		}

@@ -22,21 +22,23 @@
 
 <MDIWindow xmlns="flexlib.mdi.containers.*" 
 	       xmlns:mx="http://www.adobe.com/2006/mxml" 
-	       title="Log Window" creationComplete="displayLogMessages();"
+	       title="Log Window"
 	       showCloseButton="true" xmlns:text="flash.text.*">
 
 	<mx:Script>
 		<![CDATA[
-			import mx.controls.TextArea;
-			import flexlib.controls.Highlighter;
-			import org.bigbluebutton.util.logging.Logger;
-			import mx.logging.Log;
-			import mx.logging.LogEventLevel;
-			import mx.collections.ArrayCollection;
-			import mx.managers.PopUpManager;
+            import flexlib.controls.Highlighter;
+            
+            import mx.collections.ArrayCollection;
+            import mx.controls.TextArea;
+            import mx.logging.Log;
+            import mx.logging.LogEventLevel;
+            import mx.managers.PopUpManager;
+            
+            import org.bigbluebutton.core.model.imp.LoggerModel;
 			
 			[Bindable]
-			public var logs:Logger;
+			public var logs:LoggerModel;
 			private var highlighter:Highlighter;
 			private var textField:TextField;
 			
@@ -48,7 +50,7 @@
 				}
 			}
 			
-			private function displayLogMessages():void {
+			public function displayLogMessages():void {
 				this.textField = this.getTextField(this.txtOutput);
 				highlighter = new Highlighter(this.textField);
 				txtOutput.text = logs.messages;

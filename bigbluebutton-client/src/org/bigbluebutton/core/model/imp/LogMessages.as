@@ -26,16 +26,10 @@ package org.bigbluebutton.core.model.imp
 	
 	public class LogMessages extends LineFormattedTarget
 	{
-		private var logMessages:ArrayCollection;
+		private var logMessages:ArrayCollection = new ArrayCollection();;
 		
 		public static const MAX_NUM_MESSAGES:int = 2000;
-		
-		public function LogMessages()
-		{
-			super();
-			this.logMessages = new ArrayCollection();
-		}
-		
+				
 		override mx_internal function internalLog(message:String):void {
 			if (logMessages.length >= MAX_NUM_MESSAGES) {
 				logMessages.removeItemAt(0);
@@ -48,7 +42,7 @@ package org.bigbluebutton.core.model.imp
 		}
 		
 		public function get messages():String {
-			var m:String = "";
+			var m:String = "Hello!!!";
 			
 			for (var i:int=0; i < logMessages.length; i++) {
 				m += logMessages.getItemAt(i);			

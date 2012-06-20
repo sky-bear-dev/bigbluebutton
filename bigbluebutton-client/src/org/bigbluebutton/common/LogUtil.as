@@ -27,27 +27,27 @@ package org.bigbluebutton.common
 		
 		public static function debug(message:String):void
 		{
-			logger.debug(message);
+//			logger.debug(message);
 		}
 
 		public static function info(message:String):void
 		{
-			logger.info(message);
+//			logger.info(message);
 		}
 		
 		public static function error(message:String):void
 		{
-			logger.error(message);
+//			logger.error(message);
 		}
 
 		public static function fatal(message:String):void
 		{
-			logger.fatal(message);
+//			logger.fatal(message);
 		}
 		
 		public static function warn(message:String):void
 		{
-			logger.warn(message);
+//			logger.warn(message);
 		}
 		
 		private static function get logger():ILogger {

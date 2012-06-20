@@ -170,7 +170,6 @@
 			private function openLogWindow():void {
 				if (logWindow == null){
 					logWindow = new LogWindow();
-					logWindow.logs = logs;
 				}
 				mdiCanvas.windowManager.add(logWindow);
 				mdiCanvas.windowManager.absPos(logWindow, 50, 50);
