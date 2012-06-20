@@ -1,9 +1,18 @@
 package org.bigbluebutton.core.model.imp
 {
-    public class UsersModel
+    import org.bigbluebutton.core.controllers.events.UserAuthenticatedEvent;
+    import org.bigbluebutton.core.model.vo.UserSession;
+    import org.robotlegs.mvcs.Actor;
+
+    public class UsersModel extends Actor
     {
-        public function UsersModel()
-        {
-        }
+       private var _loggedInUser:UserSession;
+       
+       public function set loggedInUser(user:UserSession):void {
+           _loggedInUser = user;
+           var event:UserAuthenticatedEvent = new UserAuthenticatedEvent();
+           dispatch(event);
+       }
+        
     }
 }

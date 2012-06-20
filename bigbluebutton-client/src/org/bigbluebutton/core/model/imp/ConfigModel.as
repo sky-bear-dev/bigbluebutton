@@ -28,12 +28,13 @@ package org.bigbluebutton.core.model.imp
 			p.application = _config.porttest.@application;
 			return p;
 		}
-		
-		public function get application():Object {
-			var a:Object = new Object();
-			a.uri = _config.application.@uri;
-			a.host = _config.application.@host;
-			return a;
+
+        public function get applicationURI():Object {
+            return _config.application.@uri;
+        }
+        
+		public function get enterApiURI():Object {
+			return _config.application.@host;
 		}
 		
 		public function get language():Object {

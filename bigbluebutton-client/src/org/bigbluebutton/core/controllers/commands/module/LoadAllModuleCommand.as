@@ -1,6 +1,7 @@
 package org.bigbluebutton.core.controllers.commands.module
 {
     import org.bigbluebutton.core.Logger;
+    import org.bigbluebutton.core.controllers.events.module.AllModulesLoadedEvent;
     import org.bigbluebutton.core.model.imp.ModuleModel;
     import org.bigbluebutton.core.model.vo.ModuleDescriptor;
     import org.bigbluebutton.core.services.imp.ModuleLoaderService;
@@ -21,6 +22,7 @@ package org.bigbluebutton.core.controllers.commands.module
         {    
             if (moduleModel.allModulesLoaded()) {
                 logger.debug("All modules have been loaded");
+                dispatch(new AllModulesLoadedEvent(AllModulesLoadedEvent.ALL_MODULES_LOADED_EVENT));
             } else {
                 var mod:ModuleDescriptor = moduleModel.getNextModuleToLoad();
                 if (mod != null) {
