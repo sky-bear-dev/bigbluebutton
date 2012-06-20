@@ -21,7 +21,7 @@ package org.bigbluebutton.core.services.imp
 		[Inject]
 		public var moduleParser:ConfigToModuleDataParser;
 		
-		public function determineAvailableLocales():void {            
+		public function loadConfig():void {            
 			var _urlLoader:URLLoader = new URLLoader();
 			_urlLoader.addEventListener(Event.COMPLETE, handleComplete);
 			_urlLoader.addEventListener(IOErrorEvent.IO_ERROR, handleIOErrorEvent);

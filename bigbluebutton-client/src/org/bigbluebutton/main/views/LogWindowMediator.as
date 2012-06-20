@@ -1,5 +1,6 @@
 package org.bigbluebutton.main.views
 {
+    import org.bigbluebutton.core.Logger;
     import org.bigbluebutton.core.model.imp.LoggerModel;
     import org.robotlegs.mvcs.Mediator;
     
@@ -9,11 +10,11 @@ package org.bigbluebutton.main.views
         public var view:LogWindow;
         
         [Inject]
-        public var model:LoggerModel;
+        public var logger:Logger;
         
         override public function onRegister():void
         {
-            view.logs = model;
+            view.logger = logger;
             view.displayLogMessages();
             // addViewListener();
             // addContextListener();

@@ -15,7 +15,7 @@ package org.bigbluebutton.core.model.imp
 		}
 		
 		public function get localeVersion():String {
-			return _config.localeversion as String;
+			return _config.localeversion;
 		}
 		
 		public function get version():String {

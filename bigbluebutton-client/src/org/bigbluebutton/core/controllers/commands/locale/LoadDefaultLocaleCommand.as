@@ -1,5 +1,6 @@
 package org.bigbluebutton.core.controllers.commands.locale
 {
+    import org.bigbluebutton.core.Logger;
     import org.bigbluebutton.core.controllers.events.locale.LocaleEvent;
     import org.bigbluebutton.core.model.imp.LocaleModel;
     import org.bigbluebutton.core.services.imp.LocaleLoaderService;
@@ -13,8 +14,12 @@ package org.bigbluebutton.core.controllers.commands.locale
         [Inject]
         public var service:LocaleLoaderService;
         
+        [Inject]
+        public var logger:Logger;
+        
         override public function execute():void
         {
+            logger.debug("Loading default locale");
             var defaultLocale:String = model.defaultLocale;
             if (defaultLocale != null  && defaultLocale != "" && defaultLocale != model.masterLocale) {
                 service.loadLocaleResource(defaultLocale);                    

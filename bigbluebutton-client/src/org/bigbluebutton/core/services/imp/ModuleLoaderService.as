@@ -5,19 +5,23 @@ package org.bigbluebutton.core.services.imp
     import flash.system.ApplicationDomain;
     
     import mx.events.ModuleEvent;
+    import mx.modules.ModuleLoader;
     
     import org.bigbluebutton.common.IBigBlueButtonModule;
+    import org.bigbluebutton.core.Logger;
     import org.bigbluebutton.core.controllers.events.module.ModuleLoadErrorEvent;
     import org.bigbluebutton.core.controllers.events.module.ModuleLoadProgressEvent;
     import org.bigbluebutton.core.controllers.events.module.ModuleLoadedEvent;
     import org.bigbluebutton.core.model.vo.ModuleDescriptor;
-    import org.robotlegs.mvcs.Actor;   
-    import mx.modules.ModuleLoader;
+    import org.robotlegs.mvcs.Actor;
 
     public class ModuleLoaderService extends Actor
     {
-        private var _loader:ModuleLoader;
+        private var _loader:ModuleLoader = new ModuleLoader();
         private var _currentModule:ModuleDescriptor;
+        
+        [Inject]
+        public var logger:Logger;
         
         public function load(module:ModuleDescriptor):void { 
             _currentModule = module;
@@ -27,6 +31,7 @@ package org.bigbluebutton.core.services.imp
             _loader.addEventListener("ready", onReady);
             _loader.addEventListener("error", onErrorLoading);
             _loader.url = module.attributes.url;
+            logger.debug("Module URL = " + module.attributes.url); 
             _loader.loadModule();
         }
         

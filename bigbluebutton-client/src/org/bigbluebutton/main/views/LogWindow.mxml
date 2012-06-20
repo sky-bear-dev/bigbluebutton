@@ -33,27 +33,26 @@
             import mx.controls.TextArea;
             import mx.logging.Log;
             import mx.logging.LogEventLevel;
-            import mx.managers.PopUpManager;
-            
-            import org.bigbluebutton.core.model.imp.LoggerModel;
+            import mx.managers.PopUpManager;           
+            import org.bigbluebutton.core.Logger;
+
 			
-			[Bindable]
-			public var logs:LoggerModel;
+			public var logger:Logger;
 			private var highlighter:Highlighter;
 			private var textField:TextField;
 			
 			private function changeTarget():void {
 				if (!chkFlag.selected) {
-					logs.enableLogging(true)
+                    logger.enableLogging(true)
 				} else {
-					logs.enableLogging(false)
+                    logger.enableLogging(false)
 				}
 			}
 			
 			public function displayLogMessages():void {
 				this.textField = this.getTextField(this.txtOutput);
 				highlighter = new Highlighter(this.textField);
-				txtOutput.text = logs.messages;
+				txtOutput.text = logger.messages;
 			}
 			
 			private function filter():void{

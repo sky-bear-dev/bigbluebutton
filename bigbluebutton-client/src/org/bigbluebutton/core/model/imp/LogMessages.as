@@ -42,9 +42,9 @@ package org.bigbluebutton.core.model.imp
 		}
 		
 		public function get messages():String {
-			var m:String = "Hello!!!";
+			var m:String = "";
 			
-			for (var i:int=0; i < logMessages.length; i++) {
+			for (var i:int = 0; i < logMessages.length; i++) {
 				m += logMessages.getItemAt(i);			
 			}
 			

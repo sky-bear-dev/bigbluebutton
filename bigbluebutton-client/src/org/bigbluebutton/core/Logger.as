@@ -10,6 +10,10 @@ package org.bigbluebutton.core
         
         function fatal(message:String):void;
         
-        function warn(message:String):void;             
+        function warn(message:String):void;  
+        
+        function enableLogging(enabled:Boolean):void;
+        
+        function get messages():String;
     }
 }

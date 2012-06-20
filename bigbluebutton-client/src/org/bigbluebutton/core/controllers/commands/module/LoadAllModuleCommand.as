@@ -19,7 +19,7 @@ package org.bigbluebutton.core.controllers.commands.module
         
         override public function execute():void
         {
-            
+            logger.debug("Loading LoadAllModuleCommand");
             if (moduleModel.allModulesLoaded()) {
                 
             } else {
