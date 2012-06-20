@@ -13,7 +13,7 @@ package org.bigbluebutton.core.controllers.commands
         public var service:LocaleConfigLoaderService;
         
         override public function execute():void {
-            logger.debug("Startup complete");
+            logger.debug("Starting BigBlueButton");
             service.determineAvailableLocales();
         }
     }

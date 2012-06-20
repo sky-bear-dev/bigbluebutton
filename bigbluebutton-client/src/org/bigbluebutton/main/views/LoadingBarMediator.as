@@ -20,7 +20,6 @@ package org.bigbluebutton.main.views
         }
         
         protected function moduleLoadProgressEventHandler(e:ModuleLoadProgressEvent):void{
-            Alert.show("Loading " + e.percentLoaded);
             view.setProgress(e.percentLoaded, 100);
         }
     }

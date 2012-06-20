@@ -17,7 +17,6 @@ package org.bigbluebutton.core.services.imp
 
     public class ModuleLoaderService extends Actor
     {
-        private var _loader:ModuleLoader = new ModuleLoader();
         private var _currentModule:ModuleDescriptor;
         
         [Inject]
@@ -25,13 +24,13 @@ package org.bigbluebutton.core.services.imp
         
         public function load(module:ModuleDescriptor):void { 
             _currentModule = module;
+            var _loader:ModuleLoader = new ModuleLoader();
             _loader.applicationDomain = new ApplicationDomain(ApplicationDomain.currentDomain);
             _loader.addEventListener("loading", onLoading);
             _loader.addEventListener("progress", onLoadProgress);
             _loader.addEventListener("ready", onReady);
             _loader.addEventListener("error", onErrorLoading);
             _loader.url = module.attributes.url;
-            logger.debug("Module URL = " + module.attributes.url); 
             _loader.loadModule();
         }
         

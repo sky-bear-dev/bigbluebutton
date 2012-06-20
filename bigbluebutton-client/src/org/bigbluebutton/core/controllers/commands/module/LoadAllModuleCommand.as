@@ -18,10 +18,9 @@ package org.bigbluebutton.core.controllers.commands.module
         public var logger:Logger;
         
         override public function execute():void
-        {
-            logger.debug("Loading LoadAllModuleCommand");
+        {    
             if (moduleModel.allModulesLoaded()) {
-                
+                logger.debug("All modules have been loaded");
             } else {
                 var mod:ModuleDescriptor = moduleModel.getNextModuleToLoad();
                 if (mod != null) {

@@ -18,12 +18,13 @@ package org.bigbluebutton.core.controllers.commands.locale
         public var logger:Logger;
         
         override public function execute():void
-        {
-            logger.debug("Loading default locale");
+        {            
             var defaultLocale:String = model.defaultLocale;
             if (defaultLocale != null  && defaultLocale != "" && defaultLocale != model.masterLocale) {
+                logger.debug("Loading default locale [" + defaultLocale + "]");
                 service.loadLocaleResource(defaultLocale);                    
             } else {
+                logger.debug("Cannot determine default locale. Using master locale [" + model.masterLocale + "]");
                 var event:LocaleEvent = new LocaleEvent(LocaleEvent.PREFERRED_LOCALE_LOADED_EVENT);
                 event.loadedLocale = model.masterLocale;
                 dispatch(event);

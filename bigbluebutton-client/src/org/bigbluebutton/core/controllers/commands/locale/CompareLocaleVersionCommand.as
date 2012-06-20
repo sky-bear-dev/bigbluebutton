@@ -19,7 +19,7 @@ package org.bigbluebutton.core.controllers.commands.locale
         
 		override public function execute():void
 		{   
-            logger.debug(configModel.localeVersion + " == " + localeModel.localeVersion + "(" + configModel.version + ")");
+            logger.debug("Comparing locale versions [config=" + configModel.localeVersion + ", locale=" + localeModel.localeVersion + "]");
             
 			if (configModel.localeVersion == localeModel.localeVersion) {
                 logger.debug(ConfigVersionEvent.CONFIG_VERSION_SAME_EVENT);
