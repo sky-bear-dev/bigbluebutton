@@ -31,6 +31,7 @@ package org.bigbluebutton.core.services.imp
             _loader.addEventListener("ready", onReady);
             _loader.addEventListener("error", onErrorLoading);
             _loader.url = module.attributes.url;
+            logger.debug("Loading " + _loader.url);
             _loader.loadModule();
         }
         
@@ -38,17 +39,22 @@ package org.bigbluebutton.core.services.imp
             var modLoader:ModuleLoader = event.target as ModuleLoader;
             
             if (!(modLoader.child is IBigBlueButtonModule)) {
+                logger.error("Invalid module error");
                 var errorEvent:ModuleLoadErrorEvent = new ModuleLoadErrorEvent(ModuleLoadErrorEvent.INVALID_MODULE_ERROR_EVENT);
                 dispatch(errorEvent);
             }
             
-            _currentModule.module = modLoader.child as IBigBlueButtonModule;
-            if (_currentModule != null) {
+            var bbb_module:IBigBlueButtonModule = modLoader.child as IBigBlueButtonModule;
+            
+            if (bbb_module != null) {
+                _currentModule.module = bbb_module;
                 _currentModule.loaded = true;
+                logger.error("Module has been loaded.");
                 var evt:ModuleLoadedEvent = new ModuleLoadedEvent(ModuleLoadedEvent.MODULE_LOADED_EVENT);
                 evt.name = _currentModule.name;
                 dispatch(evt);
             } else {
+                logger.error("Failed to load module.");
                 var loadErrorEvent:ModuleLoadErrorEvent = new ModuleLoadErrorEvent(ModuleLoadErrorEvent.FAILED_TO_LOAD_MODULE_ERROR_EVENT);
                 dispatch(loadErrorEvent);
             }            
@@ -62,6 +68,7 @@ package org.bigbluebutton.core.services.imp
         }	
         
         private function onErrorLoading(e:ModuleEvent):void{
+            logger.error("Error loading module.");
             var loadErrorEvent:ModuleLoadErrorEvent = new ModuleLoadErrorEvent(ModuleLoadErrorEvent.FAILED_TO_LOAD_MODULE_ERROR_EVENT);
             dispatch(loadErrorEvent);
         }

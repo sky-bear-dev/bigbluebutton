@@ -2,13 +2,13 @@ package org.bigbluebutton.main.views.vo
 {
     public class LayoutOptions
     {
-        [Bindable] public var showDebugWindow:Boolean = true;
-        [Bindable] public var showLogButton:Boolean = true;
-        [Bindable] public var showVideoLayout:Boolean = true;
-        [Bindable] public var showResetLayout:Boolean = true;
-        [Bindable] public var showToolbar:Boolean = true;
-        [Bindable] public var showHelpButton:Boolean = true;
-        [Bindable] public var showLogoutWindow:Boolean = true;
+        [Bindable] public var showDebugWindow:Boolean = false;
+        [Bindable] public var showLogButton:Boolean = false;
+        [Bindable] public var showVideoLayout:Boolean = false;
+        [Bindable] public var showResetLayout:Boolean = false;
+        [Bindable] public var showToolbar:Boolean = false;
+        [Bindable] public var showHelpButton:Boolean = false;
+        [Bindable] public var showLogoutWindow:Boolean = false;
         
         public function LayoutOptions(layout:XML)
         {
