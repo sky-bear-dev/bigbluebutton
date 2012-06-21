@@ -29,8 +29,8 @@ package org.bigbluebutton.main.model.users
 	
 	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.main.model.ConferenceParameters;
-	import org.bigbluebutton.main.model.users.events.ConnectionFailedEvent;
-	import org.bigbluebutton.main.model.users.events.UsersConnectionEvent;
+	import org.bigbluebutton.core.controllers.events.ConnectionFailedEvent;
+	import org.bigbluebutton.core.controllers.events.UsersConnectionEvent;
 		
 	public class NetConnectionDelegate
 	{

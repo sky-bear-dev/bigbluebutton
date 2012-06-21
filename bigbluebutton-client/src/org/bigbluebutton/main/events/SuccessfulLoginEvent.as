@@ -21,7 +21,7 @@ package org.bigbluebutton.main.events
 	import flash.events.Event;
 	
 	import org.bigbluebutton.main.model.ConferenceParameters;
-	import org.bigbluebutton.main.model.users.BBBUser;
+	import org.bigbluebutton.core.model.vo.User;
 
 	public class SuccessfulLoginEvent extends Event
 	{

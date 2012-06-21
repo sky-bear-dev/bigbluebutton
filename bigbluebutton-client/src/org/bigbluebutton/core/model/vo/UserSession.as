@@ -11,7 +11,7 @@ package org.bigbluebutton.core.model.vo
         public var role:String;
         public var room:String;
         public var authToken:String;
-        public var record:String;
+        public var record:Boolean;
         public var webvoiceconf:String;
         public var voicebridge:String;
         public var mode:String;

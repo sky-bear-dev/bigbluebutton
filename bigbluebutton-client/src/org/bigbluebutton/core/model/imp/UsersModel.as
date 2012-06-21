@@ -13,6 +13,9 @@ package org.bigbluebutton.core.model.imp
            var event:UserAuthenticatedEvent = new UserAuthenticatedEvent();
            dispatch(event);
        }
-        
+       
+       public function get loggedInUser():UserSession {
+           return _loggedInUser;
+       }
     }
 }

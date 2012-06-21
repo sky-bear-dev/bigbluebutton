@@ -16,17 +16,16 @@
 * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 * 
 */
-package org.bigbluebutton.main.model.users {
-	import com.asfusion.mate.events.Dispatcher;
-	
+package org.bigbluebutton.core.services.imp {
 	import flash.events.AsyncErrorEvent;
 	import flash.events.NetStatusEvent;
 	import flash.net.NetConnection;
 	import flash.net.Responder;
-	import flash.net.SharedObject;
-	
-	import org.bigbluebutton.common.LogUtil;
+	import flash.net.SharedObject;	
+	import org.bigbluebutton.core.Logger;
+	import org.bigbluebutton.core.controllers.events.ConnectionFailedEvent;
 	import org.bigbluebutton.core.managers.UserManager;
+	import org.bigbluebutton.core.model.vo.User;
 	import org.bigbluebutton.main.events.BBBEvent;
 	import org.bigbluebutton.main.events.LogoutEvent;
 	import org.bigbluebutton.main.events.MadePresenterEvent;
@@ -34,38 +33,28 @@ package org.bigbluebutton.main.model.users {
 	import org.bigbluebutton.main.events.PresenterStatusEvent;
 	import org.bigbluebutton.main.model.ConferenceParameters;
 	import org.bigbluebutton.main.model.User;
-	import org.bigbluebutton.core.controllers.events.ConnectionFailedEvent;
 	import org.bigbluebutton.main.model.users.events.RoleChangeEvent;
-	import org.bigbluebutton.core.model.vo.User;
 
 	public class UsersSOService {
-		public static const NAME:String = "ViewersSOService";
-		public static const LOGNAME:String = "[ViewersSOService]";
-		
+        [Inject]
+        public var red5Conn:Red5BBBAppConnectionService;
+        
+        [Inject]
+        public var logger:Logger;
+        
 		private var _participantsSO : SharedObject;
 		private static const SO_NAME : String = "participantsSO";
 		private static const STATUS:String = "_STATUS";
 		
-		private var netConnectionDelegate: NetConnectionDelegate;		
 		private var _room:String;
 		private var _applicationURI:String;
-		
-		private var dispatcher:Dispatcher;
 				
 		public function UsersSOService(uri:String) {			
 			_applicationURI = uri;
-			netConnectionDelegate = new NetConnectionDelegate(uri);
-			dispatcher = new Dispatcher();
 		}
-		
-		public function connect(params:ConferenceParameters):void {
-			_room = params.room;
-			netConnectionDelegate.connect(params);
-		}
-			
+					
 		public function disconnect(onUserAction:Boolean):void {
 			if (_participantsSO != null) _participantsSO.close();
-			netConnectionDelegate.disconnect(onUserAction);
 		}
 		
 	    public function join(userid:Number, room:String):void {
@@ -73,19 +62,17 @@ package org.bigbluebutton.main.model.users {
 			_participantsSO.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
 			_participantsSO.addEventListener(AsyncErrorEvent.ASYNC_ERROR, asyncErrorHandler);
 			_participantsSO.client = this;
-			_participantsSO.connect(netConnectionDelegate.connection);
+			_participantsSO.connect(red5Conn.connection);
 			queryForParticipants();					
 			UserManager.getInstance().getConference().setMyUserid(userid);
 		}
 		
 		private function queryForParticipants():void {
-			var nc:NetConnection = netConnectionDelegate.connection;
-			nc.call(
-				"participants.getParticipants",// Remote function name
+			var nc:NetConnection = red5Conn.connection;
+			nc.call("participants.getParticipants",// Remote function name
 				new Responder(
 	        		// participants - On successful result
 					function(result:Object):void { 
-						LogUtil.debug("Successfully queried participants: " + result.count); 
 						if (result.count > 0) {
 							for(var p:Object in result.participants) {
 								participantJoined(result.participants[p]);
@@ -95,11 +82,7 @@ package org.bigbluebutton.main.model.users {
 					},	
 					// status - On error occurred
 					function(status:Object):void { 
-						LogUtil.error("Error occurred:"); 
-						for (var x:Object in status) { 
-							LogUtil.error(x + " : " + status[x]); 
-						} 
-						sendConnectionFailedEvent(ConnectionFailedEvent.UNKNOWN_REASON);
+						logger.error("Error occurred: queryForParticipants"); 
 					}
 				)//new Responder
 			); //_netConnection.call
@@ -120,22 +103,18 @@ package org.bigbluebutton.main.model.users {
 		}
 		
 		public function assignPresenter(userid:Number, name:String, assignedBy:Number):void {
-			var nc:NetConnection = netConnectionDelegate.connection;
+			var nc:NetConnection = red5Conn.connection;
 			nc.call("participants.assignPresenter",// Remote function name
 				new Responder(
 					// On successful result
-					function(result:Boolean):void { 
-						
+					function(result:Boolean):void { 						
 						if (result) {
-							LogUtil.debug("Successfully assigned presenter to: " + userid);							
+							logger.debug("Successfully assigned presenter to: " + userid);							
 						}	
 					},	
 					// status - On error occurred
 					function(status:Object):void { 
-						LogUtil.error("Error occurred:"); 
-						for (var x:Object in status) { 
-							LogUtil.error(x + " : " + status[x]); 
-						} 
+                        logger.error("Error occurred:"); 
 					}
 				), //new Responder
 				userid,
@@ -194,9 +173,7 @@ package org.bigbluebutton.main.model.users {
 			var joinEvent:ParticipantJoinEvent = new ParticipantJoinEvent(ParticipantJoinEvent.PARTICIPANT_JOINED_EVENT);
 			joinEvent.participant = p;
 			joinEvent.join = false;
-			dispatcher.dispatchEvent(joinEvent);	
-			
-
+			dispatcher.dispatchEvent(joinEvent);
 		}
 		
 		public function participantJoined(joinedUser:Object):void { 

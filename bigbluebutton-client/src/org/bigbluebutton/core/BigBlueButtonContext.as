@@ -2,6 +2,8 @@ package org.bigbluebutton.core
 {
     import flash.display.DisplayObjectContainer;
     
+    import org.bigbluebutton.core.controllers.commands.ConnectToRed5BBBCommand;
+    import org.bigbluebutton.core.controllers.commands.GetMyUserIdCommand;
     import org.bigbluebutton.core.controllers.commands.JoinUserCommand;
     import org.bigbluebutton.core.controllers.commands.StartupBigBlueButtonCommand;
     import org.bigbluebutton.core.controllers.commands.config.LoadConfigCommand;
@@ -11,7 +13,9 @@ package org.bigbluebutton.core
     import org.bigbluebutton.core.controllers.commands.locale.SwitchLocaleCommand;
     import org.bigbluebutton.core.controllers.commands.module.LoadAllModuleCommand;
     import org.bigbluebutton.core.controllers.commands.module.StartAllModulesCommand;
+    import org.bigbluebutton.core.controllers.events.ConnectedToRed5Event;
     import org.bigbluebutton.core.controllers.events.UserAuthenticatedEvent;
+    import org.bigbluebutton.core.controllers.events.UsersConnectionEvent;
     import org.bigbluebutton.core.controllers.events.config.ConfigLoadEvent;
     import org.bigbluebutton.core.controllers.events.config.ConfigVersionEvent;
     import org.bigbluebutton.core.controllers.events.locale.LocaleEvent;
@@ -21,6 +25,7 @@ package org.bigbluebutton.core
     import org.bigbluebutton.core.model.imp.ConfigModel;
     import org.bigbluebutton.core.model.imp.LocaleModel;
     import org.bigbluebutton.core.model.imp.LoggerModel;
+    import org.bigbluebutton.core.model.imp.MeetingModel;
     import org.bigbluebutton.core.model.imp.ModuleModel;
     import org.bigbluebutton.core.model.imp.UsersModel;
     import org.bigbluebutton.core.services.ILocaleService;
@@ -32,6 +37,7 @@ package org.bigbluebutton.core
     import org.bigbluebutton.core.services.imp.LocaleLoaderService;
     import org.bigbluebutton.core.services.imp.ModuleDependencyResolver;
     import org.bigbluebutton.core.services.imp.ModuleLoaderService;
+    import org.bigbluebutton.core.services.imp.Red5BBBAppConnectionService;
     import org.bigbluebutton.main.views.BigBlueButtonAppShell;
     import org.bigbluebutton.main.views.BigBlueButtonAppShellMediator;
     import org.bigbluebutton.main.views.LoadingBar;
@@ -69,7 +75,8 @@ package org.bigbluebutton.core
             injector.mapSingleton(ModuleLoaderService);
             injector.mapSingleton(JoinService);
             injector.mapSingleton(JoinServiceXmlParser);
-            
+            injector.mapSingleton(Red5BBBAppConnectionService);
+            injector.mapSingleton(MeetingModel);
             
             mediatorMap.mapView(MainApplicationShell, MainApplicationShellMediator);
             mediatorMap.mapView(MainCanvas, MainCanvasMediator);
@@ -86,7 +93,9 @@ package org.bigbluebutton.core
             commandMap.mapEvent(ConfigVersionEvent.CONFIG_VERSION_SAME_EVENT, LoadAllModuleCommand);
             commandMap.mapEvent(ModuleLoadedEvent.MODULE_LOADED_EVENT, LoadAllModuleCommand);
             commandMap.mapEvent(AllModulesLoadedEvent.ALL_MODULES_LOADED_EVENT, JoinUserCommand);
-            commandMap.mapEvent(UserAuthenticatedEvent.USER_AUTHENTICATED_EVENT, StartAllModulesCommand);
+            commandMap.mapEvent(UserAuthenticatedEvent.USER_AUTHENTICATED_EVENT, ConnectToRed5BBBCommand);
+            commandMap.mapEvent(ConnectedToRed5Event.CONNECTED_TO_RED5_EVENT, GetMyUserIdCommand);
+            commandMap.mapEvent(UsersConnectionEvent.CONNECTION_SUCCESS, GetAllUsersCommand);
             commandMap.mapEvent(SwitchLocaleEvent.SWITCH_TO_NEW_LOCALE_EVENT, SwitchLocaleCommand);
             
             contextView.addChild(new BigBlueButtonAppShell());

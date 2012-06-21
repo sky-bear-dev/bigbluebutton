@@ -26,9 +26,9 @@ package org.bigbluebutton.main.model.users.events
 		
 		public var user:String;
 		public var stream:String;
-		public var userid:Number
+		public var userid:String
 		
-		public function StreamStartedEvent(userid:Number, user:String, stream:String)
+		public function StreamStartedEvent(userid:String, user:String, stream:String)
 		{
 			this.userid = userid;
 			this.user = user;

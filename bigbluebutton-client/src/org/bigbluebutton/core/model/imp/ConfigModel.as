@@ -29,7 +29,7 @@ package org.bigbluebutton.core.model.imp
 			return p;
 		}
 
-        public function get applicationURI():Object {
+        public function get applicationURI():String {
             return _config.application.@uri;
         }
         

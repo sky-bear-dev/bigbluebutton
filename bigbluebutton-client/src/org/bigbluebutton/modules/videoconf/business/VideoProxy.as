@@ -32,7 +32,7 @@ package org.bigbluebutton.modules.videoconf.business
 	
 	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.core.managers.UserManager;
-	import org.bigbluebutton.main.model.users.BBBUser;
+	import org.bigbluebutton.core.model.vo.User;
 	import org.bigbluebutton.main.model.users.events.StreamStartedEvent;
 	import org.bigbluebutton.modules.videoconf.events.StartBroadcastEvent;
 	import org.bigbluebutton.modules.videoconf.model.VideoConfOptions;
@@ -215,7 +215,7 @@ package org.bigbluebutton.modules.videoconf.business
 			var dispatcher:Dispatcher = new Dispatcher();
 			var users:ArrayCollection = UserManager.getInstance().getConference().users;
 			for (var i:int=0; i<users.length; i++){
-				var user:BBBUser = (users.getItemAt(i) as BBBUser);
+				var user:User = (users.getItemAt(i) as User);
 				if (user.hasStream) dispatcher.dispatchEvent(new StreamStartedEvent(user.userid, user.name, user.streamName));
 			}
 		}

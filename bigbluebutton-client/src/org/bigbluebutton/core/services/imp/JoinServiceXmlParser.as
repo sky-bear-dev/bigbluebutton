@@ -27,7 +27,7 @@ package org.bigbluebutton.core.services.imp
                 user.role = xml.role;
                 user.room = xml.room;
                 user.authToken = xml.room;
-                user.record = xml.record;
+                user.record = xml.record as Boolean;
                 user.webvoiceconf = xml.webvoiceconf;
                 user.voicebridge = xml.voicebridge;
                 user.mode = xml.mode;

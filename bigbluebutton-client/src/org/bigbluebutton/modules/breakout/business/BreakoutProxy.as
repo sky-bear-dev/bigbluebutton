@@ -35,7 +35,7 @@ package org.bigbluebutton.modules.breakout.business
 	import mx.events.CloseEvent;
 	
 	import org.bigbluebutton.core.managers.UserManager;
-	import org.bigbluebutton.main.model.users.BBBUser;
+	import org.bigbluebutton.core.model.vo.User;
 	import org.bigbluebutton.main.model.users.Conference;
 
 	public class BreakoutProxy
@@ -178,8 +178,8 @@ package org.bigbluebutton.modules.breakout.business
 		private function newRoomHasModerator(list:Array):Boolean{
 			var conference:Conference = UserManager.getInstance().getConference();
 			for (var i:int = 0; i<list.length; i++){
-				var user:BBBUser = conference.getParticipant(Number(list[i]));
-				if (user.role == BBBUser.MODERATOR) return true;
+				var user:User = conference.getParticipant(Number(list[i]));
+				if (user.role == User.MODERATOR) return true;
 			}
 			return false;
 		}

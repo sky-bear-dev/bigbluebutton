@@ -28,7 +28,7 @@ package org.bigbluebutton.modules.present.business {
 	import org.bigbluebutton.core.managers.UserManager;
 	import org.bigbluebutton.main.events.BBBEvent;
 	import org.bigbluebutton.main.events.MadePresenterEvent;
-	import org.bigbluebutton.main.model.users.BBBUser;
+	import org.bigbluebutton.core.model.vo.User;
 	import org.bigbluebutton.main.model.users.Conference;
 	import org.bigbluebutton.modules.present.events.CursorEvent;
 	import org.bigbluebutton.modules.present.events.MoveEvent;
@@ -412,7 +412,7 @@ package org.bigbluebutton.modules.present.business {
 				dispatcher.dispatchEvent(e);													
 			} else {				
 				
-				var p:BBBUser = meeting.getPresenter();
+				var p:User = meeting.getPresenter();
 				if (p != null) {
 					LogUtil.debug("trigger Switch to Viewer mode ");
 					var viewerEvent:MadePresenterEvent = new MadePresenterEvent(MadePresenterEvent.SWITCH_TO_VIEWER_MODE);

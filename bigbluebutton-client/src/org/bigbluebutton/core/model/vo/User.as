@@ -16,7 +16,7 @@
 * with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 * 
 */
-package org.bigbluebutton.main.model.users
+package org.bigbluebutton.core.model.vo
 {
 	import com.asfusion.mate.events.Dispatcher;
 	
@@ -25,14 +25,15 @@ package org.bigbluebutton.main.model.users
 	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.common.Role;
 	import org.bigbluebutton.main.model.users.events.StreamStartedEvent;
+
 	
-	public class BBBUser {
+	public class User {
 		public static const MODERATOR:String = "MODERATOR";
 		public static const VIEWER:String = "VIEWER";
 		public static const PRESENTER:String = "PRESENTER";
 		
 		[Bindable] public var me:Boolean = false;
-		[Bindable] public var userid:Number;
+		[Bindable] public var userid:String;
 		[Bindable] public var name:String;
 		[Bindable] public var hasStream:Boolean = false;
 		[Bindable] public var streamName:String = "";
@@ -103,8 +104,8 @@ package org.bigbluebutton.main.model.users
 			return _status.getStatus(name);
 		}
 	
-		public static function copy(user:BBBUser):BBBUser {
-			var n:BBBUser = new BBBUser();
+		public static function copy(user:User):User {
+			var n:User = new User();
 			n.authToken = user.authToken;
 			n.me = user.me;
 			n.userid = user.userid;
@@ -120,8 +121,8 @@ package org.bigbluebutton.main.model.users
 		}
 		
 		private function sendStreamStartedEvent():void{
-			var dispatcher:Dispatcher = new Dispatcher();
-	//		dispatcher.dispatchEvent(new StreamStartedEvent(userid, name, streamName));
+//			var dispatcher:Dispatcher = new Dispatcher();
+//			dispatcher.dispatchEvent(new StreamStartedEvent(userid, name, streamName));
 		}
 	}
 }

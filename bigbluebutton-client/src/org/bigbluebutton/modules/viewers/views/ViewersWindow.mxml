@@ -50,7 +50,7 @@
 			import org.bigbluebutton.core.managers.UserManager;
 			import org.bigbluebutton.common.events.LocaleChangeEvent;
 			import org.bigbluebutton.main.events.ParticipantJoinEvent;
-			import org.bigbluebutton.main.model.users.BBBUser;
+			import org.bigbluebutton.core.model.vo.User;
 			import org.bigbluebutton.main.model.users.Conference;
 			import org.bigbluebutton.main.model.users.events.ConferenceCreatedEvent;
 			import org.bigbluebutton.main.model.users.events.KickUserEvent;
@@ -148,7 +148,7 @@
 			
 			private function onItemRollOver(event:ListEvent):void{
 				var item:IListItemRenderer = event.itemRenderer;
-				var user:BBBUser = item.data as BBBUser;
+				var user:User = item.data as User;
 				var rollEvent:ViewersRollEvent = new ViewersRollEvent(ViewersRollEvent.VIEWERS_ROLL_OVER);
 				rollEvent.userid = user.userid;
 				dispatcher.dispatchEvent(rollEvent);
@@ -156,7 +156,7 @@
 			
 			private function onItemRollOut(event:ListEvent):void{
 				var item:IListItemRenderer = event.itemRenderer;
-				var user:BBBUser = item.data as BBBUser;
+				var user:User = item.data as User;
 				var rollEvent:ViewersRollEvent = new ViewersRollEvent(ViewersRollEvent.VIEWERS_ROLL_OUT);
 				rollEvent.userid = user.userid;
 				dispatcher.dispatchEvent(rollEvent);
