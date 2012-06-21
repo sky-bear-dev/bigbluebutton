@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  BigBlueButton open source conferencing system - http://www.bigbluebutton.org
+  
+  Copyright (c) 2010 BigBlueButton Inc. and by respective authors (see below).
+  
+  BigBlueButton is free software; you can redistribute it and/or modify it under the 
+  terms of the GNU Lesser General Public License as published by the Free Software 
+  Foundation; either version 2.1 of the License, or (at your option) any later 
+  version. 
+  
+  BigBlueButton is distributed in the hope that it will be useful, but WITHOUT ANY 
+  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+  PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+  
+  You should have received a copy of the GNU Lesser General Public License along 
+  with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
+ 
+  $Id: $
+-->
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+		xmlns:flexmdi="flexlib.mdi.containers.*"
+		xmlns:views="org.bigbluebutton.main.views.*"
+		width="100%" height="100%" >
+			
+	<mx:Script>
+		<![CDATA[
+            
+            public function appendProgress(text:String):void {
+                progText.text += text + "\n"
+            }
+            
+            public function userHasBeenAuthenticated():void {
+                this.removeAllChildren();
+                this.addChild(new MainApplicationShell());
+            }
+            
+            private function openLogWindow():void {
+                dispatchEvent(new LogButtonClickedEvent());
+            }
+		]]>
+	</mx:Script>
+    <mx:Button id="logBtn" width="20" height="20" x="10" y="400" click="openLogWindow()" />
+	<mx:TextArea id="progText" width="600" height="300" text=""/>		
+	<views:LoadingBar id="progressBar" x="{this.width/2 - progressBar.width/2}" y="{this.height/2 - progressBar.height/2}" width="{this.width/2}" />
+</mx:Canvas>

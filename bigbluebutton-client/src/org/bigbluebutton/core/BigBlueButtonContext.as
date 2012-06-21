@@ -32,6 +32,8 @@ package org.bigbluebutton.core
     import org.bigbluebutton.core.services.imp.LocaleLoaderService;
     import org.bigbluebutton.core.services.imp.ModuleDependencyResolver;
     import org.bigbluebutton.core.services.imp.ModuleLoaderService;
+    import org.bigbluebutton.main.views.BigBlueButtonAppShell;
+    import org.bigbluebutton.main.views.BigBlueButtonAppShellMediator;
     import org.bigbluebutton.main.views.LoadingBar;
     import org.bigbluebutton.main.views.LoadingBarMediator;
     import org.bigbluebutton.main.views.LogWindow;
@@ -74,6 +76,7 @@ package org.bigbluebutton.core
             mediatorMap.mapView(LoadingBar, LoadingBarMediator);
             mediatorMap.mapView(MainToolbar, MainToolbarMediator);
             mediatorMap.mapView(LogWindow, LogWindowMediator);
+            mediatorMap.mapView(BigBlueButtonAppShell, BigBlueButtonAppShellMediator);
             
             commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupBigBlueButtonCommand, ContextEvent);
             commandMap.mapEvent(LocaleEvent.LIST_OF_AVAILABLE_LOCALES_LOADED_EVENT, LoadMasterLocaleCommand);
@@ -85,6 +88,8 @@ package org.bigbluebutton.core
             commandMap.mapEvent(AllModulesLoadedEvent.ALL_MODULES_LOADED_EVENT, JoinUserCommand);
             commandMap.mapEvent(UserAuthenticatedEvent.USER_AUTHENTICATED_EVENT, StartAllModulesCommand);
             commandMap.mapEvent(SwitchLocaleEvent.SWITCH_TO_NEW_LOCALE_EVENT, SwitchLocaleCommand);
+            
+            contextView.addChild(new BigBlueButtonAppShell());
             
             dispatchEvent(new ContextEvent(ContextEvent.STARTUP_COMPLETE));
                 
