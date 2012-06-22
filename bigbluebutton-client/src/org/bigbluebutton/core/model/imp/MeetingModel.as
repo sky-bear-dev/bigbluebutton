@@ -22,7 +22,9 @@ package org.bigbluebutton.core.model.imp {
 	import org.bigbluebutton.common.Role;
 	import org.bigbluebutton.core.BBB;
 	import org.bigbluebutton.core.Logger;
+	import org.bigbluebutton.core.controllers.events.SwitchPresenterEvent;
 	import org.bigbluebutton.core.controllers.events.UserEvent;
+	import org.bigbluebutton.core.controllers.events.UserLeftEvent;
 	import org.bigbluebutton.core.controllers.events.UserStatusChangeEvent;
 	import org.bigbluebutton.core.model.vo.Status;
 	import org.bigbluebutton.core.model.vo.User;
@@ -40,6 +42,12 @@ package org.bigbluebutton.core.model.imp {
             _myUserid = userid;
         }
         
+		public function addAllUsers(u:ArrayCollection):void {
+			for (var i:int = 0; i < u.length; i++) {
+				addUser(User.copy(u.getItemAt(i)));
+			}
+		}
+		
 		public function addUser(newuser:User):void {				
 			if (! hasUser(newuser.userid)) {				
 				if (newuser.userid == _me.userid) {
@@ -52,7 +60,7 @@ package org.bigbluebutton.core.model.imp {
 		}
 
 		public function hasUser(userid:String):Boolean {
-			var p:Object = getParticipantIndex(userid);
+			var p:Object = getUserIndex(userid);
 			if (p != null) {
 				return true;
 			}
@@ -118,12 +126,31 @@ package org.bigbluebutton.core.model.imp {
 			return a.presenter;
 		}
 			
+		public function assignNewPresenter(newPresenter:String, assignedBy:String):void {
+			var u:User = getUser(newPresenter);
+			var cp:User = getPresenter();
+			if (cp != null && u != null) {
+				cp.presenter = false;
+				u.presenter = true;
+			}
+			
+			var event:SwitchPresenterEvent = new SwitchPresenterEvent();
+			event.newPresenter = newPresenter;
+			event.oldPresenter = cp.userid;
+			event.assignedBy = assignedBy;
+			dispatch(event);
+		}
+		
 		public function removeUser(userid:String):void {
-			var p:Object = getUserIndex(userid);
-			if (p != null) {
-				logger.debug("removing user[" + p.participant.name + "," + p.participant.userid + "]");				
-                _users.removeItemAt(p.index);
+			var index:int = getUserIndex(userid);
+			if (index >= 0) {
+                var u:User = _users.removeItemAt(index);
 				sort();
+				
+				var event:UserLeftEvent = new UserLeftEvent();
+				event.userId = u.userid;
+				event.name = u.name;
+				dispatch(event);
 			}							
 		}
 		
@@ -133,8 +160,8 @@ package org.bigbluebutton.core.model.imp {
 		 * @return -1 if participant not found
 		 * 
 		 */		
-		private function getUserIndex(userid:String):Object {
-			var aUser : User;
+		private function getUserIndex(userid:String):int {
+			var aUser:User;
 			
 			for (var i:int = 0; i < _users.length; i++) {
 				aUser = _users.getItemAt(i) as User;
@@ -145,7 +172,7 @@ package org.bigbluebutton.core.model.imp {
 			}				
 			
 			// Participant not found.
-			return null;
+			return -1;
 		}
 	
 		public function amIPresenter():Boolean {

@@ -21,10 +21,14 @@ package org.bigbluebutton.core.services.imp {
 	import flash.events.NetStatusEvent;
 	import flash.net.NetConnection;
 	import flash.net.Responder;
-	import flash.net.SharedObject;	
+	import flash.net.SharedObject;
+	
+	import mx.collections.ArrayCollection;
+	
 	import org.bigbluebutton.core.Logger;
 	import org.bigbluebutton.core.controllers.events.ConnectionFailedEvent;
 	import org.bigbluebutton.core.managers.UserManager;
+	import org.bigbluebutton.core.model.imp.MeetingModel;
 	import org.bigbluebutton.core.model.vo.User;
 	import org.bigbluebutton.main.events.BBBEvent;
 	import org.bigbluebutton.main.events.LogoutEvent;
@@ -41,7 +45,10 @@ package org.bigbluebutton.core.services.imp {
         
         [Inject]
         public var logger:Logger;
-        
+		
+		[Inject]
+		public var meetingModel:MeetingModel;
+		
 		private var _participantsSO : SharedObject;
 		private static const SO_NAME : String = "participantsSO";
 		private static const STATUS:String = "_STATUS";
@@ -57,28 +64,27 @@ package org.bigbluebutton.core.services.imp {
 			if (_participantsSO != null) _participantsSO.close();
 		}
 		
-	    public function join(userid:Number, room:String):void {
+	    public function listenForUserMessages():void {
 			_participantsSO = SharedObject.getRemote(SO_NAME, _applicationURI + "/" + room, false);
 			_participantsSO.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
 			_participantsSO.addEventListener(AsyncErrorEvent.ASYNC_ERROR, asyncErrorHandler);
 			_participantsSO.client = this;
 			_participantsSO.connect(red5Conn.connection);
-			queryForParticipants();					
-			UserManager.getInstance().getConference().setMyUserid(userid);
 		}
 		
-		private function queryForParticipants():void {
+		public function getAllUsers():void {
 			var nc:NetConnection = red5Conn.connection;
 			nc.call("participants.getParticipants",// Remote function name
 				new Responder(
 	        		// participants - On successful result
 					function(result:Object):void { 
 						if (result.count > 0) {
+							var u:ArrayCollection = new ArrayCollection();
 							for(var p:Object in result.participants) {
-								participantJoined(result.participants[p]);
+								u.addItem(result.participants[p]);
 							}
+							meetingModel.addAllUsers(u);
 						}	
-						becomePresenterIfLoneModerator();
 					},	
 					// status - On error occurred
 					function(status:Object):void { 
@@ -88,19 +94,6 @@ package org.bigbluebutton.core.services.imp {
 			); //_netConnection.call
 		}
 		
-		private function becomePresenterIfLoneModerator():void {
-			var participants:Conference = UserManager.getInstance().getConference();
-			if (participants.hasOnlyOneModerator()) {
-				var user:org.bigbluebutton.core.model.vo.User = participants.getTheOnlyModerator();
-				if (user.me) {
-					var presenterEvent:RoleChangeEvent = new RoleChangeEvent(RoleChangeEvent.ASSIGN_PRESENTER);
-					presenterEvent.userid = user.userid;
-					presenterEvent.username = user.name;
-					var dispatcher:Dispatcher = new Dispatcher();
-					dispatcher.dispatchEvent(presenterEvent);
-				} 
-			} 
-		}
 		
 		public function assignPresenter(userid:Number, name:String, assignedBy:Number):void {
 			var nc:NetConnection = red5Conn.connection;
@@ -109,7 +102,8 @@ package org.bigbluebutton.core.services.imp {
 					// On successful result
 					function(result:Boolean):void { 						
 						if (result) {
-							logger.debug("Successfully assigned presenter to: " + userid);							
+							logger.debug("Successfully assigned presenter to: " + userid);
+							meetingModel.assignNewPresenter(userid.toString(), assignedBy.toString();
 						}	
 					},	
 					// status - On error occurred

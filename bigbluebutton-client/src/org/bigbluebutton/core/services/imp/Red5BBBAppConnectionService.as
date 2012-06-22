@@ -87,57 +87,7 @@ package org.bigbluebutton.core.services.imp
         {
             _netConnection.close();
         }
-        
-        public function participantJoined(joinedUser:Object):void { 
-            var user:User = new User();
-            user.userid = joinedUser.userid;
-            user.name = joinedUser.name;
-            user.role = joinedUser.role;
-            
-            LogUtil.debug("User status: " + joinedUser.status.hasStream);
-            
-            LogUtil.info("Joined as [" + user.userid + "," + user.name + "," + user.role + "]");
-            UserManager.getInstance().getConference().addUser(user);
-            participantStatusChange(user.userid, "hasStream", joinedUser.status.hasStream);
-            participantStatusChange(user.userid, "presenter", joinedUser.status.presenter);
-            participantStatusChange(user.userid, "raiseHand", joinedUser.status.raiseHand);
-            
-            var participant:User = new User();
-            participant.userid = String(user.userid);
-            participant.name = user.name;
-            participant.isPresenter = joinedUser.status.presenter;
-            participant.role = user.role;
-            UserManager.getInstance().participantJoined(participant);
-            
-            var dispatcher:Dispatcher = new Dispatcher();
-            var joinEvent:ParticipantJoinEvent = new ParticipantJoinEvent(ParticipantJoinEvent.PARTICIPANT_JOINED_EVENT);
-            joinEvent.participant = participant;
-            joinEvent.join = true;
-            dispatcher.dispatchEvent(joinEvent);	
-            
-        }
-        
-        public function queryForParticipants():void {
-            _netConnection.call(
-                "participants.getParticipants",// Remote function name
-                new Responder(
-                    // participants - On successful result
-                    function(result:Object):void { 
-                        if (result.count > 0) {
-                            for(var p:Object in result.participants) {
-                                participantJoined(result.participants[p]);
-                            }
-                        }	
-                        becomePresenterIfLoneModerator();
-                    },	
-                    // status - On error occurred
-                    function(status:Object):void { 
-                        logger.error("queryForParticipants Error occurred:");
-                    }
-                )//new Responder
-            ); //_netConnection.call
-        }
-        
+                
         public function getMyUserID():void {
             _netConnection.call(
                 "getMyUserId",// Remote function name
