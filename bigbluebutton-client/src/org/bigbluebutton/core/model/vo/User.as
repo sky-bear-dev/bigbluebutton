@@ -124,5 +124,9 @@ package org.bigbluebutton.core.model.vo
 //			var dispatcher:Dispatcher = new Dispatcher();
 //			dispatcher.dispatchEvent(new StreamStartedEvent(userid, name, streamName));
 		}
+        
+        public function toString():String {
+            return "[" + userid + "," + name + "," + role + ",hasStream=" + hasStream + ",presenter=" + presenter + "]";
+        }
 	}
 }

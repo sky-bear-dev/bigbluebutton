@@ -31,11 +31,13 @@ package org.bigbluebutton.core.services.imp
             _loader.addEventListener("ready", onReady);
             _loader.addEventListener("error", onErrorLoading);
             _loader.url = module.attributes.url;
-            logger.debug("Loading " + _loader.url);
+   //         logger.debug("Loading " + _loader.url);
             _loader.loadModule();
         }
         
         private function onReady(event:Event):void {
+            logger.error("Module on ready event");
+            
             var modLoader:ModuleLoader = event.target as ModuleLoader;
             
             if (!(modLoader.child is IBigBlueButtonModule)) {
@@ -74,7 +76,7 @@ package org.bigbluebutton.core.services.imp
         }
         
         private function onLoading(e:Event):void{
-            //			LogUtil.debug(getName() + " is loading");
+            logger.error("Module on loading event.");
         }
     }
 }

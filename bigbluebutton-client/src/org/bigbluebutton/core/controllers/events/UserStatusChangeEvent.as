@@ -6,8 +6,8 @@ package org.bigbluebutton.core.controllers.events
     {
         public static const USER_STATUS_CHANGE_EVENT:String = "user status change event";
         
-        public var oldStatus:String;
-        public var newStatus:String;
+        public var oldStatus:Object;
+        public var newStatus:Object;
         public var userid:String;
         
         public function UserStatusChangeEvent(bubbles:Boolean=false, cancelable:Boolean=false)

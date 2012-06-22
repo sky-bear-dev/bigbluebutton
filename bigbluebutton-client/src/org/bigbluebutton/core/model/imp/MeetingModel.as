@@ -22,6 +22,7 @@ package org.bigbluebutton.core.model.imp {
 	import org.bigbluebutton.common.Role;
 	import org.bigbluebutton.core.BBB;
 	import org.bigbluebutton.core.Logger;
+	import org.bigbluebutton.core.controllers.events.GotAllUsersEvent;
 	import org.bigbluebutton.core.controllers.events.SwitchPresenterEvent;
 	import org.bigbluebutton.core.controllers.events.UserEvent;
 	import org.bigbluebutton.core.controllers.events.UserLeftEvent;
@@ -44,8 +45,10 @@ package org.bigbluebutton.core.model.imp {
         
 		public function addAllUsers(u:ArrayCollection):void {
 			for (var i:int = 0; i < u.length; i++) {
-				addUser(User.copy(u.getItemAt(i)));
+				addUser(User.copy(u.getItemAt(i) as User));
 			}
+            logger.debug("Dispatching GlotAllUsersEvent");
+            dispatch(new GotAllUsersEvent());
 		}
 		
 		public function addUser(newuser:User):void {				
@@ -144,7 +147,7 @@ package org.bigbluebutton.core.model.imp {
 		public function removeUser(userid:String):void {
 			var index:int = getUserIndex(userid);
 			if (index >= 0) {
-                var u:User = _users.removeItemAt(index);
+                var u:User = _users.removeItemAt(index) as User;
 				sort();
 				
 				var event:UserLeftEvent = new UserLeftEvent();
@@ -167,7 +170,7 @@ package org.bigbluebutton.core.model.imp {
 				aUser = _users.getItemAt(i) as User;
 				
 				if (aUser.userid == userid) {
-					return {index:i, participant:aUser};
+					return i;
 				}
 			}				
 			
@@ -279,13 +282,17 @@ package org.bigbluebutton.core.model.imp {
 		}		
 	
 		public function newUserStatus(id:String, status:String, value:Object):void {
-			var aUser:User = getUser(id);			
+			var aUser:User = getUser(id);	
 			if (aUser != null) {
+                var event:UserStatusChangeEvent = new UserStatusChangeEvent();
+                event.oldStatus = aUser.getStatus(status);
+                
 				var s:Status = new Status(status, value);
 				aUser.changeStatus(s);
-                
-                var event:UserStatusChangeEvent = new UserStatusChangeEvent(UserStatusChangeEvent.USER_STATUS_CHANGE_EVENT);
-                dispatch();
+                                
+                event.newStatus = aUser.getStatus(status);
+                event.userid = id;
+                dispatch(event);
 			}	
 			
 			sort();		

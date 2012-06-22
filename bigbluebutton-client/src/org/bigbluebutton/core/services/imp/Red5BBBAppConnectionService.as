@@ -29,7 +29,13 @@ package org.bigbluebutton.core.services.imp
         
         private var _netConnection:NetConnection;	        
         private var _connectParams:ConnectParameters;
-                       
+        
+        private var _connUri:String;
+        
+        public function get connectionUri():String {
+            return _connUri;
+        }
+        
         public function get connection():NetConnection {
             return _netConnection;
         }
@@ -54,9 +60,9 @@ package org.bigbluebutton.core.services.imp
             _netConnection.addEventListener(AsyncErrorEvent.ASYNC_ERROR, netASyncError);
             _netConnection.addEventListener(SecurityErrorEvent.SECURITY_ERROR, netSecurityError);
             _netConnection.addEventListener(IOErrorEvent.IO_ERROR, netIOError);
-            uri = (rtmpt ? "rtmpt:" : "rtmp:") + "//" + uri
+            _connUri = (rtmpt ? "rtmpt:" : "rtmp:") + "//" + uri
             logger.debug("Connect to " + uri);
-            _netConnection.connect(uri, _connectParams.username, _connectParams.role, _connectParams.conference, 
+            _netConnection.connect(_connUri, _connectParams.username, _connectParams.role, _connectParams.conference, 
                 _connectParams.room, _connectParams.voicebridge, _connectParams.record, _connectParams.externUserID, _connectParams.internalUserID);
             if (!rtmpt) {
                 rtmpTimer = new Timer(ConnectionTimeout, 1);

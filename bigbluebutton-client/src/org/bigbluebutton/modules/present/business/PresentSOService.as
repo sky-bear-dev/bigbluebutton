@@ -17,18 +17,21 @@
 * 
 */
 package org.bigbluebutton.modules.present.business {
-	import com.asfusion.mate.events.Dispatcher;	
+	import com.asfusion.mate.events.Dispatcher;
+	
 	import flash.events.AsyncErrorEvent;
 	import flash.events.NetStatusEvent;
 	import flash.events.SyncEvent;
 	import flash.net.NetConnection;
 	import flash.net.Responder;
 	import flash.net.SharedObject;
+	
 	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.core.managers.UserManager;
 	import org.bigbluebutton.main.events.BBBEvent;
 	import org.bigbluebutton.main.events.MadePresenterEvent;
-	import org.bigbluebutton.core.model.vo.User;
+	import org.bigbluebutton.main.model.User;
+	import org.bigbluebutton.main.model.users.BBBUser;
 	import org.bigbluebutton.main.model.users.Conference;
 	import org.bigbluebutton.modules.present.events.CursorEvent;
 	import org.bigbluebutton.modules.present.events.MoveEvent;
@@ -412,13 +415,13 @@ package org.bigbluebutton.modules.present.business {
 				dispatcher.dispatchEvent(e);													
 			} else {				
 				
-				var p:User = meeting.getPresenter();
+				var p:BBBUser = meeting.getPresenter();
 				if (p != null) {
 					LogUtil.debug("trigger Switch to Viewer mode ");
 					var viewerEvent:MadePresenterEvent = new MadePresenterEvent(MadePresenterEvent.SWITCH_TO_VIEWER_MODE);
-					viewerEvent.userid = p.userid;
+					viewerEvent.userid = Number(p.userid);
 					viewerEvent.presenterName = p.name;
-					viewerEvent.assignerBy = p.userid;
+					viewerEvent.assignerBy = Number(p.userid);
 					
 					dispatcher.dispatchEvent(viewerEvent);					
 				}
