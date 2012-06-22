@@ -17,6 +17,7 @@ package org.bigbluebutton.core
     import org.bigbluebutton.core.controllers.commands.module.StartAllModulesCommand;
     import org.bigbluebutton.core.controllers.events.ConnectedToRed5Event;
     import org.bigbluebutton.core.controllers.events.GotAllUsersEvent;
+    import org.bigbluebutton.core.controllers.events.ListeningForUserMessagesEvent;
     import org.bigbluebutton.core.controllers.events.UserAuthenticatedEvent;
     import org.bigbluebutton.core.controllers.events.UsersConnectionEvent;
     import org.bigbluebutton.core.controllers.events.config.ConfigLoadEvent;
@@ -78,7 +79,6 @@ package org.bigbluebutton.core
             injector.mapSingleton(ConfigLoaderService);
 			injector.mapSingleton(ConfigToModuleDataParser);
             injector.mapSingleton(ModuleDependencyResolver);
-    //        injector.mapSingleton(ModuleLoaderService);
             injector.mapSingleton(JoinService);
             injector.mapSingleton(JoinServiceXmlParser);
             injector.mapSingleton(Red5BBBAppConnectionService);
@@ -104,6 +104,9 @@ package org.bigbluebutton.core
             commandMap.mapEvent(ConnectedToRed5Event.CONNECTED_TO_RED5_EVENT, GetMyUserIdCommand);
             commandMap.mapEvent(UsersConnectionEvent.CONNECTION_SUCCESS, GetAllUsersCommand);
             commandMap.mapEvent(GotAllUsersEvent.GOT_ALL_USERS_EVENT, ListenForUserMessagesCommand);
+            commandMap.mapEvent(ListeningForUserMessagesEvent.LISTENING_FOR_USER_MESSAGES_EVENT, StartAllModulesCommand);
+            
+            
             commandMap.mapEvent(SwitchLocaleEvent.SWITCH_TO_NEW_LOCALE_EVENT, SwitchLocaleCommand);
             
             contextView.addChild(new BigBlueButtonAppShell());

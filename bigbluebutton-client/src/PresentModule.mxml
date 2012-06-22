@@ -20,86 +20,29 @@
   $Id: $
 -->
 
-<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml"
-	implements="org.bigbluebutton.common.IBigBlueButtonModule"
-	creationComplete="onCreationComplete()" xmlns:maps="org.bigbluebutton.modules.present.maps.*">
+<bbb:BigBlueButtonModule xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:bbb="org.bigbluebutton.core.*">
 	
 	<mx:Script>
 		<![CDATA[
-			import com.asfusion.mate.events.Dispatcher;
-			
-			import mx.controls.Alert;
-			
-			import org.bigbluebutton.common.LogUtil;
-			import org.bigbluebutton.modules.present.events.PresentModuleEvent;
-			import org.bigbluebutton.modules.present.maps.PresentEventMap;
-			
-			private var globalDispatcher:Dispatcher = new Dispatcher();
-			
-			private var _moduleName:String = "Presentation";
-			private var _attributes:Object;
-			
-			private function onCreationComplete():void{
-			}
-			
-			public function get moduleName():String{
-				return _moduleName;
-			}
-			
-			public function get uri():String{
-				if (_attributes.mode == "PLAYBACK")
-					return _attributes.uri + "/" + _attributes.playbackRoom;
-				return _attributes.uri + "/" + _attributes.room;
-			}
-			
-			public function get username():String{
-				return _attributes.username;
-			}
-			
-			public function get connection():NetConnection{
-				return _attributes.connection;
-			}
-			
-			public function get mode():String{
-				if (_attributes.mode == null){
-					_attributes.mode = "LIVE";
-					LogUtil.debug("Setting Present mode: " + _attributes.mode);
-				}
-				LogUtil.debug("Present mode: " + _attributes.mode);
-				return _attributes.mode;
-			}
-			
-			public function get userid():Number{
-				return _attributes.userid as Number;
-			}
-			
-			public function get role():String{
-				return _attributes.userrole as String;
-			}
-			
-			public function start(attributes:Object):void{
-				LogUtil.debug("present attr: " + attributes.username);
-				_attributes = attributes;
-				
-				var e:PresentModuleEvent = new PresentModuleEvent(PresentModuleEvent.START_MODULE);
-				e.data = attributes;
-				globalDispatcher.dispatchEvent(e);
-			}
-			
-			public function stop():void{
-				var e:PresentModuleEvent = new PresentModuleEvent(PresentModuleEvent.STOP_MODULE);
-				globalDispatcher.dispatchEvent(e);
-			}
-			
-			public function getRoom():String{
-				return _attributes.room;
-			}
-			
-			public function getRed5ServerUri():String{
-				return _attributes.uri;
-			}
+            import org.bigbluebutton.modules.present.PresentModuleContext;
+            import org.robotlegs.core.IInjector;
+            import org.robotlegs.utilities.modular.core.IModuleContext;
+                        
+            override public function set parentInjector(value:IInjector):void {
+                context = new PresentModuleContext(this, true, value);
+            }
+            
+            override public function dispose():void {
+                context.dispose();
+                context = null;
+            }
+            
+            override public function start():void {
+                
+            }
 		]]>
 	</mx:Script>
 	
-	<maps:PresentEventMap id="eventMap" />
-</mx:Module>
+
+</bbb:BigBlueButtonModule>

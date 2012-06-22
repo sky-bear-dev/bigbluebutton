@@ -7,13 +7,14 @@ package org.bigbluebutton.core.services.imp
     import mx.events.ModuleEvent;
     import mx.modules.ModuleLoader;
     
-    import org.bigbluebutton.common.IBigBlueButtonModule;
+    import org.bigbluebutton.core.BigBlueButtonModule;
     import org.bigbluebutton.core.Logger;
     import org.bigbluebutton.core.controllers.events.module.ModuleLoadErrorEvent;
     import org.bigbluebutton.core.controllers.events.module.ModuleLoadProgressEvent;
     import org.bigbluebutton.core.controllers.events.module.ModuleLoadedEvent;
     import org.bigbluebutton.core.model.vo.ModuleDescriptor;
     import org.robotlegs.mvcs.Actor;
+    import org.robotlegs.utilities.modular.core.IModule;
 
     public class ModuleLoaderService extends Actor
     {
@@ -21,6 +22,7 @@ package org.bigbluebutton.core.services.imp
         
         [Inject]
         public var logger:Logger;
+        
         
         public function load(module:ModuleDescriptor):void { 
             _currentModule = module;
@@ -31,7 +33,7 @@ package org.bigbluebutton.core.services.imp
             _loader.addEventListener("ready", onReady);
             _loader.addEventListener("error", onErrorLoading);
             _loader.url = module.attributes.url;
-   //         logger.debug("Loading " + _loader.url);
+            logger.debug("Loading " + _loader.url);
             _loader.loadModule();
         }
         
@@ -40,13 +42,13 @@ package org.bigbluebutton.core.services.imp
             
             var modLoader:ModuleLoader = event.target as ModuleLoader;
             
-            if (!(modLoader.child is IBigBlueButtonModule)) {
+            if (!(modLoader.child is BigBlueButtonModule)) {
                 logger.error("Invalid module error");
                 var errorEvent:ModuleLoadErrorEvent = new ModuleLoadErrorEvent(ModuleLoadErrorEvent.INVALID_MODULE_ERROR_EVENT);
                 dispatch(errorEvent);
             }
             
-            var bbb_module:IBigBlueButtonModule = modLoader.child as IBigBlueButtonModule;
+            var bbb_module:BigBlueButtonModule = modLoader.child as BigBlueButtonModule;
             
             if (bbb_module != null) {
                 _currentModule.module = bbb_module;

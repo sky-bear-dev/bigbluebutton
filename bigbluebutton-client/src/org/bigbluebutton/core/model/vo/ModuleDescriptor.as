@@ -20,11 +20,11 @@ package org.bigbluebutton.core.model.vo
 {
     import mx.collections.ArrayCollection;
     
-    import org.bigbluebutton.common.IBigBlueButtonModule;
+    import org.bigbluebutton.core.BigBlueButtonModule;
 		
 	public class ModuleDescriptor
 	{
-        private var _module:IBigBlueButtonModule;
+        private var _module:BigBlueButtonModule;
         
         private var _attributes:Object = new Object();
         private var _unresolvedDependencies:ArrayCollection  = new ArrayCollection();
@@ -36,8 +36,12 @@ package org.bigbluebutton.core.model.vo
             return _attributes["name"] as String;
         }
         
-        public function set module(m:IBigBlueButtonModule):void {
+        public function set module(m:BigBlueButtonModule):void {
             _module = m;
+        }
+        
+        public function get module():BigBlueButtonModule {
+            return _module;
         }
         
         public function set attributes(attr:Object):void {
