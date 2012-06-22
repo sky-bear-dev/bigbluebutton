@@ -13,7 +13,7 @@ package org.bigbluebutton.core.services.imp
         private var resEventDispatcher:IEventDispatcher;
         
         [Inject]
-        public var localeModel: LocaleModel;
+        public var localeModel:LocaleModel;
         
         private var _localeBeingLoaded:String;
         
