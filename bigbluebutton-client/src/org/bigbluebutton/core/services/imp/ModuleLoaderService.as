@@ -23,7 +23,9 @@ package org.bigbluebutton.core.services.imp
         [Inject]
         public var logger:Logger;
         
-        
+		[Inject]
+		public var bmod:BigBlueButtonModule;
+		
         public function load(module:ModuleDescriptor):void { 
             _currentModule = module;
             var _loader:ModuleLoader = new ModuleLoader();
@@ -53,7 +55,7 @@ package org.bigbluebutton.core.services.imp
             if (bbb_module != null) {
                 _currentModule.module = bbb_module;
                 _currentModule.loaded = true;
-                logger.error("Module has been loaded.");
+                logger.error("Module has been loaded. [" + _currentModule.name);
                 var evt:ModuleLoadedEvent = new ModuleLoadedEvent(ModuleLoadedEvent.MODULE_LOADED_EVENT);
                 evt.name = _currentModule.name;
                 dispatch(evt);

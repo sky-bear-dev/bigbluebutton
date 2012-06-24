@@ -232,8 +232,9 @@
 	</target>
 	
 	<!-- just a grouping of modules to compile -->
+	<!-- build-bbb-main-test, build-chat, build-listeners, -->
 	<target name="build-main-chat-viewers-listeners-present" 
-			depends="build-bbb-main, build-bbb-main-test, build-chat, build-viewers, build-listeners, build-present"
+			depends="build-bbb-main, build-viewers, build-present"
 			description="Compile main, chat, viewers, listeners, present, breakout modules">
 	</target>
 	
@@ -344,7 +345,8 @@
 			<echo message="Deskshare standalone built without optimization." />
 	</target>
 		
-	<target name="compile-bbb" depends="build-main-chat-viewers-listeners-present, build-deskshare-phone-video-whiteboard-dyn, copy-resource-files"
+	<!-- build-deskshare-phone-video-whiteboard-dyn,  -->
+	<target name="compile-bbb" depends="build-main-chat-viewers-listeners-present, copy-resource-files"
 			description="Compiling the BBB without copying config.xml">	
 	</target>
 
@@ -452,7 +454,8 @@
 				to be compiled withouth being optimized by using the linker -->
 	<target name="clean-build-bbb" depends="clean, init-ant-contrib, generate-html-wrapper, compile-deskshare-standalone, compile-bbb" 
 			description="Build BBB client skipping compiling of locales"/>	
-	<target name="clean-build-all" depends="clean, init-ant-contrib, generate-html-wrapper, compile-deskshare-standalone, compile-bbb" 
+	<!-- compile-deskshare-standalone, -->
+	<target name="clean-build-all" depends="clean, init-ant-contrib, generate-html-wrapper, compile-bbb" 
 			description="Build BBB client including locales"/>
 	<target name="modules" depends="init-ant-contrib, generate-html-wrapper, compile-deskshare-standalone, compile-bbb"
                         description="Build BBB client without locales"/>		

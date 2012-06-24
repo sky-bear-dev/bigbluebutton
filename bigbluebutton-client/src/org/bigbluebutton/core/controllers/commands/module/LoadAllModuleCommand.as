@@ -27,7 +27,6 @@ package org.bigbluebutton.core.controllers.commands.module
                 var mod:ModuleDescriptor = moduleModel.getNextModuleToLoad();
                 if (mod != null) {
                     logger.debug("Loading " + mod.name);
-                 //   var service:ModuleLoaderService = new ModuleLoaderService();
                     service.load(mod);
                 }
             }

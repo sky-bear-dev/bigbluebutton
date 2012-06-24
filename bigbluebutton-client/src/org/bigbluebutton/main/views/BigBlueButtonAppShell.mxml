@@ -27,11 +27,16 @@
 			
 	<mx:Script>
 		<![CDATA[
+			import org.bigbluebutton.core.BigBlueButtonModule;
             
             public function appendProgress(text:String):void {
                 progText.text += text + "\n"
             }
             
+			public function addModule(module:BigBlueButtonModule):void {
+				this.addChild(module);
+			}
+			
             public function userHasBeenAuthenticated():void {
                 this.removeAllChildren();
                 this.addChild(new MainApplicationShell());

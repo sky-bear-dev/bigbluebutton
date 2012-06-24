@@ -6,9 +6,11 @@ package org.bigbluebutton.core.model.imp
     
     import org.bigbluebutton.core.BigBlueButtonModule;
     import org.bigbluebutton.core.Logger;
+    import org.bigbluebutton.core.controllers.events.AddModuleToDisplayEvent;
     import org.bigbluebutton.core.model.vo.ModuleDescriptor;
+    import org.robotlegs.mvcs.Actor;
 
-    public class ModuleModel
+    public class ModuleModel extends Actor
     {
         [Inject]
         public var logger:Logger;
@@ -17,15 +19,27 @@ package org.bigbluebutton.core.model.imp
         private var _sortedDependecies:ArrayCollection;
         
         public function set modules(m:Dictionary):void {
-            _modules = m;
-        }
+            _modules = m;	
+		}
         
-        public function startAllModules():void{
-            for (var i:int = 0; i < _sortedDependecies.length; i++){
-                var m:ModuleDescriptor = _sortedDependecies.getItemAt(i) as ModuleDescriptor;
-                startModule(m.name);
-            }
-        }
+        public function startAllModules():void {
+			for (var key:Object in _modules) {				
+				var m:ModuleDescriptor = _modules[key] as ModuleDescriptor;
+				if (m.module != null) {
+					logger.debug('Starting module ' + m.name);
+					var bbb:BigBlueButtonModule = BigBlueButtonModule(m.module);
+					
+					logger.debug("Module foo = " + bbb.foo());
+					var event:AddModuleToDisplayEvent = new AddModuleToDisplayEvent();
+					event.module = bbb;
+					dispatch(event);
+					
+				} else {
+					logger.debug("No modules to start");
+				}
+			}		
+
+		}
         
         private function getModule(name:String):ModuleDescriptor {
             for (var key:Object in _modules) {				
@@ -42,7 +56,9 @@ package org.bigbluebutton.core.model.imp
             if (m != null) {
                 logger.debug('Starting module ' + name);
                 var bbb:BigBlueButtonModule = m.module as BigBlueButtonModule;
-                bbb.start();		
+                var event:AddModuleToDisplayEvent = new AddModuleToDisplayEvent();
+				event.module = bbb;
+				dispatch(event);
             }	
         }
         
@@ -68,7 +84,7 @@ package org.bigbluebutton.core.model.imp
             return null;
         }
         
-        public function allModulesLoaded():Boolean{
+        public function allModulesLoaded():Boolean {
             for (var i:int = 0; i < _sortedDependecies.length; i++){
                 var m:ModuleDescriptor = _sortedDependecies.getItemAt(i) as ModuleDescriptor;
                 if (!m.loaded){

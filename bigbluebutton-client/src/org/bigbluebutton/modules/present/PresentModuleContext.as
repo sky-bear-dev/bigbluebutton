@@ -28,7 +28,7 @@ package org.bigbluebutton.modules.present
         }
         
         override public function startup():void {
-            logger.debug("Starting presentation module");
+         //   logger.debug("***Starting presentation module");
             mediatorMap.mapView(PresentationWindow, PresentationWindowMediator);
             mediatorMap.mapView(PresentationModuleShell, PresentationModuleShellMediator);
             addEventListener(PresentationModuleReadyEvent.PRESENTATION_MODULE_READY_EVENT, PresentationModuleReadyEventHandler);

@@ -1,6 +1,7 @@
 package org.bigbluebutton.main.views
 {
     import org.bigbluebutton.core.Logger;
+    import org.bigbluebutton.core.controllers.events.AddModuleToDisplayEvent;
     import org.bigbluebutton.core.controllers.events.UserAuthenticatedEvent;
     import org.bigbluebutton.core.controllers.events.module.AllModulesLoadedEvent;
     import org.bigbluebutton.core.controllers.events.module.ModuleLoadProgressEvent;
@@ -21,13 +22,18 @@ package org.bigbluebutton.main.views
             addContextListener(ModuleLoadProgressEvent.MODULE_LOAD_PROGRESS_EVENT, moduleLoadProgressEventHandler, ModuleLoadProgressEvent);
             addContextListener(UserAuthenticatedEvent.USER_AUTHENTICATED_EVENT, userAuthenticatedEventHandler, UserAuthenticatedEvent);
             addContextListener(AllModulesLoadedEvent.ALL_MODULES_LOADED_EVENT, allModulesLoadedEventHandler, AllModulesLoadedEvent);
-            
+            addContextListener(AddModuleToDisplayEvent.ADD_MODULE_TO_DISPLAY_EVENT, addModuleToDisplayEventHandler, AddModuleToDisplayEvent);
         }
  
         protected function handleLogButtonClieckedEvent(e:LogButtonClickedEvent):void{
             view.appendProgress(logger.messages);
         }
         
+		protected function addModuleToDisplayEventHandler(e:AddModuleToDisplayEvent):void {
+			logger.debug("Adding module");
+			view.addModule(e.module);	
+		}
+		
         protected function allModulesLoadedEventHandler(e:AllModulesLoadedEvent):void{
             view.appendProgress("All modules have been loaded");
         }

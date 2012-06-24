@@ -69,7 +69,8 @@ package org.bigbluebutton.core
             injector.mapSingletonOf(Logger, LoggerModel);
             
             injector.mapClass(ModuleLoaderService, ModuleLoaderService);
-            
+			injector.mapClass(BigBlueButtonModule, BigBlueButtonModule);
+			
             injector.mapSingleton(LocaleLoaderService);
             injector.mapSingleton(LocaleConfigLoaderService);
             injector.mapSingleton(LocaleModel);
@@ -85,6 +86,8 @@ package org.bigbluebutton.core
             injector.mapSingleton(MeetingModel);
             injector.mapSingleton(UsersService);
             
+			viewMap.mapType(BigBlueButtonModule);
+			
             mediatorMap.mapView(MainApplicationShell, MainApplicationShellMediator);
             mediatorMap.mapView(MainCanvas, MainCanvasMediator);
             mediatorMap.mapView(LoadingBar, LoadingBarMediator);

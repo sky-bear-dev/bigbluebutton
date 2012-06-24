@@ -28,7 +28,8 @@
             import org.bigbluebutton.modules.present.PresentModuleContext;
             import org.robotlegs.core.IInjector;
             import org.robotlegs.utilities.modular.core.IModuleContext;
-                        
+            
+			[Inject]
             override public function set parentInjector(value:IInjector):void {
                 context = new PresentModuleContext(this, true, value);
             }
@@ -41,6 +42,10 @@
             override public function start():void {
                 
             }
+			
+			override public function foo():String {
+				return "Foo Presentation Module";
+			}
 		]]>
 	</mx:Script>
 	

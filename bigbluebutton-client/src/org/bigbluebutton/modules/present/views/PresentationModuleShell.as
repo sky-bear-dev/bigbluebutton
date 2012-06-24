@@ -1,9 +1,11 @@
 package org.bigbluebutton.modules.present.views
 {
 
-    import flash.display.Sprite;
+
     
-    public class PresentationModuleShell extends Sprite
+    import mx.core.UIComponent;
+    
+    public class PresentationModuleShell extends UIComponent
     {
 
     }
