@@ -9,6 +9,7 @@ package org.bigbluebutton.core.services.imp
     
     import org.bigbluebutton.core.BigBlueButtonModule;
     import org.bigbluebutton.core.Logger;
+    import org.bigbluebutton.core.ModuleWrapper;
     import org.bigbluebutton.core.controllers.events.module.ModuleLoadErrorEvent;
     import org.bigbluebutton.core.controllers.events.module.ModuleLoadProgressEvent;
     import org.bigbluebutton.core.controllers.events.module.ModuleLoadedEvent;
@@ -23,8 +24,8 @@ package org.bigbluebutton.core.services.imp
         [Inject]
         public var logger:Logger;
         
-		[Inject]
-		public var bmod:BigBlueButtonModule;
+//		[Inject]
+//		public var bmod:BigBlueButtonModule;
 		
         public function load(module:ModuleDescriptor):void { 
             _currentModule = module;

@@ -5,6 +5,7 @@ package org.bigbluebutton.modules.present
     import flash.system.ApplicationDomain;
     
     import org.bigbluebutton.core.Logger;
+    import org.bigbluebutton.core.model.imp.LoggerModel;
     import org.bigbluebutton.modules.present.controller.commands.StartPresentationModuleCommand;
     import org.bigbluebutton.modules.present.controller.events.PresentationModuleContextStartedEvent;
     import org.bigbluebutton.modules.present.controller.events.PresentationModuleReadyEvent;
@@ -18,8 +19,8 @@ package org.bigbluebutton.modules.present
     
     public class PresentModuleContext extends ModuleContext
     {
-        [Injector]
-        public var logger:Logger;
+ //       [Injector]
+ //       public var logger:Logger;
         
         public function PresentModuleContext(contextView:DisplayObjectContainer=null, autoStartup:Boolean=true, parentInjector:IInjector=null, applicationDomain:ApplicationDomain=null)
         {
@@ -28,20 +29,21 @@ package org.bigbluebutton.modules.present
         }
         
         override public function startup():void {
-         //   logger.debug("***Starting presentation module");
+         //   logger.debug("*** Starting presentation module");
+        //    injector.mapSingletonOf(Logger, LoggerModel);
             mediatorMap.mapView(PresentationWindow, PresentationWindowMediator);
             mediatorMap.mapView(PresentationModuleShell, PresentationModuleShellMediator);
             addEventListener(PresentationModuleReadyEvent.PRESENTATION_MODULE_READY_EVENT, PresentationModuleReadyEventHandler);
             
-            commandMap.mapEvent(PresentationModuleContextStartedEvent.PRESENTATION_MODULE_CONTEXT_STARTED_EVENT, StartPresentationModuleCommand);
-        
-            contextView.addChild(new PresentationModuleShell());
-            
-            dispatchEvent(new PresentationModuleContextStartedEvent());
+ //           commandMap.mapEvent(); 
+            moduleCommandMap.mapEvent(PresentationModuleContextStartedEvent.PRESENTATION_MODULE_CONTEXT_STARTED_EVENT, StartPresentationModuleCommand);
+ //           contextView.addChild(new PresentationModuleShell());
+            dispatchToModules(new PresentationModuleContextStartedEvent());
+      //      dispatchEvent();
         }
         
         protected function PresentationModuleReadyEventHandler(event:Event):void {
-            logger.debug("Handling PresentationModuleReadyEventHandler");
+ //           logger.debug("Handling PresentationModuleReadyEventHandler");
         }
     }
 }

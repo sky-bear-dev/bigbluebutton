@@ -27,13 +27,13 @@
 			
 	<mx:Script>
 		<![CDATA[
-			import org.bigbluebutton.core.BigBlueButtonModule;
+            import org.bigbluebutton.core.ModuleWrapper;
             
             public function appendProgress(text:String):void {
                 progText.text += text + "\n"
             }
             
-			public function addModule(module:BigBlueButtonModule):void {
+			public function addModule(module:ModuleWrapper):void {
 				this.addChild(module);
 			}
 			

@@ -4,8 +4,8 @@ package org.bigbluebutton.core.model.imp
     
     import mx.collections.ArrayCollection;
     
-    import org.bigbluebutton.core.BigBlueButtonModule;
     import org.bigbluebutton.core.Logger;
+    import org.bigbluebutton.core.ModuleWrapper;
     import org.bigbluebutton.core.controllers.events.AddModuleToDisplayEvent;
     import org.bigbluebutton.core.model.vo.ModuleDescriptor;
     import org.robotlegs.mvcs.Actor;
@@ -27,13 +27,12 @@ package org.bigbluebutton.core.model.imp
 				var m:ModuleDescriptor = _modules[key] as ModuleDescriptor;
 				if (m.module != null) {
 					logger.debug('Starting module ' + m.name);
-					var bbb:BigBlueButtonModule = BigBlueButtonModule(m.module);
-					
-					logger.debug("Module foo = " + bbb.foo());
+					var bbb:ModuleWrapper = new ModuleWrapper();
+					bbb.bModule = m.module;
 					var event:AddModuleToDisplayEvent = new AddModuleToDisplayEvent();
 					event.module = bbb;
 					dispatch(event);
-					
+					bbb.start();
 				} else {
 					logger.debug("No modules to start");
 				}
@@ -50,18 +49,18 @@ package org.bigbluebutton.core.model.imp
             }		
             return null;	
         }
-        
+/*        
         private function startModule(name:String):void {
             var m:ModuleDescriptor = getModule(name);
             if (m != null) {
                 logger.debug('Starting module ' + name);
-                var bbb:BigBlueButtonModule = m.module as BigBlueButtonModule;
+                var bbb:Big = m.module as ModuleWrapper;
                 var event:AddModuleToDisplayEvent = new AddModuleToDisplayEvent();
 				event.module = bbb;
 				dispatch(event);
             }	
         }
-        
+ */       
         public function get modules():Dictionary {
             return _modules;
         }

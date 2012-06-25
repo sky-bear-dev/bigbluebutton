@@ -28,22 +28,23 @@
             import org.bigbluebutton.modules.present.PresentModuleContext;
             import org.robotlegs.core.IInjector;
             import org.robotlegs.utilities.modular.core.IModuleContext;
+            import org.bigbluebutton.core.Logger;
             
-			[Inject]
-            override public function set parentInjector(value:IInjector):void {
-                context = new PresentModuleContext(this, true, value);
-            }
+     //       [Inject]
+     //       public var logger:Logger;
             
             override public function dispose():void {
                 context.dispose();
                 context = null;
             }
             
-            override public function start():void {
-                
+            override public function start(contextView:DisplayObjectContainer, value:IInjector):void {
+        //        logger.debug("Booo hoo!");
+                context = new PresentModuleContext(contextView, false, value);
+                context.startup();
             }
 			
-			override public function foo():String {
+            override public function foo():String {
 				return "Foo Presentation Module";
 			}
 		]]>

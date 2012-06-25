@@ -7,29 +7,24 @@ package org.bigbluebutton.core
     
     import org.robotlegs.core.IInjector;
     import org.robotlegs.utilities.modular.core.IModule;
-    import org.robotlegs.utilities.modular.core.IModuleContext;
+    import org.robotlegs.utilities.modular.mvcs.ModuleContext;
     
-    public class BigBlueButtonModule extends Module implements IModule
+    public class BigBlueButtonModule extends Module
     {
-        protected var context:IModuleContext;
-        
-		[Inject]
-		public var logger:Logger;
-		
-        public function start():void {}
-        
-		[Inject]
-        public function set parentInjector(value:IInjector):void {
-            logger.error("***You should override parentInjector");
+        protected var context:ModuleContext;
+        protected var contextView:DisplayObjectContainer;
+        protected var injector:IInjector;
+        		        
+        public function start(contextView:DisplayObjectContainer, value:IInjector):void {
+            throw new Error("You need to override the start method.");
         }
-        
+             
         public function dispose():void {
-			logger.error("You should override dispose");
+            throw new Error("You need to override the dispose method.");
         }
-		
-		public function foo():String {
-			return "FOOBAR";
-		}
-		
+
+        public function foo():String {
+            throw new Error("You need to override the foo method.");
+        }
     }
 }

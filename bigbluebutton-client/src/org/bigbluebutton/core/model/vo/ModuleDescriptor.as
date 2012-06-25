@@ -21,7 +21,7 @@ package org.bigbluebutton.core.model.vo
     import mx.collections.ArrayCollection;
     
     import org.bigbluebutton.core.BigBlueButtonModule;
-		
+	
 	public class ModuleDescriptor
 	{
         private var _module:BigBlueButtonModule;
