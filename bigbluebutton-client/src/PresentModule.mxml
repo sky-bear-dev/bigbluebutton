@@ -40,8 +40,8 @@
             
             override public function start(contextView:DisplayObjectContainer, value:IInjector):void {
         //        logger.debug("Booo hoo!");
-                context = new PresentModuleContext(contextView, false, value);
-                context.startup();
+          //      context = new PresentModuleContext(contextView, false);
+          //      context.startup();
             }
 			
             override public function foo():String {

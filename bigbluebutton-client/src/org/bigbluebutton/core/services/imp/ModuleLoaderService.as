@@ -51,7 +51,7 @@ package org.bigbluebutton.core.services.imp
                 dispatch(errorEvent);
             }
             
-            var bbb_module:BigBlueButtonModule = modLoader.child as BigBlueButtonModule;
+            var bbb_module:BigBlueButtonModule = BigBlueButtonModule(modLoader.child);
             
             if (bbb_module != null) {
                 _currentModule.module = bbb_module;

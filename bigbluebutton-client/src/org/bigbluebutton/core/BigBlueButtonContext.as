@@ -55,10 +55,12 @@ package org.bigbluebutton.core
     import org.bigbluebutton.main.views.MainCanvasMediator;
     import org.bigbluebutton.main.views.MainToolbar;
     import org.bigbluebutton.main.views.MainToolbarMediator;
+    import org.bigbluebutton.modules.present.views.PresentationModule;
     import org.robotlegs.base.ContextEvent;
+    import org.robotlegs.mvcs.Context;
     import org.robotlegs.utilities.modular.mvcs.ModuleContext;
     
-    public class BigBlueButtonContext extends ModuleContext
+    public class BigBlueButtonContext extends Context
     {
         public function BigBlueButtonContext(contextView:DisplayObjectContainer=null, autoStartup:Boolean=true)
         {
@@ -69,8 +71,9 @@ package org.bigbluebutton.core
             injector.mapSingletonOf(Logger, LoggerModel);
             
             injector.mapClass(ModuleLoaderService, ModuleLoaderService);
-			injector.mapClass(ModuleWrapper, ModuleWrapper);
-			
+//			injector.mapClass(ModuleWrapper, ModuleWrapper);
+            injector.mapClass(PresentationModule, PresentationModule);
+            
             injector.mapSingleton(LocaleLoaderService);
             injector.mapSingleton(LocaleConfigLoaderService);
             injector.mapSingleton(LocaleModel);
@@ -86,8 +89,10 @@ package org.bigbluebutton.core
             injector.mapSingleton(MeetingModel);
             injector.mapSingleton(UsersService);
             
-			viewMap.mapType(ModuleWrapper);
-            viewMap.mapType(BigBlueButtonModule);
+            viewMap.mapType(PresentationModule);
+            
+//			viewMap.mapType(ModuleWrapper);
+//            viewMap.mapType(BigBlueButtonModule);
             
             mediatorMap.mapView(MainApplicationShell, MainApplicationShellMediator);
             mediatorMap.mapView(MainCanvas, MainCanvasMediator);

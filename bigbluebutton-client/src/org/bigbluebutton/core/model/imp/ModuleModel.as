@@ -8,6 +8,7 @@ package org.bigbluebutton.core.model.imp
     import org.bigbluebutton.core.ModuleWrapper;
     import org.bigbluebutton.core.controllers.events.AddModuleToDisplayEvent;
     import org.bigbluebutton.core.model.vo.ModuleDescriptor;
+    import org.bigbluebutton.modules.present.views.PresentationModule;
     import org.robotlegs.mvcs.Actor;
 
     public class ModuleModel extends Actor
@@ -27,12 +28,13 @@ package org.bigbluebutton.core.model.imp
 				var m:ModuleDescriptor = _modules[key] as ModuleDescriptor;
 				if (m.module != null) {
 					logger.debug('Starting module ' + m.name);
-					var bbb:ModuleWrapper = new ModuleWrapper();
-					bbb.bModule = m.module;
+                    var pm:PresentationModule = new PresentationModule();
+		//			var bbb:ModuleWrapper = new ModuleWrapper();
+		//			bbb.bModule = m.module;
 					var event:AddModuleToDisplayEvent = new AddModuleToDisplayEvent();
-					event.module = bbb;
+					event.module = pm;
 					dispatch(event);
-					bbb.start();
+	//				bbb.start();
 				} else {
 					logger.debug("No modules to start");
 				}

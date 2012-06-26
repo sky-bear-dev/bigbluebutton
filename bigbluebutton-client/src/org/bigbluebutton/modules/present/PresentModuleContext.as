@@ -15,30 +15,31 @@ package org.bigbluebutton.modules.present
     import org.bigbluebutton.modules.present.views.PresentationWindowMediator;
     import org.robotlegs.base.ContextEvent;
     import org.robotlegs.core.IInjector;
-    import org.robotlegs.utilities.modular.mvcs.ModuleContext;
+    import org.robotlegs.mvcs.Context;
+
     
-    public class PresentModuleContext extends ModuleContext
+    public class PresentModuleContext extends Context
     {
- //       [Injector]
- //       public var logger:Logger;
+        [Injector]
+        public var logger:Logger;
         
-        public function PresentModuleContext(contextView:DisplayObjectContainer=null, autoStartup:Boolean=true, parentInjector:IInjector=null, applicationDomain:ApplicationDomain=null)
+        public function PresentModuleContext(contextView:DisplayObjectContainer=null, autoStartup:Boolean=true)
         {
-            this.contextView = contextView;
-            super(contextView, autoStartup, parentInjector, applicationDomain);
+//            this.contextView = contextView;
+            super(contextView, autoStartup);
         }
         
         override public function startup():void {
-         //   logger.debug("*** Starting presentation module");
+            logger.debug("*** Starting presentation module");
         //    injector.mapSingletonOf(Logger, LoggerModel);
             mediatorMap.mapView(PresentationWindow, PresentationWindowMediator);
             mediatorMap.mapView(PresentationModuleShell, PresentationModuleShellMediator);
             addEventListener(PresentationModuleReadyEvent.PRESENTATION_MODULE_READY_EVENT, PresentationModuleReadyEventHandler);
             
  //           commandMap.mapEvent(); 
-            moduleCommandMap.mapEvent(PresentationModuleContextStartedEvent.PRESENTATION_MODULE_CONTEXT_STARTED_EVENT, StartPresentationModuleCommand);
- //           contextView.addChild(new PresentationModuleShell());
-            dispatchToModules(new PresentationModuleContextStartedEvent());
+            commandMap.mapEvent(PresentationModuleContextStartedEvent.PRESENTATION_MODULE_CONTEXT_STARTED_EVENT, StartPresentationModuleCommand);
+  //          contextView.addChild(new PresentationModuleShell());
+            dispatchEvent(new PresentationModuleContextStartedEvent());
       //      dispatchEvent();
         }
         
