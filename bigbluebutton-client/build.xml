@@ -233,13 +233,13 @@
 	
 	<!-- just a grouping of modules to compile -->
 	<target name="build-main-chat-viewers-listeners-present" 
-			depends="build-bbb-main, build-bbb-main-test, build-chat, build-viewers, build-listeners, build-present, build-breakout"
+			depends="build-bbb-main, build-bbb-main-test, build-chat, build-viewers, build-listeners, build-present"
 			description="Compile main, chat, viewers, listeners, present, breakout modules">
 	</target>
 	
 	<!-- just a grouping of modules to compile -->
 	<target name="build-deskshare-phone-video-whiteboard-dyn" 
-			depends="build-deskshare, build-phone, build-video, build-videodock, build-whiteboard, build-dyn, build-classroom-audio, build-settings"
+			depends="build-deskshare, build-phone, build-video, build-videodock, build-whiteboard"
 			description="Compile deskshare, phone, video, whiteboard, dynamic info modules">
 	</target>
 	
@@ -253,7 +253,9 @@
 					<target-player>10.3.0</target-player>
 					<load-config filename="@{flex}/frameworks/flex-config.xml" />
 					<source-path path-element="@{flex}/frameworks" />
-					
+					<arg value="-keep-as3-metadata+=Inject"/>
+					<arg value="-keep-as3-metadata+=PostConstruct"/>
+
 					<!--
 				  		Dump out resources to find out what resources to include building the locales.
 				  		http://forums.adobe.com/thread/758619
@@ -293,7 +295,10 @@
 				<load-config filename="@{flex}/frameworks/flex-config.xml" />
 				<source-path path-element="@{flex}/frameworks" />
 				<static-link-runtime-shared-libraries>${STATIC_RSL}</static-link-runtime-shared-libraries>
-
+				
+				<arg value="-keep-as3-metadata+=Inject"/>
+				<arg value="-keep-as3-metadata+=PostConstruct"/>
+				
 				<compiler.library-path dir="@{flex}/frameworks" append="true">
 					<include name="libs" />
 					<include name="../bundles/{locale}" />

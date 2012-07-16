@@ -40,6 +40,7 @@ public class BigBlueButtonApplication extends MultiThreadedApplicationAdapter {
 	private ParticipantsApplication participantsApplication;
 	private RecorderApplication recorderApplication;
 	private AbstractApplicationContext appCtx;
+
 	
 	private String version;
 	
@@ -110,6 +111,8 @@ public class BigBlueButtonApplication extends MultiThreadedApplicationAdapter {
     	String externalUserID = ((String) params[6]).toString();
     	String internalUserID = ((String) params[6]).toString();
     	
+    	
+    	
 		if (record == true) {
 			recorderApplication.createRecordSession(sessionName);
 		}
@@ -132,6 +135,8 @@ public class BigBlueButtonApplication extends MultiThreadedApplicationAdapter {
         int remotePort = Red5.getConnectionLocal().getRemotePort();    	
         String clientId = Red5.getConnectionLocal().getClient().getId();
     	log.info("[clientid=" + clientId + "] disconnnected from " + remoteHost + ":" + remotePort + ".");
+    	
+    	
     	
 		BigBlueButtonSession bbbSession = (BigBlueButtonSession) Red5.getConnectionLocal().getAttribute(Constants.SESSION);
 		log.info("User [" + bbbSession.getUsername() + "] disconnected from room [" + bbbSession.getRoom() +"]");
@@ -169,6 +174,8 @@ public class BigBlueButtonApplication extends MultiThreadedApplicationAdapter {
 		return (BigBlueButtonSession) Red5.getConnectionLocal().getAttribute(Constants.SESSION);
 	}
 	
+
+
 	private class ShutdownHookListener implements ApplicationListener<ApplicationEvent> {
 
 		@Override

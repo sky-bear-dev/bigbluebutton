@@ -27,16 +27,18 @@
 
 	<mx:Script>
 		<![CDATA[
-			import mx.controls.TextArea;
-			import flexlib.controls.Highlighter;
-			import org.bigbluebutton.util.logging.Logger;
-			import mx.logging.Log;
-			import mx.logging.LogEventLevel;
-			import mx.collections.ArrayCollection;
-			import mx.managers.PopUpManager;
+            import flexlib.controls.Highlighter;
+            
+            import mx.collections.ArrayCollection;
+            import mx.controls.TextArea;
+            import mx.logging.Log;
+            import mx.logging.LogEventLevel;
+            import mx.managers.PopUpManager;
+            
+            import org.bigbluebutton.core.model.imp.LogModel;
 			
 			[Bindable]
-			public var logs:Logger;
+			public var logs:LogModel;
 			private var highlighter:Highlighter;
 			private var textField:TextField;
 			
