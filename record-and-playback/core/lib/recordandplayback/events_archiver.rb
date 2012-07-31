@@ -9,6 +9,10 @@ module BigBlueButton
   # Class to wrap Redis so we can mock
   # for testing
   class RedisWrapper
+
+    #two days in seconds
+    DEFAULT_EXPIRE_TIME = 2880
+
     def initialize(host, port)
       @host, @port = host, port
       @redis = Redis.new(:host => @host, :port => @port)
@@ -40,7 +44,16 @@ module BigBlueButton
     
     def event_info_for(meeting_id, event)
       @redis.hgetall("recording:#{meeting_id}:#{event}")
-    end    
+    end
+
+    def expire_event_info_for(meeting_id,event)
+      @redis.expire("recording:#{meeting_id}:#{event}", DEFAULT_EXPIRE_TIME )
+    end
+
+    def expire_events_for(meeting_id)
+      @redis.expire("meeting:#{meeting_id}:recordings", DEFAULT_EXPIRE_TIME )
+    end
+
   end
 
   class RedisEventsArchiver
@@ -54,38 +67,41 @@ module BigBlueButton
     end
     
     def store_events(meeting_id)
-	Encoding.default_external="UTF-8"
+      Encoding.default_external="UTF-8"
       xml = Builder::XmlMarkup.new( :indent => 2 )
       result = xml.instruct! :xml, :version => "1.0", :encoding=>"UTF-8"
       
       meeting_metadata = @redis.metadata_for(meeting_id)
 
       if (meeting_metadata != nil)
-          xml.recording(:meeting_id => meeting_id) {
-            xml.metadata(meeting_metadata)
-            msgs = @redis.events_for(meeting_id)                      
-            msgs.each do |msg|
-              res = @redis.event_info_for(meeting_id, msg)
-              xml.event(:timestamp => res[TIMESTAMP], :module => res[MODULE], :eventname => res[EVENTNAME]) {
-                res.each do |key, val|
-                  if not [TIMESTAMP, MODULE, EVENTNAME, MEETINGID].include?(key)
-					# a temporary solution for enable a good display of the xml in the presentation module and for add CDATA to chat
-					if res[MODULE] == "PRESENTATION" && key == "slidesInfo"
-						xml.method_missing(key){
-							xml << val
-						}
-					elsif res[MODULE] == "CHAT" && res[EVENTNAME] == "PublicChatEvent" && key == "message"
-						xml.method_missing(key){
-							xml.cdata!(val.tr("\u0000-\u001f\u007f\u2028",''))
-						}
-					else
-						xml.method_missing(key,  val)
-					end
+        xml.recording(:meeting_id => meeting_id) {
+          xml.metadata(meeting_metadata)
+
+          msgs = @redis.events_for(meeting_id)                      
+          msgs.each do |msg|
+            res = @redis.event_info_for(meeting_id, msg)
+            xml.event(:timestamp => res[TIMESTAMP], :module => res[MODULE], :eventname => res[EVENTNAME]) {
+              res.each do |key, val|
+                if not [TIMESTAMP, MODULE, EVENTNAME, MEETINGID].include?(key)
+                  # a temporary solution for enable a good display of the xml in the presentation module and for add CDATA to chat
+                  if res[MODULE] == "PRESENTATION" && key == "slidesInfo"
+                    xml.method_missing(key){
+                      xml << val
+                    }
+                  elsif res[MODULE] == "CHAT" && res[EVENTNAME] == "PublicChatEvent" && key == "message"
+                    xml.method_missing(key){
+                      xml.cdata!(val.tr("\u0000-\u001f\u007f\u2028",''))
+                    }
+                  else
+                    xml.method_missing(key,  val)
                   end
                 end
-              }
-            end
-          }
+              end
+            }
+            @redis.expire_event_info_for(meeting_id, msg)
+          end
+          @redis.expire_events_for(meeting_id) 
+        }
       end  
       xml.target!
     end
