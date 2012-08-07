@@ -41,16 +41,16 @@ package org.bigbluebutton.core.layout.managers
 	import org.bigbluebutton.core.EventBroadcaster;
 	import org.bigbluebutton.core.managers.UserManager;
 	import org.bigbluebutton.core.model.Config;
-	import org.bigbluebutton.modules.layout.events.LayoutEvent;
-	import org.bigbluebutton.modules.layout.events.LayoutsLoadedEvent;
-	import org.bigbluebutton.modules.layout.events.UpdateLayoutEvent;
-	import org.bigbluebutton.modules.layout.model.LayoutDefinition;
-	import org.bigbluebutton.modules.layout.model.LayoutDefinitionFile;
-	import org.bigbluebutton.modules.layout.model.LayoutLoader;
-	import org.bigbluebutton.modules.layout.model.WindowLayout;
-	import org.bigbluebutton.modules.layout.events.RedefineLayoutEvent;
+	import org.bigbluebutton.core.layout.events.LayoutEvent;
+	import org.bigbluebutton.core.layout.events.LayoutsLoadedEvent;
+	import org.bigbluebutton.core.layout.events.UpdateLayoutEvent;
+	import org.bigbluebutton.core.layout.model.LayoutDefinition;
+	import org.bigbluebutton.core.layout.model.LayoutDefinitionFile;
+	import org.bigbluebutton.core.layout.model.LayoutLoader;
+	import org.bigbluebutton.core.layout.model.WindowLayout;
+	import org.bigbluebutton.core.layout.events.RedefineLayoutEvent;
 	import org.bigbluebutton.util.i18n.ResourceUtil;
-	import org.bigbluebutton.modules.layout.managers.OrderManager;
+	import org.bigbluebutton.core.layout.managers.OrderManager;
 	
 	public class LayoutManager extends EventDispatcher {
 		private var _layouts:LayoutDefinitionFile = null;

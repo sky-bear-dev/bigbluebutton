@@ -22,6 +22,7 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:views="org.bigbluebutton.main.views.*"
 	xmlns:maps="org.bigbluebutton.main.maps.*"
+  xmlns:layoutMap="org.bigbluebutton.core.layout.maps.*"
 	xmlns:mate="http://mate.asfusion.com/"
 	xmlns:m="library://melomel/2010"
 	pageTitle="BigBlueButton"
@@ -256,6 +257,7 @@
 	</mx:Script>	
 	
 	<maps:ApplicationEventMap />	
+  <layoutMap:LayoutEventMap />
 	<views:MainApplicationShell id="mainShell"/>	
 	
 	<mate:Listener type="{BBBEvent.LOGIN_EVENT}" method="handleLoginEvent"/>

@@ -35,10 +35,10 @@ package org.bigbluebutton.core.layout.services
 	
 	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.core.managers.UserManager;
-	import org.bigbluebutton.modules.layout.events.ConnectionEvent;
-	import org.bigbluebutton.modules.layout.events.LayoutEvent;
-	import org.bigbluebutton.modules.layout.events.RedefineLayoutEvent;
-	import org.bigbluebutton.modules.layout.model.LayoutDefinition;
+	import org.bigbluebutton.core.layout.events.ConnectionEvent;
+	import org.bigbluebutton.core.layout.events.LayoutEvent;
+	import org.bigbluebutton.core.layout.events.RedefineLayoutEvent;
+	import org.bigbluebutton.core.layout.model.LayoutDefinition;
 	import org.bigbluebutton.util.i18n.ResourceUtil;
 
 	public class LayoutSharedObjectService

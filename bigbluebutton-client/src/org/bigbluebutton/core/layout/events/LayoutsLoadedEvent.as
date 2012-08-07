@@ -20,7 +20,7 @@
 package org.bigbluebutton.core.layout.events
 {
 	import flash.events.Event;
-	import org.bigbluebutton.modules.layout.model.LayoutDefinitionFile;
+	import org.bigbluebutton.core.layout.model.LayoutDefinitionFile;
 	
 	public class LayoutsLoadedEvent extends Event
 	{

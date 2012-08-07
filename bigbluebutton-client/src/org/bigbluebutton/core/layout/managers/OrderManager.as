@@ -25,8 +25,8 @@ package org.bigbluebutton.core.layout.managers
 	import flexlib.mdi.containers.MDIWindow;
 
 	import org.bigbluebutton.common.LogUtil;
-	import org.bigbluebutton.modules.layout.model.LayoutDefinition;
-	import org.bigbluebutton.modules.layout.model.WindowLayout;
+	import org.bigbluebutton.core.layout.model.LayoutDefinition;
+	import org.bigbluebutton.core.layout.model.WindowLayout;
 
 	public class OrderManager {
 		private static var _instance:OrderManager = null;

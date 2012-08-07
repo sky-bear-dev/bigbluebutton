@@ -34,8 +34,8 @@
 
 			import org.bigbluebutton.core.managers.UserManager;
 			import org.bigbluebutton.main.views.MainToolbar;
-			import org.bigbluebutton.modules.layout.events.ViewInitializedEvent;
-			import org.bigbluebutton.modules.layout.model.WindowLayout;
+			import org.bigbluebutton.core.layout.events.ViewInitializedEvent;
+			import org.bigbluebutton.core.layout.model.WindowLayout;
 
 			private var _dispatcher:Dispatcher = new Dispatcher();
 			[Bindable] private var _enableEdit:Boolean = false;

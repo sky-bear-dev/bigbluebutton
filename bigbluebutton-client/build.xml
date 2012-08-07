@@ -238,14 +238,14 @@
 	
 	<!-- just a grouping of modules to compile -->
 	<target name="build-main-chat-viewers-listeners-present" 
-			depends="build-bbb-main, build-bbb-main-test, build-chat, build-viewers, build-listeners, build-present, build-breakout, build-layout"
-			description="Compile main, chat, viewers, listeners, present, breakout modules">
+			depends="build-bbb-main, build-bbb-main-test, build-chat, build-viewers, build-listeners, build-present"
+			description="Compile main, chat, viewers, listeners, present">
 	</target>
 	
 	<!-- just a grouping of modules to compile -->
 	<target name="build-deskshare-phone-video-whiteboard-dyn" 
-			depends="build-deskshare, build-phone, build-video, build-videodock, build-whiteboard, build-dyn, build-classroom-audio, build-settings"
-			description="Compile deskshare, phone, video, whiteboard, dynamic info modules">
+			depends="build-deskshare, build-phone, build-video, build-videodock, build-whiteboard"
+			description="Compile deskshare, phone, video, whiteboard">
 	</target>
 	
 	<macrodef name="build-main">

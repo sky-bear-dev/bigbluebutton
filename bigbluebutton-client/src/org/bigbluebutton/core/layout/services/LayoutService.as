@@ -21,7 +21,7 @@ package org.bigbluebutton.core.layout.services
 {
 	import flash.events.IEventDispatcher;
 	
-	import org.bigbluebutton.modules.layout.model.LayoutDefinition;
+	import org.bigbluebutton.core.layout.model.LayoutDefinition;
 	
 	public class LayoutService
 	{

@@ -27,7 +27,7 @@
 
 			import org.bigbluebutton.common.LogUtil;
 			import org.bigbluebutton.common.events.ToolbarButtonEvent;
-			import org.bigbluebutton.modules.layout.views.ToolbarComponent;
+			import org.bigbluebutton.core.layout.views.ToolbarComponent;
 			
 			private var _attributes:Object;
 			private var _globalDispatcher:Dispatcher = new Dispatcher();

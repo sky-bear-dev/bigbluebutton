@@ -32,8 +32,8 @@ package org.bigbluebutton.core.layout.model
 	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.core.EventBroadcaster;
 	import org.bigbluebutton.core.model.Config;
-	import org.bigbluebutton.modules.layout.events.LayoutsLoadedEvent;
-	import org.bigbluebutton.modules.layout.model.LayoutDefinition;
+	import org.bigbluebutton.core.layout.events.LayoutsLoadedEvent;
+	import org.bigbluebutton.core.layout.model.LayoutDefinition;
 	import org.bigbluebutton.util.i18n.ResourceUtil;
 	
 	public class LayoutLoader extends EventDispatcher {

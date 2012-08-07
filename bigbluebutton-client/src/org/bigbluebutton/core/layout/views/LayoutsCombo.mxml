@@ -61,14 +61,14 @@
 			import org.bigbluebutton.core.managers.UserManager;
 			import org.bigbluebutton.main.views.MainToolbar;
 			import org.bigbluebutton.util.i18n.ResourceUtil;
-			import org.bigbluebutton.modules.layout.events.LayoutEvent;
-			import org.bigbluebutton.modules.layout.events.LayoutsLoadedEvent;
-			import org.bigbluebutton.modules.layout.events.RedefineLayoutEvent;
-			import org.bigbluebutton.modules.layout.events.ViewInitializedEvent;
-			import org.bigbluebutton.modules.layout.model.LayoutDefinitionFile;
-			import org.bigbluebutton.modules.layout.model.LayoutDefinition;
-			import org.bigbluebutton.modules.layout.model.WindowLayout;
-			import org.bigbluebutton.modules.layout.views.LayoutButton;
+			import org.bigbluebutton.core.layout.events.LayoutEvent;
+			import org.bigbluebutton.core.layout.events.LayoutsLoadedEvent;
+			import org.bigbluebutton.core.layout.events.RedefineLayoutEvent;
+			import org.bigbluebutton.core.layout.events.ViewInitializedEvent;
+			import org.bigbluebutton.core.layout.model.LayoutDefinitionFile;
+			import org.bigbluebutton.core.layout.model.LayoutDefinition;
+			import org.bigbluebutton.core.layout.model.WindowLayout;
+			import org.bigbluebutton.core.layout.views.LayoutButton;
 			
 			private var _dispatcher:Dispatcher = new Dispatcher();
 			

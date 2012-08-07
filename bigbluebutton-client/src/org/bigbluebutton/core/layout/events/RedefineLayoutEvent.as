@@ -21,7 +21,7 @@ package org.bigbluebutton.core.layout.events
 {
 	import flash.events.Event;
 	
-	import org.bigbluebutton.modules.layout.model.LayoutDefinition;
+	import org.bigbluebutton.core.layout.model.LayoutDefinition;
 	
 	public class RedefineLayoutEvent extends Event
 	{
