@@ -17,7 +17,7 @@
  * 
  * Author: Felipe Cecagno <felipe@mconf.org>
  */
-package org.bigbluebutton.modules.layout.managers
+package org.bigbluebutton.core.layout.managers
 {
 
 	import flash.utils.Dictionary;
@@ -27,7 +27,6 @@ package org.bigbluebutton.modules.layout.managers
 	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.modules.layout.model.LayoutDefinition;
 	import org.bigbluebutton.modules.layout.model.WindowLayout;
-	import org.bigbluebutton.core.layout.managers.OrderManager;
 
 	public class OrderManager {
 		private static var _instance:OrderManager = null;

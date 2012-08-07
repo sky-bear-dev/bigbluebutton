@@ -17,7 +17,7 @@
  * 
  * Author: Felipe Cecagno <felipe@mconf.org>
  */
-package org.bigbluebutton.modules.layout.model {
+package org.bigbluebutton.core.layout.model {
 
 	public class LayoutDefinition {
 

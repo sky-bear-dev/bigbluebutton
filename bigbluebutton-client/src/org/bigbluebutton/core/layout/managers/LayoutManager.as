@@ -17,7 +17,7 @@
  * 
  * Author: Felipe Cecagno <felipe@mconf.org>
  */
-package org.bigbluebutton.modules.layout.managers
+package org.bigbluebutton.core.layout.managers
 {
 	import com.asfusion.mate.events.Dispatcher;
 
@@ -50,7 +50,7 @@ package org.bigbluebutton.modules.layout.managers
 	import org.bigbluebutton.modules.layout.model.WindowLayout;
 	import org.bigbluebutton.modules.layout.events.RedefineLayoutEvent;
 	import org.bigbluebutton.util.i18n.ResourceUtil;
-	import org.bigbluebutton.core.layout.managers.OrderManager;
+	import org.bigbluebutton.modules.layout.managers.OrderManager;
 	
 	public class LayoutManager extends EventDispatcher {
 		private var _layouts:LayoutDefinitionFile = null;
