@@ -19,19 +19,19 @@
  */
 package org.bigbluebutton.core.layout.events
 {
-	import flash.events.Event;
+  import flash.events.Event;
 
-	import org.bigbluebutton.core.layout.model.LayoutDefinition;
+  import org.bigbluebutton.core.layout.model.LayoutDefinition;
 
-	public class UpdateLayoutEvent extends Event
-	{
-		public static const UPDATE_LAYOUT_EVENT:String = 'UPDATE_LAYOUT_EVENT';
-		public var layout:LayoutDefinition;
+  public class UpdateLayoutEvent extends Event
+  {
+    public static const UPDATE_LAYOUT_EVENT:String = 'UPDATE_LAYOUT_EVENT';
+    public var layout:LayoutDefinition;
 
-		public function UpdateLayoutEvent(type:String=UPDATE_LAYOUT_EVENT, bubbles:Boolean=true, cancelable:Boolean=false)
-		{
-			super(type, bubbles, cancelable);
-		}
-		
-	}
+    public function UpdateLayoutEvent(type:String=UPDATE_LAYOUT_EVENT, bubbles:Boolean=true, cancelable:Boolean=false)
+    {
+      super(type, bubbles, cancelable);
+    }
+    
+  }
 }

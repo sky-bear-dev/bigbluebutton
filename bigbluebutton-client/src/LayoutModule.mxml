@@ -31,8 +31,8 @@
 			import com.asfusion.mate.events.Dispatcher;
 
 			import org.bigbluebutton.common.LogUtil;
-			import org.bigbluebutton.modules.layout.events.StartLayoutModuleEvent;
-			import org.bigbluebutton.modules.layout.events.LayoutEvent;
+			import org.bigbluebutton.core.layout.events.StartLayoutModuleEvent;
+			import org.bigbluebutton.core.layout.events.LayoutEvent;
 			
 			private var _moduleName:String = "Layout Module";
 			private var _globalDispatcher:Dispatcher = new Dispatcher();

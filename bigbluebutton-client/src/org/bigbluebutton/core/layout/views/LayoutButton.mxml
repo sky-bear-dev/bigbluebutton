@@ -21,15 +21,15 @@
   $Id: $
 -->
 <mx:Button xmlns:mx="http://www.adobe.com/2006/mxml" 
-		   xmlns:mate="http://mate.asfusion.com/"
-		   width="{BUTTON_SIZE}"
-		   height="{BUTTON_SIZE}">
-	
-	<mx:Script>
-		<![CDATA[
-			import mx.controls.Button;
+       xmlns:mate="http://mate.asfusion.com/"
+       width="{BUTTON_SIZE}"
+       height="{BUTTON_SIZE}">
+  
+  <mx:Script>
+    <![CDATA[
+      import mx.controls.Button;
 
-			static public const BUTTON_SIZE:int = 20;
-		]]>
-	</mx:Script>
+      static public const BUTTON_SIZE:int = 20;
+    ]]>
+  </mx:Script>
 </mx:Button>

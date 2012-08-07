@@ -19,20 +19,20 @@
  */
 package org.bigbluebutton.core.layout.events
 {
-	import flash.events.Event;
-	import org.bigbluebutton.core.layout.model.LayoutDefinitionFile;
-	
-	public class LayoutsLoadedEvent extends Event
-	{
-		public static const LAYOUTS_LOADED_EVENT:String = "LAYOUTS_LOADED_EVENT";
-		public var layouts:LayoutDefinitionFile = null;
-		public var success:Boolean = false;
-		public var error:TypeError = null;
-		
-		public function LayoutsLoadedEvent(type:String = LAYOUTS_LOADED_EVENT)
-		{
-			super(type, true, false);
-		}
+  import flash.events.Event;
+  import org.bigbluebutton.core.layout.model.LayoutDefinitionFile;
+  
+  public class LayoutsLoadedEvent extends Event
+  {
+    public static const LAYOUTS_LOADED_EVENT:String = "LAYOUTS_LOADED_EVENT";
+    public var layouts:LayoutDefinitionFile = null;
+    public var success:Boolean = false;
+    public var error:TypeError = null;
+    
+    public function LayoutsLoadedEvent(type:String = LAYOUTS_LOADED_EVENT)
+    {
+      super(type, true, false);
+    }
 
-	}
+  }
 }

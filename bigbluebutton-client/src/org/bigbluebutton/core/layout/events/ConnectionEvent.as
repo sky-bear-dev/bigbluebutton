@@ -18,18 +18,18 @@
 */
 package org.bigbluebutton.core.layout.events
 {
-	import flash.events.Event;
+  import flash.events.Event;
 
-	public class ConnectionEvent extends Event
-	{
-		public static const CONNECT_EVENT:String = 'CONNECT_EVENT';
-		public var success:Boolean = false;
-		public var errors:Array;
-		
-		public function ConnectionEvent(type:String=CONNECT_EVENT, bubbles:Boolean=false, cancelable:Boolean=false)
-		{
-			super(type, bubbles, cancelable);
-		}
-		
-	}
+  public class ConnectionEvent extends Event
+  {
+    public static const CONNECT_EVENT:String = 'CONNECT_EVENT';
+    public var success:Boolean = false;
+    public var errors:Array;
+    
+    public function ConnectionEvent(type:String=CONNECT_EVENT, bubbles:Boolean=false, cancelable:Boolean=false)
+    {
+      super(type, bubbles, cancelable);
+    }
+    
+  }
 }

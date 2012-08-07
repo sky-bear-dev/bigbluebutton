@@ -19,17 +19,17 @@
  */
 package org.bigbluebutton.core.layout.events
 {
-	import flash.events.Event;
+  import flash.events.Event;
 
-	public class StartLayoutModuleEvent extends Event
-	{
-		public static const START_LAYOUT_MODULE_EVENT:String = 'START_LAYOUT_MODULE_EVENT';
-		public var attributes:Object;
-				
-		public function StartLayoutModuleEvent(type:String=START_LAYOUT_MODULE_EVENT, bubbles:Boolean=true, cancelable:Boolean=false)
-		{
-			super(type, bubbles, cancelable);
-		}
-		
-	}
+  public class StartLayoutModuleEvent extends Event
+  {
+    public static const START_LAYOUT_MODULE_EVENT:String = 'START_LAYOUT_MODULE_EVENT';
+    public var attributes:Object;
+        
+    public function StartLayoutModuleEvent(type:String=START_LAYOUT_MODULE_EVENT, bubbles:Boolean=true, cancelable:Boolean=false)
+    {
+      super(type, bubbles, cancelable);
+    }
+    
+  }
 }

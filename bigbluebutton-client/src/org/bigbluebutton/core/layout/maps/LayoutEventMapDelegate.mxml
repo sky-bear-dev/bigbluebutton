@@ -21,32 +21,32 @@
   $Id: $
 -->
 <EventMap xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="http://mate.asfusion.com/">
-	<mx:Script>
-		<![CDATA[
-			import com.asfusion.mate.events.Dispatcher;
+  <mx:Script>
+    <![CDATA[
+      import com.asfusion.mate.events.Dispatcher;
 
-			import org.bigbluebutton.common.LogUtil;
-			import org.bigbluebutton.common.events.ToolbarButtonEvent;
-			import org.bigbluebutton.core.layout.views.ToolbarComponent;
-			
-			private var _attributes:Object;
-			private var _globalDispatcher:Dispatcher = new Dispatcher();
-			
-			public function stopModule():void {
-			}
-			
-			public function startModule(attributes:Object):void {
-				_attributes = attributes;
-				
-				var layoutComponent:ToolbarComponent = new ToolbarComponent();
-				// using the negation will keep it enabled if the property is not there
-				layoutComponent.enableEdit = !(_attributes.enableEdit == "false");
-				
-				var event:ToolbarButtonEvent = new ToolbarButtonEvent(ToolbarButtonEvent.ADD);
-				event.button = layoutComponent;
-				event.location = ToolbarButtonEvent.BOTTOM_TOOLBAR;
-				_globalDispatcher.dispatchEvent(event);
-			}
-		]]>
-	</mx:Script>
+      import org.bigbluebutton.common.LogUtil;
+      import org.bigbluebutton.common.events.ToolbarButtonEvent;
+      import org.bigbluebutton.core.layout.views.ToolbarComponent;
+      
+      private var _attributes:Object;
+      private var _globalDispatcher:Dispatcher = new Dispatcher();
+      
+      public function stopModule():void {
+      }
+      
+      public function startModule(attributes:Object):void {
+        _attributes = attributes;
+        
+        var layoutComponent:ToolbarComponent = new ToolbarComponent();
+        // using the negation will keep it enabled if the property is not there
+        layoutComponent.enableEdit = !(_attributes.enableEdit == "false");
+        
+        var event:ToolbarButtonEvent = new ToolbarButtonEvent(ToolbarButtonEvent.ADD);
+        event.button = layoutComponent;
+        event.location = ToolbarButtonEvent.BOTTOM_TOOLBAR;
+        _globalDispatcher.dispatchEvent(event);
+      }
+    ]]>
+  </mx:Script>
 </EventMap>

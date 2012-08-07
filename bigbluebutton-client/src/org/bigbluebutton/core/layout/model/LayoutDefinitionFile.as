@@ -19,62 +19,62 @@
  */
 package org.bigbluebutton.core.layout.model
 {
-	import flash.events.EventDispatcher;
+  import flash.events.EventDispatcher;
 
-	import org.bigbluebutton.common.LogUtil;
-	import org.bigbluebutton.core.EventBroadcaster;
-	import org.bigbluebutton.core.model.Config;
-	import org.bigbluebutton.core.layout.events.LayoutsLoadedEvent;
-	import org.bigbluebutton.core.layout.model.LayoutDefinition;
-	
-	public class LayoutDefinitionFile extends EventDispatcher {
-		private var _layouts:Array = new Array();
-		
-		public function get list():Array {
-			return _layouts;
-		}
-		
-		public function pushXml(xml:XML):void {
-			if (xml.@name == undefined)
-				return;
-				
-			var layoutDefinition:LayoutDefinition = null;
-			for each (var layout:LayoutDefinition in _layouts) {
-				if (layout.name == xml.@name) {
-					layoutDefinition = layout;
-					break; 
-				}
-			}
-			
-			if (layoutDefinition == null) {
-				layoutDefinition = new LayoutDefinition();
-				layoutDefinition.load(xml);
-				_layouts.push(layoutDefinition);
-			} else {
-				layoutDefinition.load(xml);
-			}
-		}
-		
-		public function push(layoutDefinition:LayoutDefinition):void {
-			_layouts.push(layoutDefinition);
-		}
-		
-		public function getDefault():LayoutDefinition {
-			for each (var value:LayoutDefinition in _layouts) {
-				if (value.defaultLayout)
-					return value;
-			}
-			return null;
-		}
-		
-		public function toXml():XML {
-			var xml:XML = <layouts/>;
-			for each (var layoutDefinition:LayoutDefinition in _layouts) {
-				for each (var value:XML in layoutDefinition.toXml()) {
-					xml.appendChild(value);
-				}
-			}
-			return xml;
-		}
-	}
+  import org.bigbluebutton.common.LogUtil;
+  import org.bigbluebutton.core.EventBroadcaster;
+  import org.bigbluebutton.core.model.Config;
+  import org.bigbluebutton.core.layout.events.LayoutsLoadedEvent;
+  import org.bigbluebutton.core.layout.model.LayoutDefinition;
+  
+  public class LayoutDefinitionFile extends EventDispatcher {
+    private var _layouts:Array = new Array();
+    
+    public function get list():Array {
+      return _layouts;
+    }
+    
+    public function pushXml(xml:XML):void {
+      if (xml.@name == undefined)
+        return;
+        
+      var layoutDefinition:LayoutDefinition = null;
+      for each (var layout:LayoutDefinition in _layouts) {
+        if (layout.name == xml.@name) {
+          layoutDefinition = layout;
+          break; 
+        }
+      }
+      
+      if (layoutDefinition == null) {
+        layoutDefinition = new LayoutDefinition();
+        layoutDefinition.load(xml);
+        _layouts.push(layoutDefinition);
+      } else {
+        layoutDefinition.load(xml);
+      }
+    }
+    
+    public function push(layoutDefinition:LayoutDefinition):void {
+      _layouts.push(layoutDefinition);
+    }
+    
+    public function getDefault():LayoutDefinition {
+      for each (var value:LayoutDefinition in _layouts) {
+        if (value.defaultLayout)
+          return value;
+      }
+      return null;
+    }
+    
+    public function toXml():XML {
+      var xml:XML = <layouts/>;
+      for each (var layoutDefinition:LayoutDefinition in _layouts) {
+        for each (var value:XML in layoutDefinition.toXml()) {
+          xml.appendChild(value);
+        }
+      }
+      return xml;
+    }
+  }
 }

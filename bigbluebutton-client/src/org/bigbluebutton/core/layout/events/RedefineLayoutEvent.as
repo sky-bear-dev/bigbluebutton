@@ -19,20 +19,20 @@
  */
 package org.bigbluebutton.core.layout.events
 {
-	import flash.events.Event;
-	
-	import org.bigbluebutton.core.layout.model.LayoutDefinition;
-	
-	public class RedefineLayoutEvent extends Event
-	{
-		public static const REDEFINE_LAYOUT_EVENT:String = "REDEFINE_LAYOUT_EVENT";
-		public var layout:LayoutDefinition = null;
-		public var remote:Boolean = false;
-		
-		public function RedefineLayoutEvent(type:String = REDEFINE_LAYOUT_EVENT)
-		{
-			super(type, true, false);
-		}
+  import flash.events.Event;
+  
+  import org.bigbluebutton.core.layout.model.LayoutDefinition;
+  
+  public class RedefineLayoutEvent extends Event
+  {
+    public static const REDEFINE_LAYOUT_EVENT:String = "REDEFINE_LAYOUT_EVENT";
+    public var layout:LayoutDefinition = null;
+    public var remote:Boolean = false;
+    
+    public function RedefineLayoutEvent(type:String = REDEFINE_LAYOUT_EVENT)
+    {
+      super(type, true, false);
+    }
 
-	}
+  }
 }

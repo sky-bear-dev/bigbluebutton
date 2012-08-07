@@ -19,19 +19,19 @@
  */
 package org.bigbluebutton.core.layout.events
 {
-	import flash.events.Event;
+  import flash.events.Event;
 
-	import flexlib.mdi.containers.MDICanvas;
-	
-	public class ViewInitializedEvent extends Event
-	{
-		public static const VIEW_INITIALIZED_EVENT:String = "VIEW_INITIALIZED_EVENT";
-		public var canvas:MDICanvas = null;
-		
-		public function ViewInitializedEvent(type:String = VIEW_INITIALIZED_EVENT)
-		{
-			super(type, true, false);
-		}
+  import flexlib.mdi.containers.MDICanvas;
+  
+  public class ViewInitializedEvent extends Event
+  {
+    public static const VIEW_INITIALIZED_EVENT:String = "VIEW_INITIALIZED_EVENT";
+    public var canvas:MDICanvas = null;
+    
+    public function ViewInitializedEvent(type:String = VIEW_INITIALIZED_EVENT)
+    {
+      super(type, true, false);
+    }
 
-	}
+  }
 }
