@@ -24,6 +24,7 @@ package org.bigbluebutton.main.model.modules
 	import flash.utils.Timer;
 	
 	import org.bigbluebutton.common.LogUtil;
+	import org.bigbluebutton.core.layout.events.StartLayoutModuleEvent;
 	import org.bigbluebutton.core.vo.Config;
 	import org.bigbluebutton.core.vo.ConfigBuilder;
 	import org.bigbluebutton.main.events.BBBEvent;
@@ -147,6 +148,9 @@ package org.bigbluebutton.main.model.modules
 						.build()
 			event.config = config;
 			dispatcher.dispatchEvent(event);
+      
+      var layoutEvent:StartLayoutModuleEvent = new StartLayoutModuleEvent();
+      dispatcher.dispatchEvent(layoutEvent);
 		}
 	}
 }

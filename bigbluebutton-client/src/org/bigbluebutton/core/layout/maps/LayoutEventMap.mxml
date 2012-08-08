@@ -37,14 +37,14 @@
   </mx:Script>
 
   <EventHandlers type="{FlexEvent.PREINITIALIZE}">
-    <ObjectBuilder generator="{LayoutEventMapDelegate}" constructorArguments="{scope.dispatcher}" />
+    <ObjectBuilder generator="{LayoutEventMapDelegate}"/>
     <ObjectBuilder generator="{LayoutManager}" />
   </EventHandlers>
 
   <EventHandlers type="{StartLayoutModuleEvent.START_LAYOUT_MODULE_EVENT}">       
-    <ObjectBuilder generator="{LayoutService}" constructorArguments="{event.attributes}" />
-    <MethodInvoker generator="{LayoutEventMapDelegate}" method="startModule" arguments="{event.attributes}" />
-    <MethodInvoker generator="{LayoutManager}" method="loadServerLayouts" arguments="{event.attributes.layoutConfig}" />
+    <ObjectBuilder generator="{LayoutService}" />
+    <!--MethodInvoker generator="{LayoutEventMapDelegate}" method="startModule" arguments="{event.attributes}" /-->
+    <MethodInvoker generator="{LayoutManager}" method="loadServerLayouts"/>
   </EventHandlers>
 
   <EventHandlers type="{ViewInitializedEvent.VIEW_INITIALIZED_EVENT}">

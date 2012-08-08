@@ -21,6 +21,11 @@
 --> 
 
 <EventMap xmlns="http://mate.asfusion.com/" xmlns:mx="http://www.adobe.com/2006/mxml">
+  <mx:Script>
+    <![CDATA[
+      import org.bigbluebutton.core.layout.events.StartLayoutModuleEvent;
+    ]]>
+  </mx:Script>
 	<!--
 	This is the main event map for the application, think of it as the application controller.
 	-->

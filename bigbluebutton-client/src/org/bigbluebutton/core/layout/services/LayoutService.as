@@ -28,13 +28,13 @@ package org.bigbluebutton.core.layout.services
     private var _attributes:Object;
     private var _layoutSOService:LayoutSharedObjectService;
     
-    public function LayoutService(attributes:Object) {
-      _attributes = attributes;
+    public function LayoutService() {
+     
     }
     
     public function join():void {
-      _layoutSOService = new LayoutSharedObjectService(_attributes.connection);
-      _layoutSOService.join(_attributes.uri + "/" + _attributes.room);
+//      _layoutSOService = new LayoutSharedObjectService(_attributes.connection);
+ //     _layoutSOService.join(_attributes.uri + "/" + _attributes.room);
     }
     
     public function leave():void {

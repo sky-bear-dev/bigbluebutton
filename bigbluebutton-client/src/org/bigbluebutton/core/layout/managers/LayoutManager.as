@@ -77,7 +77,8 @@ package org.bigbluebutton.core.layout.managers
       });
     }
     
-    public function loadServerLayouts(layoutUrl:String):void {
+    public function loadServerLayouts():void {
+      var layoutUrl:String = "conf/layout.xml";
       LogUtil.debug("LayoutManager: loading server layouts from " + layoutUrl);
       var loader:LayoutLoader = new LayoutLoader();
       loader.addEventListener(LayoutsLoadedEvent.LAYOUTS_LOADED_EVENT, function(e:LayoutsLoadedEvent):void {
