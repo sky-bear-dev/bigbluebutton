@@ -20,14 +20,14 @@
 
   $Id: $
 -->
-<views:LayoutButton xmlns:mx="http://www.adobe.com/2006/mxml" 
+<layout:LayoutButton xmlns:mx="http://www.adobe.com/2006/mxml" 
        creationComplete="init()" 
        xmlns:mate="http://mate.asfusion.com/"
        xmlns:views="org.bigbluebutton.core.layout.views.*"
-       toolTip="{ResourceUtil.getInstance().getString('bbb.layout.saveButton.toolTip')}"
-       icon="{icon_save}"
+       toolTip="{ResourceUtil.getInstance().getString('bbb.layout.loadButton.toolTip')}"
+       icon="{icon_load}"
        click="onClick(event)"
-       enabled="{UserManager.getInstance().getConference().amIModerator()}">
+       enabled="{UserManager.getInstance().getConference().amIModerator()}" xmlns:layout="org.bigbluebutton.main.views.layout.*">
   
   <mx:Script>
     <![CDATA[
@@ -43,15 +43,15 @@
 
       private var _dispatcher:Dispatcher = new Dispatcher();
       private var _images:Images = new Images();
-      [Bindable] private var icon_save:Class = _images.disk;
+      [Bindable] private var icon_load:Class = _images.folder;
       
       private function init():void {
       }
       
       private function onClick(e:Event):void {
-        _dispatcher.dispatchEvent(new LayoutEvent(LayoutEvent.SAVE_LAYOUTS_EVENT));
+        _dispatcher.dispatchEvent(new LayoutEvent(LayoutEvent.LOAD_LAYOUTS_EVENT));
       }
       
     ]]>
   </mx:Script>
-</views:LayoutButton>
+</layout:LayoutButton>

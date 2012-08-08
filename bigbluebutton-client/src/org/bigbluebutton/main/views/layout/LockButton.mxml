@@ -20,14 +20,14 @@
 
   $Id: $
 -->
-<views:LayoutButton xmlns:mx="http://www.adobe.com/2006/mxml" 
+<layout:LayoutButton xmlns:mx="http://www.adobe.com/2006/mxml" 
 		   creationComplete="init()" 
 		   xmlns:mate="http://mate.asfusion.com/"
 		   xmlns:views="org.bigbluebutton.core.layout.views.*"
 		   toolTip="{ResourceUtil.getInstance().getString('bbb.layout.lockButton.toolTip')}"
 		   icon="{icon_unlocked}"
 		   click="onClick(event)"
-		   enabled="{UserManager.getInstance().getConference().amIModerator()}">
+		   enabled="{UserManager.getInstance().getConference().amIModerator()}" xmlns:layout="org.bigbluebutton.main.views.layout.*">
 	
 	<mate:Listener type="{LayoutEvent.REMOTE_LOCK_LAYOUT_EVENT}" method="onLockLayoutEvent" />
 	<mate:Listener type="{LayoutEvent.REMOTE_UNLOCK_LAYOUT_EVENT}" method="onUnlockLayoutEvent" />
@@ -72,4 +72,4 @@
 			
 		]]>
 	</mx:Script>
-</views:LayoutButton>
+</layout:LayoutButton>

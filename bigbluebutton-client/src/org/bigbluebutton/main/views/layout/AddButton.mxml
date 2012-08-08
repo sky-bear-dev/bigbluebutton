@@ -20,14 +20,14 @@
 
   $Id: $
 -->
-<views:LayoutButton xmlns:mx="http://www.adobe.com/2006/mxml" 
+<layout:LayoutButton xmlns:mx="http://www.adobe.com/2006/mxml" 
        creationComplete="init()" 
        xmlns:mate="http://mate.asfusion.com/"
        xmlns:views="org.bigbluebutton.core.layout.views.*"
-       toolTip="{ResourceUtil.getInstance().getString('bbb.layout.loadButton.toolTip')}"
-       icon="{icon_load}"
+       toolTip="{ResourceUtil.getInstance().getString('bbb.layout.addButton.toolTip')}"
+       icon="{icon_add}"
        click="onClick(event)"
-       enabled="{UserManager.getInstance().getConference().amIModerator()}">
+       enabled="{UserManager.getInstance().getConference().amIModerator()}" xmlns:layout="org.bigbluebutton.main.views.layout.*">
   
   <mx:Script>
     <![CDATA[
@@ -43,15 +43,15 @@
 
       private var _dispatcher:Dispatcher = new Dispatcher();
       private var _images:Images = new Images();
-      [Bindable] private var icon_load:Class = _images.folder;
+      [Bindable] private var icon_add:Class = _images.add;
       
       private function init():void {
       }
       
       private function onClick(e:Event):void {
-        _dispatcher.dispatchEvent(new LayoutEvent(LayoutEvent.LOAD_LAYOUTS_EVENT));
+        _dispatcher.dispatchEvent(new LayoutEvent(LayoutEvent.ADD_CURRENT_LAYOUT_EVENT));
       }
       
     ]]>
   </mx:Script>
-</views:LayoutButton>
+</layout:LayoutButton>

@@ -68,7 +68,7 @@
       import org.bigbluebutton.core.layout.model.LayoutDefinitionFile;
       import org.bigbluebutton.core.layout.model.LayoutDefinition;
       import org.bigbluebutton.core.layout.model.WindowLayout;
-      import org.bigbluebutton.core.layout.views.LayoutButton;
+      import org.bigbluebutton.main.views.layout.LayoutButton;
       
       private var _dispatcher:Dispatcher = new Dispatcher();
       
