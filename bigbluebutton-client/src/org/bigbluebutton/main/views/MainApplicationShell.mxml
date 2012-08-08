@@ -47,37 +47,42 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import com.asfusion.mate.events.Dispatcher;			
-			import flash.events.MouseEvent;			
-			import flexlib.mdi.containers.MDIWindow;
-			import flexlib.mdi.effects.effectsLib.MDIVistaEffects;			
-			import mx.collections.ArrayCollection;
-			import mx.containers.TitleWindow;
-			import mx.controls.Alert;
-			import mx.core.FlexGlobals;
-			import mx.core.UIComponent;
-			import mx.events.CloseEvent;
-			import mx.managers.PopUpManager;			
-			import org.bigbluebutton.common.IBbbModuleWindow;
-			import org.bigbluebutton.common.Images;
-			import org.bigbluebutton.common.LogUtil;
-			import org.bigbluebutton.common.events.AddUIComponentToMainCanvas;
-			import org.bigbluebutton.common.events.CloseWindowEvent;
-			import org.bigbluebutton.common.events.OpenWindowEvent;
-			import org.bigbluebutton.common.events.ToolbarButtonEvent;
-			import org.bigbluebutton.core.BBB;
-			import org.bigbluebutton.main.events.AppVersionEvent;
-			import org.bigbluebutton.main.events.BBBEvent;
-			import org.bigbluebutton.main.events.ConfigEvent;
-			import org.bigbluebutton.main.events.ModuleLoadEvent;
-			import org.bigbluebutton.main.events.PortTestEvent;
-			import org.bigbluebutton.main.events.RecordStatusEvent;
-			import org.bigbluebutton.main.events.ShortcutEvent;
-			import org.bigbluebutton.main.events.SuccessfulLoginEvent;
-			import org.bigbluebutton.main.model.LayoutOptions;
-			import org.bigbluebutton.main.model.users.events.ConnectionFailedEvent;
-			import org.bigbluebutton.util.i18n.ResourceUtil;
-			import org.bigbluebutton.util.logging.Logger;
+      import com.asfusion.mate.events.Dispatcher;
+      
+      import flash.events.MouseEvent;
+      
+      import flexlib.mdi.containers.MDIWindow;
+      import flexlib.mdi.effects.effectsLib.MDIVistaEffects;
+      
+      import mx.collections.ArrayCollection;
+      import mx.containers.TitleWindow;
+      import mx.controls.Alert;
+      import mx.core.FlexGlobals;
+      import mx.core.UIComponent;
+      import mx.events.CloseEvent;
+      import mx.managers.PopUpManager;
+      
+      import org.bigbluebutton.common.IBbbModuleWindow;
+      import org.bigbluebutton.common.Images;
+      import org.bigbluebutton.common.LogUtil;
+      import org.bigbluebutton.common.events.AddUIComponentToMainCanvas;
+      import org.bigbluebutton.common.events.CloseWindowEvent;
+      import org.bigbluebutton.common.events.OpenWindowEvent;
+      import org.bigbluebutton.common.events.ToolbarButtonEvent;
+      import org.bigbluebutton.core.BBB;
+      import org.bigbluebutton.main.events.AppVersionEvent;
+      import org.bigbluebutton.main.events.BBBEvent;
+      import org.bigbluebutton.main.events.ConfigEvent;
+      import org.bigbluebutton.main.events.ModuleLoadEvent;
+      import org.bigbluebutton.main.events.PortTestEvent;
+      import org.bigbluebutton.main.events.RecordStatusEvent;
+      import org.bigbluebutton.main.events.ShortcutEvent;
+      import org.bigbluebutton.main.events.SuccessfulLoginEvent;
+      import org.bigbluebutton.main.model.LayoutOptions;
+      import org.bigbluebutton.main.model.users.events.ConnectionFailedEvent;
+      import org.bigbluebutton.main.views.layout.LayoutManager;
+      import org.bigbluebutton.util.i18n.ResourceUtil;
+      import org.bigbluebutton.util.logging.Logger;
 	
 			private var globalDispatcher:Dispatcher;			
 			private var dispState:String; //full-screen?
@@ -89,6 +94,8 @@
 			private var logoutWindow:LoggedOutWindow;
 			private var connectionLostWindow:ConnectionLostWindow;
 			
+      private var layoutManager:LayoutManager;
+      
 			// LIVE or PLAYBACK
 			private var _mode:String = 'LIVE';
 			[Bindable] public var appVersion:String = ' ';
@@ -121,6 +128,7 @@
 			
 			protected function initializeShell():void {	
 				globalDispatcher = new Dispatcher();	
+        layoutManager = new LayoutManager(mdiCanvas);
 			}
 		
 			protected function initFullScreen():void {				

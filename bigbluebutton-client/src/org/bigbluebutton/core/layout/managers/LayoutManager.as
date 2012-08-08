@@ -64,9 +64,9 @@ package org.bigbluebutton.core.layout.managers
     private var _applyCurrentLayoutTimer:Timer = new Timer(150,1);
     private var _customLayoutsCount:int = 0;
     private var _eventsToDelay:Array = new Array(MDIManagerEvent.WINDOW_RESTORE,
-        MDIManagerEvent.WINDOW_MINIMIZE,
-        MDIManagerEvent.WINDOW_MAXIMIZE);
-    
+                  MDIManagerEvent.WINDOW_MINIMIZE,
+                  MDIManagerEvent.WINDOW_MAXIMIZE);
+      
     
     public function LayoutManager() {
       _applyCurrentLayoutTimer.addEventListener(TimerEvent.TIMER, function(e:TimerEvent):void {
