@@ -63,7 +63,11 @@
 				return _attributes.userrole as String;
 			}
 			
-			public function start(attributes:Object):void {	
+      public function start():void {
+        
+      }
+        
+			public function start1(attributes:Object):void {	
 				_attributes = attributes;
 				globalDispatcher = new Dispatcher();
 				

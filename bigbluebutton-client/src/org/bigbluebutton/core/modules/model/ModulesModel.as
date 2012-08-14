@@ -5,6 +5,7 @@ package org.bigbluebutton.core.modules.model
   
   import mx.collections.ArrayCollection;
   
+  import org.bigbluebutton.common.IBigBlueButtonModule;
   import org.bigbluebutton.common.LogUtil;
   import org.bigbluebutton.core.config.model.ConfigModel;
 
@@ -30,9 +31,26 @@ package org.bigbluebutton.core.modules.model
       _sortedModules = resolver.buildDependencyTree(modules);
     }
     
+    public function startModule(name:String):void {
+      var m:ModuleDescriptor = getModule(name);
+      if (m != null) {
+        LogUtil.debug('Starting module ' + name);
+        var bbb:IBigBlueButtonModule = m.module as IBigBlueButtonModule;
+        bbb.start();		
+      }	
+    }
+    
+    public function getModuleToStart():ModuleDescriptor {
+      for (var i:int = 0; i < _sortedModules.length; i++){
+        var m:ModuleDescriptor = _sortedModules.getItemAt(i) as ModuleDescriptor;
+        var bbb:IBigBlueButtonModule = m.module as IBigBlueButtonModule;
+        bbb.start();	 
+      }
+      return null;
+    }
+    
     private function getModulesXML():XMLList {
       var modulesXML:XML = configModel.config.getModules();
-      LogUtil.debug("ModulesModel modules " + modulesXML.toString());
       return modulesXML.module;
     }
     

@@ -77,7 +77,11 @@
 				return _attributes.userrole as String;
 			}
 			
-			public function start(attributes:Object):void{
+      public function start():void {
+        LogUtil.debug("Starting Present Module");
+      }
+      
+			public function start1(attributes:Object):void{
 				LogUtil.debug("present attr: " + attributes.username);
 				_attributes = attributes;
 				

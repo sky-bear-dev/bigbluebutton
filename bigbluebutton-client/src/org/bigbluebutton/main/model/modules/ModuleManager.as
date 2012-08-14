@@ -97,7 +97,7 @@ package org.bigbluebutton.main.model.modules
 				LogUtil.debug('Starting module ' + name);
 				var bbb:IBigBlueButtonModule = m.module as IBigBlueButtonModule;
 				m.loadConfigAttributes(conferenceParameters, _protocol);
-				bbb.start(m.attributes);		
+				bbb.start();		
 			}	
 		}
 

@@ -68,7 +68,6 @@ package org.bigbluebutton.core.modules.model
       LogUtil.debug("Dependency Order: ");
       for (var u:int = 0; u < sorted.length; u++){
         LogUtil.debug(((sorted.getItemAt(u) as ModuleDescriptor).getName()));
-        //Alert.show((sorted.getItemAt(u) as ModuleDescriptor).getAttribute("name") as String);
       }
       
       return sorted;

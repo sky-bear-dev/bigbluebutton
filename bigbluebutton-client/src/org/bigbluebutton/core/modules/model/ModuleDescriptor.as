@@ -149,7 +149,7 @@ package org.bigbluebutton.core.modules.model
     }
        
     public function removeDependancy(module:String):void{
-      for (var i:int = 0; i<unresolvedDependancies.length; i++){
+      for (var i:int = 0; i < unresolvedDependancies.length; i++){
         if (unresolvedDependancies[i] == module) unresolvedDependancies.removeItemAt(i);
       }
     }

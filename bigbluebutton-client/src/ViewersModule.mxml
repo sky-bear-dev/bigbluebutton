@@ -186,8 +186,17 @@
 				if (_attributes.allowKickUser == "true") return true;
 				else return false;
 			}
-						
-			public function start(attributes:Object):void {
+	
+      public function start():void {        
+        LogUtil.debug('Starting Viewers module.');
+                
+//        dispatcher = new Dispatcher();
+//        var e:ViewersModuleStartedEvent = new ViewersModuleStartedEvent(ViewersModuleStartedEvent.VIEWERS_MODULE_STARTED);
+//        e.module = this;
+//        dispatcher.dispatchEvent(e);
+      }
+      
+			public function start1(attributes:Object):void {
 				_attributes = attributes;	
 				var now:Date = new Date();	
 				_playbackRoom = now.getTime().toString();

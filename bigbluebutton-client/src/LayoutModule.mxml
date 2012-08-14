@@ -45,7 +45,11 @@
 				return _moduleName;
 			}
 			
-			public function start(attributes:Object):void {
+      public function start():void {
+        LogUtil.debug("Starting Layout Module");
+      }
+      
+			public function start1(attributes:Object):void {
 				var event:StartLayoutModuleEvent = new StartLayoutModuleEvent();
 				event.attributes = attributes;
 				_globalDispatcher.dispatchEvent(event);

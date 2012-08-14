@@ -11,7 +11,7 @@ package org.bigbluebutton.core.user.model
     
     public var myUserID:String;
     
-    private var _users:ArrayCollection = null;	
+    private var _users:ArrayCollection = new ArrayCollection();	
     
     public function addUsers(users:ArrayCollection):void {
       for (var i:int = 0; i < users.length; i++) {

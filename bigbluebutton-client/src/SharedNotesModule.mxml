@@ -85,7 +85,11 @@
 				return _attributes.userrole as String;
 			}
 			
-			public function start(attributes:Object):void {	
+      public function start():void {
+        LogUtil.debug("Starting Sharednotes Module");
+      }
+      
+			public function start1(attributes:Object):void {	
 				LogUtil.debug("notes attr: " + attributes.username);
 				_attributes = attributes;
 				SharedNotesWindow.document = _attributes.room;

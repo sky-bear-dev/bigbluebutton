@@ -53,7 +53,7 @@
   </EventHandlers>
 
   <EventHandlers type="{UserEvent.USERS_ADDED}" >
-    <MethodInvoker generator="{ModuleLoaderService}" method="startAllModules" arguments="{event}"/>
+    <MethodInvoker generator="{ModuleLoaderService}" method="startAllModules"/>
   </EventHandlers>
   
   <!-- Injectors ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->  

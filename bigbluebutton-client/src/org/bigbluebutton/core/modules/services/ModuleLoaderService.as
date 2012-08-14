@@ -13,11 +13,12 @@ package org.bigbluebutton.core.modules.services
 
   public class ModuleLoaderService
   {
-    public var dispatcher:IEventDispatcher;
+    public var dispatcher:IEventDispatcher; 
     public var modulesModel:ModulesModel;
 
     public function startAllModules():void {
       LogUtil.debug("Starting all modules...............");
+      modulesModel.getModuleToStart();
     }
     
         
