@@ -23,18 +23,23 @@
 <EventMap xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="http://mate.asfusion.com/">
 	<mx:Script>
 		<![CDATA[
-			import mx.events.FlexEvent;
-			
-			import org.bigbluebutton.modules.viewers.events.ViewersModuleEndEvent;
-			import org.bigbluebutton.modules.viewers.events.ViewersModuleStartedEvent;
-			import org.bigbluebutton.modules.viewers.managers.ViewersManager;
+      import mx.events.FlexEvent;
+      
+      import org.bigbluebutton.core.modules.events.ModuleEvent;
+      import org.bigbluebutton.modules.viewers.events.ViewersModuleEndEvent;
+      import org.bigbluebutton.modules.viewers.events.ViewersModuleStartedEvent;
+      import org.bigbluebutton.modules.viewers.managers.ViewersManager;
 		]]>
 	</mx:Script>
 	
 	<EventHandlers type="{FlexEvent.PREINITIALIZE}" >
 		<ObjectBuilder generator="{ViewersManager}" cache="global" />
 	</EventHandlers>
-	
+
+  <EventHandlers type="{ModuleEvent.MODULE_START}" >
+    <MethodInvoker generator="{ViewersManager}" method="moduleStart" arguments="{event}" />
+  </EventHandlers>
+  
 	<EventHandlers type="{ViewersModuleStartedEvent.VIEWERS_MODULE_STARTED}" >
 		<MethodInvoker generator="{ViewersManager}" method="moduleStarted" arguments="{event}" />
 	</EventHandlers>

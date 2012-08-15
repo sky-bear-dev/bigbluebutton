@@ -21,8 +21,10 @@
 --> 
 
 <mx:Module xmlns:mx="http://www.adobe.com/2006/mxml"
-	implements="org.bigbluebutton.common.IBigBlueButtonModule"
-	creationComplete="onCreationComplete()" xmlns:maps="org.bigbluebutton.modules.viewers.maps.*" >
+            xmlns:maps="org.bigbluebutton.modules.viewers.maps.*"
+	          implements="org.bigbluebutton.common.IBigBlueButtonModule"
+	          creationComplete="onCreationComplete()" >
+  
 	<mx:Script>
 		<![CDATA[
 			import com.asfusion.mate.events.Dispatcher;

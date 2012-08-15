@@ -76,7 +76,7 @@
    				LogUtil.debug("ViewersModule - sending camera view request for stream" + data.streamName);
    				streamIcon.enabled = false;
    				//streamName = data.streamName;
-				dispatchEvent(new ViewCameraEvent(data.userid, data.streamName, data.name));
+				  dispatchEvent(new ViewCameraEvent(data.userid, data.streamName, data.name));
    			}
    			
    			private function onViewVideoCloseEvent(event:BBBEvent):void {
@@ -87,7 +87,7 @@
    			}
    			
    			private function lowerHand():void {
-				dispatchEvent(new LowerHandEvent(data.userid));
+				  dispatchEvent(new LowerHandEvent(data.userid));
    			}			
 			
 			private function kickUser():void{

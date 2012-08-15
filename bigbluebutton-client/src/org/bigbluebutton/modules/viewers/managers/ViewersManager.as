@@ -24,6 +24,7 @@ package org.bigbluebutton.modules.viewers.managers
 	import org.bigbluebutton.common.events.CloseWindowEvent;
 	import org.bigbluebutton.common.events.OpenWindowEvent;
 	import org.bigbluebutton.core.BBB;
+	import org.bigbluebutton.core.modules.events.ModuleEvent;
 	import org.bigbluebutton.modules.viewers.events.ViewersModuleEndEvent;
 	import org.bigbluebutton.modules.viewers.events.ViewersModuleStartedEvent;
 	import org.bigbluebutton.modules.viewers.model.ViewerOptions;
@@ -41,7 +42,12 @@ package org.bigbluebutton.modules.viewers.managers
 		public function ViewersManager(){
 			dispatcher = new Dispatcher();
 		}
-		
+
+    public function moduleStart(event:ModuleEvent):void{
+      LogUtil.debug("Viewers module starting...........................................");
+      
+    }
+    
 		public function moduleStarted(e:ViewersModuleStartedEvent):void{
 			_module = e.module;
 

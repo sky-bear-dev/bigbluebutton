@@ -8,6 +8,7 @@ package org.bigbluebutton.core.modules.model
   import org.bigbluebutton.common.IBigBlueButtonModule;
   import org.bigbluebutton.common.LogUtil;
   import org.bigbluebutton.core.config.model.ConfigModel;
+  import org.bigbluebutton.core.modules.events.ModuleEvent;
 
 
   public class ModulesModel
@@ -45,6 +46,7 @@ package org.bigbluebutton.core.modules.model
         var m:ModuleDescriptor = _sortedModules.getItemAt(i) as ModuleDescriptor;
         var bbb:IBigBlueButtonModule = m.module as IBigBlueButtonModule;
         bbb.start();	 
+        dispatcher.dispatchEvent(new ModuleEvent(ModuleEvent.MODULE_START));
       }
       return null;
     }
