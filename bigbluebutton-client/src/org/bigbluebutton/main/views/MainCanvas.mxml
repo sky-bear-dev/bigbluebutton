@@ -22,7 +22,7 @@
 
 <containers:MDICanvas xmlns:mx="http://www.adobe.com/2006/mxml" 
                       xmlns:views="org.bigbluebutton.main.views.*"
-                      xmlns:containers="flexlib.mdi.containers.*" backgroundColor="blue"
+                      xmlns:containers="flexlib.mdi.containers.*"
                       horizontalScrollPolicy="off" verticalScrollPolicy="off" 
                       effectsLib="{flexlib.mdi.effects.effectsLib.MDIVistaEffects}" 
                       width="100%" height="100%" creationComplete="onCreationComplete()">
@@ -79,26 +79,18 @@
       
       public function openLogWindow(event:LogWindowEvent):void {
         if (logWindow == null){
-          Alert.show("Creating log window");
           logWindow = new LogWindow();
           logWindow.logs = logs;
         }
-        Alert.show("Add log window");
-        if (logWindow == null) Alert.show("Log window is null");
-//        if (mainCanvas == null) Alert.show("Main canvas is null");
-        
+      
         windowManager.add(logWindow);
         windowManager.absPos(logWindow, 50, 50);
           logWindow.width = this.width - 100;
           logWindow.height = this.height - 100;
- //       logWindow.width = 800;
- //       logWindow.height = 600;
-        Alert.show("Added log window [" + logWindow.width + "x" + logWindow.height + "]");
       }
       
       private function onCreationComplete():void {
-        Alert.show("MainCanvas created");
- //       openLogWindow();
+
       }
       
       public function logout(request:URLRequest):void {
@@ -251,9 +243,7 @@
 			
 		]]>
 	</mx:Script>
-  <!--  
-  <views:LoadingBar id="progressBar" visible="true" x="{this.width/2 - progressBar.width/2}" y="{this.height/2 - progressBar.height/2}" width="{this.width/2}" />
 
   <views:BrandingLogo x="{this.width - 300}" y="{this.height - 300}" />	
--->
+
 </containers:MDICanvas>

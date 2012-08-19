@@ -49,7 +49,6 @@
 			}
 			
 			private function displayLogMessages():void {
-        Alert.show("Displaying log message");
 				this.textField = this.getTextField(this.txtOutput);
 				highlighter = new Highlighter(this.textField);
 				txtOutput.text = logs.messages;

@@ -112,7 +112,7 @@
 	</mx:Script>	
   
 	<maps:BigBlueButtonEventMap />	
-  <maps:MainApplicationShellEventMap mainApp="{this}"/>
+  <maps:MainApplicationShellEventMap/>
   <maps:MainCanvasEventMap/>
   <layoutMap:LayoutEventMap />
   <usersMap:UsersEventMap />

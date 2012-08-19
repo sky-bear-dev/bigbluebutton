@@ -30,13 +30,12 @@
       import org.bigbluebutton.main.views.MainCanvas;
       import org.bigbluebutton.main.views.MainFooterBar;
       import org.bigbluebutton.main.views.model.vos.MainApplicationShellModel;
-      import org.bigbluebutton.main.views.model.vos.MainFooterBarModel;
-      
-      public var mainApp:BigBlueButton;
+      import org.bigbluebutton.main.views.model.vos.MainFooterBarModel;      
     ]]>
   </mx:Script>
 
   <EventHandlers type="{AppVersionEvent.APP_VERSION_EVENT}">
+    <ObjectBuilder generator="{MainApplicationShellModel}" cache="global"/>
     <MethodInvoker generator="{MainApplicationShellModel}" cache="global" method="switchToJoinedState" />
     <MethodInvoker generator="{MainAppShellMediator}" cache="global" method="appVersionHandler" />
   </EventHandlers>
@@ -53,10 +52,10 @@
     <PropertyInjector targetKey="dispatcher" source="{ scope.dispatcher }"/>
   </Injectors>
 
-  <Injectors target="{ MainApplicationShell }">
+  <Injectors target="{ MainApplicationShell }">   
     <PropertyInjector targetKey="model" source="{ MainApplicationShellModel }"/>
   </Injectors>
-  
+ 
   <Injectors target="{ MainCanvas }">
     <PropertyInjector targetKey="mainAppShellMediator" source="{ MainAppShellMediator }"/>
     <ListenerInjector eventType="{LogWindowEvent.OPEN_LOG_WINDOW}" method="openLogWindow"/>
