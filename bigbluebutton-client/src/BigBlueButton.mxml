@@ -23,6 +23,7 @@
 	xmlns:views="org.bigbluebutton.main.views.*"
 	xmlns:maps="org.bigbluebutton.main.maps.*"
   xmlns:layoutMap="org.bigbluebutton.core.layout.maps.*"
+  xmlns:usersMap="org.bigbluebutton.core.user.maps.*"
 	xmlns:mate="http://mate.asfusion.com/"
 	xmlns:m="library://melomel/2010"
 	pageTitle="BigBlueButton"
@@ -46,7 +47,7 @@
 			import org.bigbluebutton.util.i18n.ResourceUtil;
 			
 		private var langResources:ResourceUtil = ResourceUtil.getInstance();
-		private var configForceLoader:ConfigManager2 = BBB.initConfigManager();
+//		private var configForceLoader:ConfigManager2 = BBB.initConfigManager();
       
 		public var myFoo:String = "bar";
 			
@@ -95,9 +96,9 @@
 			
 			
 			public  function handleLoginEvent(event:BBBEvent):void {
-				LogUtil.debug("******************* Received loggedin event");
+//				LogUtil.debug("******************* Received loggedin event");
 				isLoggedIn = true;
-				LogUtil.debug("******************* Received loggedin event " + isLoggedIn.toString());
+//				LogUtil.debug("******************* Received loggedin event " + isLoggedIn.toString());
 			}
 			
 			public function checkLogin():String {
@@ -261,6 +262,7 @@
   <maps:ShellEventMap/>
   
   <layoutMap:LayoutEventMap />
+  <usersMap:UsersEventMap />
 	<views:MainApplicationShell id="mainShell"/>	
 	
 	<mate:Listener type="{BBBEvent.LOGIN_EVENT}" method="handleLoginEvent"/>

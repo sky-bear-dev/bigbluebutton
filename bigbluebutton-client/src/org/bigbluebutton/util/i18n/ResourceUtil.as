@@ -88,7 +88,6 @@ package org.bigbluebutton.util.i18n
 		
 		private function parse(xml:XML):void{		 	
 			var list:XMLList = xml.locale;
-			LogUtil.debug("--- Supported locales --- \n" + xml.toString() + "\n --- \n");
 			var locale:XML;
 						
 			for each(locale in list){
@@ -155,7 +154,7 @@ package org.bigbluebutton.util.i18n
 				instance = new ResourceUtil(new SingletonEnforcer);
 			} 
 			return instance;
-        }
+    }
         
 		public function changeLocale(locale:String):void{        	
 			eventDispatcher = loadResource(locale);

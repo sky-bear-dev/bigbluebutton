@@ -21,15 +21,13 @@ package org.bigbluebutton.main.model.modules
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	import flash.system.ApplicationDomain;
-	import flash.utils.Dictionary;
-	
+	import flash.utils.Dictionary;	
 	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
 	import mx.core.IFlexModuleFactory;
 	import mx.events.ModuleEvent;
 	import mx.modules.ModuleLoader;
-	import mx.utils.StringUtil;
-	
+	import mx.utils.StringUtil;	
 	import org.bigbluebutton.common.IBigBlueButtonModule;
 	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.main.model.ConferenceParameters;

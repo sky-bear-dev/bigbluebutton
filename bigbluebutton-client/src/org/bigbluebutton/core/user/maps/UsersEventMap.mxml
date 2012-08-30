@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  BigBlueButton open source conferencing system - http://www.bigbluebutton.org
+  
+  Copyright (c) 2010 BigBlueButton Inc. and by respective authors (see below).
+  
+  BigBlueButton is free software; you can redistribute it and/or modify it under the 
+  terms of the GNU Lesser General Public License as published by the Free Software 
+  Foundation; either version 2.1 of the License, or (at your option) any later 
+  version. 
+  
+  BigBlueButton is distributed in the hope that it will be useful, but WITHOUT ANY 
+  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+  PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+  
+  You should have received a copy of the GNU Lesser General Public License along 
+  with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
+ 
+  $Id: $
+--> 
+
+<EventMap xmlns="http://mate.asfusion.com/" xmlns:mx="http://www.adobe.com/2006/mxml">
+  <mx:Script>
+    <![CDATA[
+      import org.bigbluebutton.core.config.model.ConfigModel;
+      import org.bigbluebutton.core.layout.events.LayoutConfigEvent;
+      import org.bigbluebutton.core.user.model.UsersModel;
+      import org.bigbluebutton.core.user.services.JoinMeetingService;
+    ]]>
+  </mx:Script>
+
+  <EventHandlers type="{LayoutConfigEvent.LAYOUT_CONFIG_LOADED}" >
+    <MethodInvoker generator="{JoinMeetingService}" method="load" />
+  </EventHandlers>
+  
+  <!-- Injectors ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->  
+  <Injectors target="{ JoinMeetingService }">
+    <PropertyInjector targetKey="dispatcher" source="{ scope.dispatcher }"/>
+    <PropertyInjector targetKey="configModel" source="{ ConfigModel }"/>
+    <PropertyInjector targetKey="usersModel" source="{ UsersModel }"/>
+  </Injectors>
+	
+	<mx:Script>
+	<![CDATA[
+
+	]]>
+	</mx:Script>
+		
+</EventMap>

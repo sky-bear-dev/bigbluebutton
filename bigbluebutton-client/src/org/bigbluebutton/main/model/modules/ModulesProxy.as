@@ -56,6 +56,10 @@ package org.bigbluebutton.main.model.modules
       LogUtil.debug("****************************** Locale has been initialized **************");
     }
     
+    public function configLoadedHandler():void {
+      LogUtil.debug("****************************** Config has been loaded. **************");
+    }
+    
 		public function loadModule(name:String):void {
 			LogUtil.debug('Loading ' + name);
 			modulesManager.loadModule(name);

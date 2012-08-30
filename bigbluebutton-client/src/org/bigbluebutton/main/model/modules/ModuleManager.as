@@ -58,7 +58,7 @@ package org.bigbluebutton.main.model.modules
 				
 		private function handleComplete():void{	
 			var modules:Dictionary = configParameters.getModules();
-			modulesDispatcher.sendPortTestEvent();
+//			modulesDispatcher.sendPortTestEvent();
 			
 			for (var key:Object in modules) {
 				var m:ModuleDescriptor = modules[key] as ModuleDescriptor;

@@ -6,12 +6,10 @@ package org.bigbluebutton.core.layout.model
 
   public class LayoutModel
   {
-    // Injected by Mate Framework
-    private var _layouts:ArrayList = new ArrayList();
+    private var _layouts:LayoutDefinitionFile;
     
-    public function LayoutModel()
-    {
-      LogUtil.debug("*************************** Layout model inited. **********************");
+    public function set layouts(l:LayoutDefinitionFile):void {
+      _layouts = l;
     }
   }
 }

@@ -29,7 +29,6 @@ package org.bigbluebutton.main.model.users {
 		[Bindable] public var users:ArrayCollection = null;			
 				
 		public function Conference():void {
-      LogUtil.debug("******************************************************************************* Initializing Conference");
 			me = new BBBUser();
 			users = new ArrayCollection();
 		}
