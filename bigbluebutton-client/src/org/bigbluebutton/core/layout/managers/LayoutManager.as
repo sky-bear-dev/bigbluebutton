@@ -28,12 +28,10 @@ package org.bigbluebutton.core.layout.managers
   import flash.net.URLLoader;
   import flash.net.URLRequest;
   import flash.utils.Dictionary;
-  import flash.utils.Timer;
-  
+  import flash.utils.Timer;  
   import flexlib.mdi.containers.MDICanvas;
   import flexlib.mdi.containers.MDIWindow;
   import flexlib.mdi.events.MDIManagerEvent;
-
   import mx.controls.Alert;
   import mx.events.ResizeEvent;
 

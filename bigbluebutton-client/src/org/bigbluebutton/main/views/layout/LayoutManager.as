@@ -1,7 +1,6 @@
 package org.bigbluebutton.main.views.layout
 {
-  import com.asfusion.mate.events.Dispatcher;
-  
+  import com.asfusion.mate.events.Dispatcher;  
   import flash.events.Event;
   import flash.events.EventDispatcher;
   import flash.events.TimerEvent;
@@ -9,15 +8,12 @@ package org.bigbluebutton.main.views.layout
   import flash.net.URLLoader;
   import flash.net.URLRequest;
   import flash.utils.Dictionary;
-  import flash.utils.Timer;
-  
+  import flash.utils.Timer;  
   import flexlib.mdi.containers.MDICanvas;
   import flexlib.mdi.containers.MDIWindow;
-  import flexlib.mdi.events.MDIManagerEvent;
-  
+  import flexlib.mdi.events.MDIManagerEvent;  
   import mx.controls.Alert;
-  import mx.events.ResizeEvent;
-  
+  import mx.events.ResizeEvent;  
   import org.bigbluebutton.common.LogUtil;
   import org.bigbluebutton.core.EventBroadcaster;
   import org.bigbluebutton.core.managers.UserManager;
@@ -45,10 +41,8 @@ package org.bigbluebutton.main.views.layout
     private var _applyCurrentLayoutTimer:Timer = new Timer(150,1);
     private var _customLayoutsCount:int = 0;
     private var _eventsToDelay:Array = new Array(MDIManagerEvent.WINDOW_RESTORE,
-                  MDIManagerEvent.WINDOW_MINIMIZE,
-                  MDIManagerEvent.WINDOW_MAXIMIZE);
-    
-    
+                  MDIManagerEvent.WINDOW_MINIMIZE, MDIManagerEvent.WINDOW_MAXIMIZE);
+       
     public function LayoutManager(canvas:MDICanvas) {
       _canvas = canvas;
       _applyCurrentLayoutTimer.addEventListener(TimerEvent.TIMER, function(e:TimerEvent):void {
@@ -156,6 +150,7 @@ package org.bigbluebutton.main.views.layout
       _canvas.windowManager.addEventListener(MDIManagerEvent.WINDOW_FOCUS_START, function(e:MDIManagerEvent):void {
         OrderManager.getInstance().bringToFront(e.window);
       });
+      
       for each (var window:MDIWindow in _canvas.windowManager.windowList.reverse()) {
         OrderManager.getInstance().bringToFront(window);
       }
@@ -183,8 +178,10 @@ package org.bigbluebutton.main.views.layout
     
     private function applyLayout(layout:LayoutDefinition):void {
       _detectContainerChange = false;
-      if (layout != null)
+      if (layout != null) {
         layout.applyToCanvas(_canvas);
+      }
+        
       updateCurrentLayout(layout);
       _detectContainerChange = true;
     }
@@ -211,7 +208,7 @@ package org.bigbluebutton.main.views.layout
     private function checkPermissionsOverWindow(window:MDIWindow=null):void {
       if (window != null) {
         if (!UserManager.getInstance().getConference().amIModerator()
-          && !LayoutDefinition.ignoreWindow(window)) {
+              && !LayoutDefinition.ignoreWindow(window)) {
           window.draggable 
             = window.resizable
             = window.showControls

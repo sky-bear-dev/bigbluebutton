@@ -24,6 +24,9 @@
   <mx:Script>
     <![CDATA[
       import org.bigbluebutton.core.layout.events.StartLayoutModuleEvent;
+      import org.bigbluebutton.core.layout.model.LayoutModel;
+      import org.bigbluebutton.main.events.LocaleEvent;
+      import org.bigbluebutton.main.views.MainApplicationShell;
     ]]>
   </mx:Script>
 	<!--
@@ -37,7 +40,11 @@
 		<ObjectBuilder generator="{UserService}" cache="global" />
 		<ObjectBuilder generator="{ConfigManager}" cache="global" />
 	</EventHandlers>
-	
+
+  <EventHandlers type="{LocaleEvent.LOCALE_INITIALIZED}" >
+    <MethodInvoker generator="{ModulesProxy}" method="localeInitializedHandler" />
+  </EventHandlers>
+  
 	<EventHandlers type="{PortTestEvent.TEST_RTMP}" >
 		<MethodInvoker generator="{ModulesProxy}" method="testRTMP" />
 	</EventHandlers>
@@ -105,7 +112,7 @@
 	<EventHandlers type="{ModuleLoadEvent.START_ALL_MODULES}">
 		<MethodInvoker generator="{ModulesProxy}" method="startAllModules" />
 	</EventHandlers>
-	
+  	
 	<mx:Script>
 	<![CDATA[
 		import mx.events.FlexEvent;

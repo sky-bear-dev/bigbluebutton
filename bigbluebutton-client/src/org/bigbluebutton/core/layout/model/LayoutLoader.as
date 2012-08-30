@@ -25,10 +25,8 @@ package org.bigbluebutton.core.layout.model
   import flash.events.IOErrorEvent;
   import flash.events.SecurityErrorEvent;
   import flash.net.FileReference;
-
   import flash.net.URLLoader;
-  import flash.net.URLRequest;
-  
+  import flash.net.URLRequest;  
   import org.bigbluebutton.common.LogUtil;
   import org.bigbluebutton.core.EventBroadcaster;
   import org.bigbluebutton.core.model.Config;

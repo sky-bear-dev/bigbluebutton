@@ -39,12 +39,13 @@ package org.bigbluebutton.util.i18n
 	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.common.events.LocaleChangeEvent;
 	import org.bigbluebutton.main.events.AppVersionEvent;
+	import org.bigbluebutton.main.events.LocaleEvent;
 
 	public class ResourceUtil extends EventDispatcher {
 		private static var instance:ResourceUtil = null;
 		public static const LOCALES_FILE:String = "conf/locales.xml";
 		public static const VERSION:String = "0.8";
-		private var inited:Boolean = false;
+		private var initialized:Boolean = false;
 		
 		private static var BBB_RESOURCE_BUNDLE:String = 'bbbResources';
 		private static var MASTER_LOCALE:String = "en_US";
@@ -64,11 +65,7 @@ package org.bigbluebutton.util.i18n
 			}
 			initialize();
 		}
-		
-		private function isInited():Boolean {
-			return inited;
-		}
-		
+				
 		public function initialize():void {
 			resourceManager = ResourceManager.getInstance();
 			// Add a random string on the query so that we always get an up-to-date config.xml
@@ -204,8 +201,14 @@ package org.bigbluebutton.util.i18n
 			update();
 		}
 		
-		public function update():void{
+		public function update():void {
 			dispatchEvent(new Event(Event.CHANGE));
+      
+      if (!initialized) {
+        initialized = true;
+        var dispatcher:Dispatcher = new Dispatcher();
+        dispatcher.dispatchEvent(new LocaleEvent(LocaleEvent.LOCALE_INITIALIZED));
+      }
 		}
 		
 		[Bindable("change")]

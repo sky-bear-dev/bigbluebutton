@@ -200,7 +200,7 @@
 	
 	<m:Melomel/>
 	
-	<maps:ApplicationEventMap />	
+	<maps:BigBlueButtonEventMap />	
 	
 	<views:MainApplicationShell id="mainShell"/>	
 	

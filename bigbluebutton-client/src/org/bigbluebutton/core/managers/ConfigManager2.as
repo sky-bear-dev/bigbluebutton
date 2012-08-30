@@ -15,6 +15,7 @@ package org.bigbluebutton.core.managers
 		private var _config:Config = null;
 				
 		public function loadConfig():void {
+      LogUtil.debug("ConfigManager2: Loading config.xml");
 			var urlLoader:URLLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, handleComplete);
 			var date:Date = new Date();
@@ -22,6 +23,7 @@ package org.bigbluebutton.core.managers
 		}		
 		
 		private function handleComplete(e:Event):void{
+      LogUtil.debug("ConfigManager2: handling loaded config.xml");
 			_config = new Config(new XML(e.target.data));
 			 EventBroadcaster.getInstance().dispatchEvent(new Event("configLoadedEvent", true));	
 		//	 var dispatcher:Dispatcher = new Dispatcher();

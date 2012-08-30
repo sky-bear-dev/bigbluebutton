@@ -27,8 +27,10 @@
 		xmlns:mate="http://mate.asfusion.com/"
 		xmlns:maps="org.bigbluebutton.main.maps.*"
 		xmlns:api="org.bigbluebutton.main.api.*"
+    xmlns:common="org.bigbluebutton.common.*" 
+    xmlns:layout="org.bigbluebutton.main.views.layout.*"
 		width="100%" height="100%" 
-		creationComplete="initializeShell()" xmlns:common="org.bigbluebutton.common.*" xmlns:layout="org.bigbluebutton.main.views.layout.*">
+		creationComplete="initializeShell()" >
 		
 	<mate:Listener type="{OpenWindowEvent.OPEN_WINDOW_EVENT}" method="handleOpenWindowEvent" />	
 	<mate:Listener type="{CloseWindowEvent.CLOSE_WINDOW_EVENT}" method="handleCloseWindowEvent"/>
@@ -47,21 +49,17 @@
 	
 	<mx:Script>
 		<![CDATA[
-      import com.asfusion.mate.events.Dispatcher;
-      
-      import flash.events.MouseEvent;
-      
+      import com.asfusion.mate.events.Dispatcher;     
+      import flash.events.MouseEvent;     
       import flexlib.mdi.containers.MDIWindow;
-      import flexlib.mdi.effects.effectsLib.MDIVistaEffects;
-      
+      import flexlib.mdi.effects.effectsLib.MDIVistaEffects;     
       import mx.collections.ArrayCollection;
       import mx.containers.TitleWindow;
       import mx.controls.Alert;
       import mx.core.FlexGlobals;
       import mx.core.UIComponent;
       import mx.events.CloseEvent;
-      import mx.managers.PopUpManager;
-      
+      import mx.managers.PopUpManager;     
       import org.bigbluebutton.common.IBbbModuleWindow;
       import org.bigbluebutton.common.Images;
       import org.bigbluebutton.common.LogUtil;
@@ -83,7 +81,8 @@
       import org.bigbluebutton.main.views.layout.LayoutManager;
       import org.bigbluebutton.util.i18n.ResourceUtil;
       import org.bigbluebutton.util.logging.Logger;
-	
+      import org.bigbluebutton.core.layout.model.LayoutModel;
+      
 			private var globalDispatcher:Dispatcher;			
 			private var dispState:String; //full-screen?
 			private var images:Images = new Images();
@@ -109,6 +108,8 @@
 			private var receivedConfigLocaleVer:Boolean = false;
 			private var receivedResourceLocaleVer:Boolean = false;
 			
+      public var layoutModel:LayoutModel = null;
+      
 			public function get mode():String {
 				return _mode;
 			}
@@ -118,17 +119,21 @@
 			[Bindable] private var showToolbarOpt:Boolean = true;
 			
 			public function initOptions(e:Event):void {
-				LogUtil.debug("**** Init layout options ***");
 				layoutOptions = new LayoutOptions();
 				layoutOptions.parseOptions();
 				showToolbarOpt = layoutOptions.showToolbar;
-				LogUtil.debug("*** show toolbar = " + layoutOptions.showToolbar);
 				toolbar.displayToolbar();
 			}
 			
 			protected function initializeShell():void {	
 				globalDispatcher = new Dispatcher();	
         layoutManager = new LayoutManager(mdiCanvas);
+        
+        if (layoutModel != null) {
+          LogUtil.debug("**************************** LayoutModel is NOT NULL!!! ****************************");  
+        } else {
+          LogUtil.debug("**************************** LayoutModel is NULL!!! ****************************"); 
+        }  
 			}
 		
 			protected function initFullScreen():void {				

@@ -51,7 +51,11 @@ package org.bigbluebutton.main.model.modules
 			modulesManager.useProtocol(protocol);
 			modulesManager.startUserServices();
 		}
-						
+		
+    public function localeInitializedHandler():void {
+      LogUtil.debug("****************************** Locale has been initialized **************");
+    }
+    
 		public function loadModule(name:String):void {
 			LogUtil.debug('Loading ' + name);
 			modulesManager.loadModule(name);

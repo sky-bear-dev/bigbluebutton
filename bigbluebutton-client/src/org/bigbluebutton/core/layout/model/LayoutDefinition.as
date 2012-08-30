@@ -20,11 +20,9 @@
 package org.bigbluebutton.core.layout.model {
 
   public class LayoutDefinition {
-
     import flash.utils.Dictionary;
     import flexlib.mdi.containers.MDICanvas;
-    import flexlib.mdi.containers.MDIWindow;
-    
+    import flexlib.mdi.containers.MDIWindow;    
     import org.bigbluebutton.common.LogUtil;
     import org.bigbluebutton.common.Role;
     import org.bigbluebutton.core.managers.UserManager;
@@ -35,9 +33,8 @@ package org.bigbluebutton.core.layout.model {
     [Bindable] public var defaultLayout:Boolean = false;
     private var _windows:Dictionary = new Dictionary();
     
-    static private var _ignoredWindows:Array = new Array("PublishWindow", 
-        "VideoWindow", "DesktopPublishWindow", "DesktopViewWindow",
-        "LogWindow");
+    static private var _ignoredWindows:Array = new Array("PublishWindow", "VideoWindow", "DesktopPublishWindow", 
+                                                          "DesktopViewWindow", "LogWindow");
     static private var _roles:Array = new Array(Role.VIEWER, Role.MODERATOR, Role.PRESENTER);
     
     public function LayoutDefinition() {

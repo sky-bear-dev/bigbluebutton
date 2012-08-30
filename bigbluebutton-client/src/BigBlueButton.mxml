@@ -32,21 +32,22 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import flash.events.Event;
-			import com.asfusion.mate.events.Dispatcher;		
-			import mx.managers.HistoryManager;
-			import org.bigbluebutton.core.EventBroadcaster;
-			import org.bigbluebutton.core.managers.ConfigManager2;			
+			import com.asfusion.mate.events.Dispatcher;			
+			import flash.events.Event;			
+			import mx.managers.HistoryManager;			
 			import org.bigbluebutton.common.LogUtil;
+			import org.bigbluebutton.common.events.AddUIComponentToMainCanvas;
 			import org.bigbluebutton.core.BBB;
+			import org.bigbluebutton.core.EventBroadcaster;
+			import org.bigbluebutton.core.managers.ConfigManager2;
 			import org.bigbluebutton.main.events.BBBEvent;
 			import org.bigbluebutton.main.events.ShortcutEvent;
 			import org.bigbluebutton.main.views.MainApplicationShell;
 			import org.bigbluebutton.util.i18n.ResourceUtil;
-			import org.bigbluebutton.common.events.AddUIComponentToMainCanvas;
 			
 		private var langResources:ResourceUtil = ResourceUtil.getInstance();
-		
+		private var configForceLoader:ConfigManager2 = BBB.initConfigManager();
+      
 		public var myFoo:String = "bar";
 			
 		/**
@@ -256,7 +257,9 @@
 		]]>
 	</mx:Script>	
 	
-	<maps:ApplicationEventMap />	
+	<maps:BigBlueButtonEventMap />	
+  <maps:ShellEventMap/>
+  
   <layoutMap:LayoutEventMap />
 	<views:MainApplicationShell id="mainShell"/>	
 	
