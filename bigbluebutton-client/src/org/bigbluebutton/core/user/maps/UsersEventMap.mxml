@@ -23,15 +23,37 @@
 <EventMap xmlns="http://mate.asfusion.com/" xmlns:mx="http://www.adobe.com/2006/mxml">
   <mx:Script>
     <![CDATA[
+      import mx.events.FlexEvent;
+      
       import org.bigbluebutton.core.config.model.ConfigModel;
       import org.bigbluebutton.core.layout.events.LayoutConfigEvent;
+      import org.bigbluebutton.core.modules.events.ModuleLoadEvent;
+      import org.bigbluebutton.core.user.events.ConnectionEvent;
+      import org.bigbluebutton.core.user.model.MeetingModel;
       import org.bigbluebutton.core.user.model.UsersModel;
+      import org.bigbluebutton.core.user.services.ConnectionService;
       import org.bigbluebutton.core.user.services.JoinMeetingService;
+      import org.bigbluebutton.main.model.users.events.UsersConnectionEvent;
     ]]>
   </mx:Script>
-
+  
   <EventHandlers type="{LayoutConfigEvent.LAYOUT_CONFIG_LOADED}" >
+    <ObjectBuilder generator="{UsersModel}" cache="global" />
+    <ObjectBuilder generator="{JoinMeetingService}" cache="global" />
+    <ObjectBuilder generator="{ConnectionService}" cache="global" />
     <MethodInvoker generator="{JoinMeetingService}" method="load" />
+  </EventHandlers>
+
+  <EventHandlers type="{ModuleLoadEvent.MODULE_LOADED_ALL}" >
+    <MethodInvoker generator="{ConnectionService}" method="connect" />
+  </EventHandlers>
+
+  <EventHandlers type="{ConnectionEvent.CONNECTION_SUCCEED}" >
+    <MethodInvoker generator="{ConnectionService}" method="getMyUserID" />
+  </EventHandlers>
+
+  <EventHandlers type="{UsersConnectionEvent.CONNECTION_SUCCESS}" >
+    <MethodInvoker generator="{ConnectionService}" method="getMyUserIDReply" />
   </EventHandlers>
   
   <!-- Injectors ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->  
@@ -39,8 +61,16 @@
     <PropertyInjector targetKey="dispatcher" source="{ scope.dispatcher }"/>
     <PropertyInjector targetKey="configModel" source="{ ConfigModel }"/>
     <PropertyInjector targetKey="usersModel" source="{ UsersModel }"/>
+    <PropertyInjector targetKey="meetingModel" source="{ MeetingModel }"/>
   </Injectors>
-	
+
+  <Injectors target="{ ConnectionService }">
+    <PropertyInjector targetKey="dispatcher" source="{ scope.dispatcher }"/>
+    <PropertyInjector targetKey="configModel" source="{ ConfigModel }"/>
+    <PropertyInjector targetKey="usersModel" source="{ UsersModel }"/>
+    <PropertyInjector targetKey="meetingModel" source="{ MeetingModel }"/>
+  </Injectors>
+  
 	<mx:Script>
 	<![CDATA[
 

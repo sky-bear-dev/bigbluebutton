@@ -54,11 +54,7 @@
     <MethodInvoker generator="{ModulesProxy}" cache="global" method="configLoadedHandler" />
     <MethodInvoker generator="{LayoutLoaderService}" method="loadServerLayouts" />
   </EventHandlers>
-
-  <EventHandlers type="{LayoutConfigEvent.LAYOUT_CONFIG_LOADED}" >
-
-  </EventHandlers>
-  
+ 
 	<EventHandlers type="{PortTestEvent.TEST_RTMP}" >
 		<MethodInvoker generator="{ModulesProxy}" method="testRTMP" />
 	</EventHandlers>
@@ -87,11 +83,13 @@
 	<EventHandlers type="{UsersConnectionEvent.CONNECTION_SUCCESS}" >
 		<MethodInvoker generator="{UserService}" method="userLoggedIn" arguments="{event}" />
 	</EventHandlers>
-	
+
+<!--
 	<EventHandlers type="{SuccessfulLoginEvent.USER_LOGGED_IN}" >
 		<MethodInvoker generator="{ModulesProxy}" method="loadAllModules" arguments="{event.conferenceParameters}" />
 	</EventHandlers>
-	
+-->
+  
 	<!-- Viewers Stuff -->
 	<EventHandlers type="{RaiseHandEvent.RAISE_HAND}" >
 		<MethodInvoker generator="{UserService}" method="raiseHand" arguments="{event}" />

@@ -178,7 +178,7 @@ package org.bigbluebutton.main.model.modules
 			conferenceParameters = parameters;
 			Role.setRole(parameters.role);
 			
-			for (var i:int = 0; i<sorted.length; i++){
+			for (var i:int = 0; i < sorted.length; i++){
 				var m:ModuleDescriptor = sorted.getItemAt(i) as ModuleDescriptor;
 				loadModule(m.getName());
 			}

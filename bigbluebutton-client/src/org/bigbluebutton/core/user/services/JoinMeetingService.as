@@ -12,6 +12,7 @@ package org.bigbluebutton.core.user.services
   import org.bigbluebutton.core.user.model.MeetingModel;
   import org.bigbluebutton.core.user.model.UsersModel;
   import org.bigbluebutton.core.user.model.vo.Meeting;
+  import org.bigbluebutton.main.events.SuccessfulLoginEvent;
 
   public class JoinMeetingService
   {
@@ -64,6 +65,8 @@ package org.bigbluebutton.core.user.services
         meeting.logoutURL = xml.logoutUrl;
         
         meetingModel.meeting = meeting;
+        
+        dispatcher.dispatchEvent(new SuccessfulLoginEvent(SuccessfulLoginEvent.USER_LOGGED_IN));
       }
       
     }

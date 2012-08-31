@@ -1,5 +1,6 @@
 package org.bigbluebutton.core.config.model
 {
+  import org.bigbluebutton.common.LogUtil;
   import org.bigbluebutton.core.model.Config;
 
   public class ConfigModel
@@ -9,6 +10,7 @@ package org.bigbluebutton.core.config.model
     
     public function ConfigModel()
     {
+      LogUtil.debug("ConfigModel created.");
     }
     
     public function set config(c:Config):void {

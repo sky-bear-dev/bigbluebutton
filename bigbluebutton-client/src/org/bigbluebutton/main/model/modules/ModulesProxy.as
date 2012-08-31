@@ -38,11 +38,17 @@ package org.bigbluebutton.main.model.modules
 		private var modulesDispatcher:ModulesDispatcher;
 		
 		public function ModulesProxy() {
-			modulesDispatcher = new ModulesDispatcher();
-			portTestProxy = new PortTestProxy();
-			modulesManager = new ModuleManager();
+//			modulesDispatcher = new ModulesDispatcher();
+//			portTestProxy = new PortTestProxy();
+//			modulesManager = new ModuleManager();
 		}
 		
+    private function initTemp():void {
+      modulesDispatcher = new ModulesDispatcher();
+      portTestProxy = new PortTestProxy();
+      modulesManager = new ModuleManager();
+    }
+    
 		public function get username():String {
 			return _user.username;
 		}

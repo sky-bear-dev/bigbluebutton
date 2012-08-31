@@ -6,6 +6,8 @@ package org.bigbluebutton.core.user.model
   {
     public var meeting:Meeting;
     
+    public var myUserID:String;
+    
     public function MeetingModel()
     {
     }

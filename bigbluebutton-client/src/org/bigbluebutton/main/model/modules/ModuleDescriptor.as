@@ -102,9 +102,9 @@ package org.bigbluebutton.main.model.modules
 		
 		
 		public function load(resultHandler:Function):void {
-			if (this.applicationDomain == null) throw new Error("Common application domain not set for module. Make sure your module has the common BigBlueButton Application Domain");
+//			if (this.applicationDomain == null) throw new Error("Common application domain not set for module. Make sure your module has the common BigBlueButton Application Domain");
 			
-			_loader.applicationDomain = this.applicationDomain;
+//			_loader.applicationDomain = this.applicationDomain;
 			callbackHandler = resultHandler;
 			_loader.addEventListener("loading", onLoading);
 			_loader.addEventListener("progress", onLoadProgress);

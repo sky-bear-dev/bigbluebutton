@@ -24,6 +24,7 @@
 	xmlns:maps="org.bigbluebutton.main.maps.*"
   xmlns:layoutMap="org.bigbluebutton.core.layout.maps.*"
   xmlns:usersMap="org.bigbluebutton.core.user.maps.*"
+  xmlns:modulesMap="org.bigbluebutton.core.modules.maps.*"
 	xmlns:mate="http://mate.asfusion.com/"
 	xmlns:m="library://melomel/2010"
 	pageTitle="BigBlueButton"
@@ -263,6 +264,8 @@
   
   <layoutMap:LayoutEventMap />
   <usersMap:UsersEventMap />
+  <modulesMap:ModulesEventMap />
+  
 	<views:MainApplicationShell id="mainShell"/>	
 	
 	<mate:Listener type="{BBBEvent.LOGIN_EVENT}" method="handleLoginEvent"/>

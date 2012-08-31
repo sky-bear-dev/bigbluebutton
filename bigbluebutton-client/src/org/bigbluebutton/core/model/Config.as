@@ -36,8 +36,10 @@ package org.bigbluebutton.core.model
 			
 		public function get application():Object {
 			var a:Object = new Object();
-			a.uri = config.application.@uri;
+			a.server = config.application.@server;
+      a.app = config.application.@app;
 			a.host = config.application.@host;
+      a.forceTunnel = ((config.application.@forceTunnel).toUpperCase() == "TRUE") ? true : false;
 			return a;
 		}
 		
@@ -70,7 +72,11 @@ package org.bigbluebutton.core.model
 			}	
 			return found;
 		}
-			
+		
+    public function getModules():XML {
+      return new XML(config.modules);  
+    }
+    
 		public function getConfigFor(moduleName:String):XML {
 			if (isModulePresent(moduleName)) {
 					return new XML(config.modules.module.(@name.toUpperCase() == moduleName.toUpperCase()).toXMLString());
