@@ -127,7 +127,7 @@ package org.bigbluebutton.core.modules.model
     }	
     
     private function onLoadProgress(e:ProgressEvent):void {
-      LogUtil.debug(getName() + " still loading");
+//      LogUtil.debug(getName() + " still loading");
       var moduleEvent:ModuleLoadEvent = new ModuleLoadEvent(ModuleLoadEvent.MODULE_LOAD_PROGRESS);
       moduleEvent.moduleName = getName();
       moduleEvent.percentLoaded = Math.round((e.bytesLoaded/e.bytesTotal) * 100);

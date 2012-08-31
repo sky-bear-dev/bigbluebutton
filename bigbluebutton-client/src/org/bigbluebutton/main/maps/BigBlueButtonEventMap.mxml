@@ -79,12 +79,13 @@
 	<EventHandlers type="{UserServicesEvent.START_USER_SERVICES}" >
 		<MethodInvoker generator="{UserService}" method="startService" arguments="{event}" />
 	</EventHandlers>
-	
+
+  <!--
 	<EventHandlers type="{UsersConnectionEvent.CONNECTION_SUCCESS}" >
 		<MethodInvoker generator="{UserService}" method="userLoggedIn" arguments="{event}" />
 	</EventHandlers>
 
-<!--
+
 	<EventHandlers type="{SuccessfulLoginEvent.USER_LOGGED_IN}" >
 		<MethodInvoker generator="{ModulesProxy}" method="loadAllModules" arguments="{event.conferenceParameters}" />
 	</EventHandlers>

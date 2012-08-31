@@ -29,6 +29,7 @@
       import org.bigbluebutton.core.modules.events.ModuleLoadEvent;
       import org.bigbluebutton.core.modules.model.ModulesModel;
       import org.bigbluebutton.core.modules.services.ModuleLoaderService;
+      import org.bigbluebutton.core.user.events.UserEvent;
       import org.bigbluebutton.main.events.SuccessfulLoginEvent;
     ]]>
   </mx:Script>
@@ -49,6 +50,10 @@
 
   <EventHandlers type="{ModuleLoadEvent.MODULE_LOAD_SUCCESS}" >
     <MethodInvoker generator="{ModuleLoaderService}" method="moduleLoadedSuccessHandler" arguments="{event}"/>
+  </EventHandlers>
+
+  <EventHandlers type="{UserEvent.USERS_ADDED}" >
+    <MethodInvoker generator="{ModuleLoaderService}" method="startAllModules" arguments="{event}"/>
   </EventHandlers>
   
   <!-- Injectors ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->  

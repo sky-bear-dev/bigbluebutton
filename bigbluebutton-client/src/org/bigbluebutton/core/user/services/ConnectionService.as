@@ -134,9 +134,9 @@ package org.bigbluebutton.core.user.services
           function(result:Object):void { 
             var useridString:String = result as String;
             meetingModel.myUserID = useridString;
+            usersModel.myUserID = useridString;
+            
             var e:UsersConnectionEvent = new UsersConnectionEvent(UsersConnectionEvent.CONNECTION_SUCCESS);
-            e.connection = _netConnection;
-            e.userid = useridString;
             dispatcher.dispatchEvent(e);
           },	
           // status - On error occurred

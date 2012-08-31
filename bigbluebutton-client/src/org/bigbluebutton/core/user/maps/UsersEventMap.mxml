@@ -33,6 +33,7 @@
       import org.bigbluebutton.core.user.model.UsersModel;
       import org.bigbluebutton.core.user.services.ConnectionService;
       import org.bigbluebutton.core.user.services.JoinMeetingService;
+      import org.bigbluebutton.core.user.services.UsersSOService;
       import org.bigbluebutton.main.model.users.events.UsersConnectionEvent;
     ]]>
   </mx:Script>
@@ -53,7 +54,7 @@
   </EventHandlers>
 
   <EventHandlers type="{UsersConnectionEvent.CONNECTION_SUCCESS}" >
-    <MethodInvoker generator="{ConnectionService}" method="getMyUserIDReply" />
+    <MethodInvoker generator="{UsersSOService}" method="queryForUsers" />
   </EventHandlers>
   
   <!-- Injectors ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->  
@@ -69,6 +70,13 @@
     <PropertyInjector targetKey="configModel" source="{ ConfigModel }"/>
     <PropertyInjector targetKey="usersModel" source="{ UsersModel }"/>
     <PropertyInjector targetKey="meetingModel" source="{ MeetingModel }"/>
+  </Injectors>
+
+  <Injectors target="{ UsersSOService }">
+    <PropertyInjector targetKey="dispatcher" source="{ scope.dispatcher }"/>
+    <PropertyInjector targetKey="connService" source="{ ConnectionService }"/>
+    <PropertyInjector targetKey="meetingModel" source="{ MeetingModel }"/>
+    <PropertyInjector targetKey="usersModel" source="{ UsersModel }"/>
   </Injectors>
   
 	<mx:Script>

@@ -15,6 +15,10 @@ package org.bigbluebutton.core.modules.services
   {
     public var dispatcher:IEventDispatcher;
     public var modulesModel:ModulesModel;
+
+    public function startAllModules():void {
+      LogUtil.debug("Starting all modules...............");
+    }
     
         
     public function loadAllModules():void {
