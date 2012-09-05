@@ -22,28 +22,25 @@ $Id: $
 
 <EventMap xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="http://mate.asfusion.com/">
 	<mx:Script>
-		<![CDATA[
-			import org.bigbluebutton.common.LogUtil;
-			import org.bigbluebutton.common.events.OpenWindowEvent;
-			import org.bigbluebutton.common.events.CloseWindowEvent;
-			
-			import org.bigbluebutton.modules.videodock.views.VideoDock;
-			
-			private var videoDock:VideoDock;
-			
-			public function startModule():void{
-				videoDock = new VideoDock();			
-
-				var windowEvent:OpenWindowEvent = new OpenWindowEvent(OpenWindowEvent.OPEN_WINDOW_EVENT);
-				windowEvent.window = videoDock;
-				globalDispatcher.dispatchEvent(windowEvent);
-			}
-			
-			public function stopModule():void {
-				videoDock.removeAllChildren();
-			}
-			
+		<![CDATA[      
+      import org.bigbluebutton.common.LogUtil;
+      import org.bigbluebutton.common.events.CloseWindowEvent;
+      import org.bigbluebutton.common.events.OpenWindowEvent;
+      import org.bigbluebutton.core.modules.events.ModuleEvent;
+      import org.bigbluebutton.modules.videodock.views.VideoDock;
+					
 		]]>
 	</mx:Script>
-	
+  
+  <EventHandlers type="{ModuleEvent.MODULE_START}" >
+    <ObjectBuilder generator="{VideoDockEventMapDelegate}" cache="global"/>
+    <MethodInvoker generator="{VideoDockEventMapDelegate}" method="moduleStart" arguments="{event}" />
+  </EventHandlers>	
+  
+  <Injectors target="{VideoDockEventMapDelegate}">
+    <PropertyInjector targetKey="dispatcher" source="{scope.dispatcher}"/>
+    <PropertyInjector targetKey="videoDock" source="{VideoDock}"/>    
+  </Injectors>	
+  
+
 </EventMap>

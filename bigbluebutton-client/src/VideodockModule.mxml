@@ -22,11 +22,11 @@
 			public function start1(attributes:Object):void {	
 				LogUtil.debug("Videodock attr: " + attributes.username);
 				
-				eventMap.startModule();
+
 			}
 			
 			public function stop():void {
-				eventMap.stopModule();
+
 			}
 			
 		]]>
