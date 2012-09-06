@@ -28,7 +28,7 @@
 	xmlns:mate="http://mate.asfusion.com/"
 	xmlns:m="library://melomel/2010"
 	pageTitle="BigBlueButton"
-	layout="absolute" preinitialize="init()"
+	layout="absolute" preinitialize="init()" 
 	preloader="org.bigbluebutton.main.model.BigBlueButtonPreloader"
 	applicationComplete="hotkeyCapture()">
 	
@@ -236,6 +236,7 @@
 			}
 
 			public function hotkeyCapture():void{
+  //      currentState="LoadingState";
 				LogUtil.debug("Entering hotkeyCapture");
 				stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown);
 				ResourceUtil.getInstance().addEventListener(Event.CHANGE, localeChanged); // Listen for locale changing
@@ -258,16 +259,17 @@
 			}
 		]]>
 	</mx:Script>	
-	
+  
 	<maps:BigBlueButtonEventMap />	
   <maps:MainApplicationShellEventMap mainApp="{this}"/>
   <maps:MainCanvasEventMap/>
   <layoutMap:LayoutEventMap />
   <usersMap:UsersEventMap />
   <modulesMap:ModulesEventMap />
-  
+
 	<views:MainApplicationShell id="mainShell"/>	
-	
+
+ 
 	<mate:Listener type="{BBBEvent.LOGIN_EVENT}" method="handleLoginEvent"/>
 	<mate:Listener type="{BBBEvent.RECEIVED_PUBLIC_CHAT_MESSAGE_EVENT}" method="handleReceivedPublicChatMessageEvent"/>
 	<mate:Listener type="{BBBEvent.ADDED_LISTENER}" method="handleAddedListenerEvent"/>
