@@ -29,18 +29,26 @@
 		xmlns:api="org.bigbluebutton.main.api.*"
     xmlns:common="org.bigbluebutton.common.*" 
     xmlns:layout="org.bigbluebutton.main.views.layout.*"
+    currentState="{curState}"
 		width="100%" height="100%" creationComplete="onCreationComplete()">
 		
 
 	<mx:Script>
 		<![CDATA[
-      import mx.controls.Alert;
+      import org.bigbluebutton.main.views.model.vos.MainApplicationShellModel;
 
+      public var model:MainApplicationShellModel;
+      
+      [Bindable]
+      private var curState:String = model.curState;
+      
       public function onCreationComplete():void {
-        Alert.show("Shell created");
         currentState = 'LoadingState';
       }
       
+//      public function switchToJoinedState():void {
+ //       currentState = 'JoinedState';
+ //     }
 
 /*			
 			private function openLogWindow():void {
@@ -88,20 +96,7 @@
 								
 		]]>
 	</mx:Script>
-<!--	
-  <mx:states>
-    <mx:State name="JoinedState">
-      <mx:AddChild>
-        <mx:Button label="Bar"/>		
-      </mx:AddChild>
-    </mx:State>
-    <mx:State name="LoadingState">
-      <mx:AddChild>
-        <mx:Button id="fooBtn" label="Foo" click="currentState = 'JoinedState' "/>
-      </mx:AddChild>
-    </mx:State>    
-  </mx:states> 
--->
+  
   <mx:states>
     <mx:State name="JoinedState">
       <mx:RemoveChild target="progressBar"/>
@@ -113,7 +108,7 @@
         <views:MainCanvas width="100%" height="100%"/>	
       </mx:AddChild>
       <mx:AddChild>
-        <views:MainFooterBar />	
+        <views:MainFooterBar/>	
       </mx:AddChild>
     </mx:State>
     <mx:State name="LoadingState">
@@ -125,14 +120,7 @@
       </mx:AddChild>
       <mx:AddChild>
         <views:BrandingLogo id="brandingLogo" x="{this.width - 300}" y="{this.height - 300}" />
-      </mx:AddChild>
-        
+      </mx:AddChild>        
     </mx:State>    
   </mx:states> 
-
-  <!--
-  
-  <views:LoadingBar id="progressBar" visible="true" x="{this.width/2 - progressBar.width/2}" y="{this.height/2 - progressBar.height/2}" width="{this.width/2}" />        
-  <views:BrandingLogo id="brandingLogo" x="{this.width - 300}" y="{this.height - 300}" />	
-  -->	
 </mx:VBox>
