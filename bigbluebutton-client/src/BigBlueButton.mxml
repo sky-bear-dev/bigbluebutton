@@ -213,7 +213,7 @@
 			
 			private function configLoadedEventHandler(e:Event):void {
 				LogUtil.debug("***** Config Loaded ****");
-				mainShell.initOptions(null);
+//				mainShell.initOptions(null);
 			}
 
 			/**
@@ -260,8 +260,8 @@
 	</mx:Script>	
 	
 	<maps:BigBlueButtonEventMap />	
-  <maps:ShellEventMap/>
-  
+  <maps:MainApplicationShellEventMap mainApp="{this}"/>
+  <maps:MainCanvasEventMap/>
   <layoutMap:LayoutEventMap />
   <usersMap:UsersEventMap />
   <modulesMap:ModulesEventMap />

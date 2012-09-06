@@ -21,16 +21,21 @@
 -->
 
 <mx:ApplicationControlBar xmlns:mx="http://www.adobe.com/2006/mxml" 
-	xmlns:mate="http://mate.asfusion.com/" visible="{showToolbar}"
-	enabled="true" xmlns:views="org.bigbluebutton.main.views.*" >   
-	
+	xmlns:mate="http://mate.asfusion.com/"
+	enabled="true" xmlns:views="org.bigbluebutton.main.views.*" 
+  dock="true" width="100%" height="30" 
+  verticalAlign="middle" 
+  paddingTop="4">   
+
+  <!--
 	<mate:Listener type="{ToolbarButtonEvent.ADD}" method="handleAddToolbarButtonEvent" />	
 	<mate:Listener type="{ToolbarButtonEvent.REMOVE}" method="handleRemoveToolbarButtonEvent"/>
 	<mate:Listener type="{BBBEvent.END_MEETING_EVENT}" method="handleEndMeetingEvent"/>
 	<mate:Listener type="{ConnectionFailedEvent.USER_LOGGED_OUT}" method="hideToolbar" />
 	<mate:Listener type="{ConfigEvent.CONFIG_EVENT}" method="gotConfigParameters" />
 	<mate:Listener type="{SettingsEvent.SETTINGS_MODULE_LOADED}" method="showSettingsButton" />
-	
+	-->
+  
 	<mx:Script>
 		<![CDATA[
       import com.asfusion.mate.events.Dispatcher;      
@@ -52,123 +57,30 @@
       import org.bigbluebutton.util.i18n.ResourceUtil;
 
 			private var DEFAULT_HELP_URL:String = "http://www.bigbluebutton.org/content/videos";
+      public static const ALIGN_RIGHT:String ="ALIGN_RIGHT";
+      public static const ALIGN_LEFT:String = "ALIGN_LEFT";
 			
-			public static const ALIGN_RIGHT:String ="ALIGN_RIGHT";
-			public static const ALIGN_LEFT:String = "ALIGN_LEFT";
-			
-			[Bindable]
-			private var showHelpBtn:Boolean = false;
-			[Bindable]
-			private var showToolbar:Boolean = false;
-			[Bindable]
-			public var toolbarOptions:LayoutOptions = new LayoutOptions();
-			
+      [Bindable]
       public var model:MainToolbarModel;
       
-			public function displayToolbar():void{
-				toolbarOptions = new LayoutOptions();
-				toolbarOptions.parseOptions();	
-				if (toolbarOptions.showToolbar) {
-					showToolbar = true;
-				} else {
-					showToolbar = false;
-				}
-				
-				if (toolbarOptions.showHelpButton) {
-					showHelpBtn = true;
-				} else {
-					showHelpBtn = false;
-				}
-			}
-			
-			public function addButton(name:String):Button{
-				var btn:Button = new Button();
-				btn.id = name;
-				btn.label = name;
-				btn.height = 20;
-				btn.visible = true;
-				this.addChild(btn);
-				
-				return btn;
-			}
-			
-			private function onHelpButtonClicked():void {
-				navigateToURL(new URLRequest(DEFAULT_HELP_URL))
-			}
-			
-			private function handleEndMeetingEvent(event:BBBEvent):void {
-				LogUtil.debug("Received end meeting event.");
-				doLogout();
-			}
-			
-			private function doLogout():void {
-				dispatchEvent(new LogoutEvent(LogoutEvent.USER_LOGGED_OUT));
-			}
-			
-			private function hideToolbar(e:ConnectionFailedEvent):void{
-				if (toolbarOptions.showToolbar) {
-					this.visible = false;
-				} else {
-					this.visible = true;
-				}
-			}
-			
-			private function handleAddToolbarButtonEvent(event:ToolbarButtonEvent):void {
-				if (event.location == ToolbarButtonEvent.TOP_TOOLBAR) {
-					addedBtns.addChild(event.button as UIComponent);
-					realignButtons();
-				}
-			}
-			
-			private function handleRemoveToolbarButtonEvent(event:ToolbarButtonEvent):void {
-				if (addedBtns.contains(event.button as UIComponent))
-					addedBtns.removeChild(event.button as UIComponent);
-			}
-			
-			private function realignButtons():void{
-				for each (var button:UIComponent in addedBtns.getChildren()){
-					var toolbarComponent:IBbbToolbarComponent = button as IBbbToolbarComponent;
-					if (toolbarComponent.getAlignment() == ALIGN_LEFT) addedBtns.setChildIndex(button, 0);
-					else if (toolbarComponent.getAlignment() == ALIGN_RIGHT) addedBtns.setChildIndex(button, addedBtns.numChildren - 1);
-				}
-			}
-						
-			private function gotConfigParameters(e:ConfigEvent):void{
-				langSelector.visible = e.config.languageEnabled;
-				DEFAULT_HELP_URL = e.config.helpURL;
-			}
-			
-			private function onDisconnectTest():void{
-				var d:Dispatcher = new Dispatcher();
-				var e:LogoutEvent = new LogoutEvent(LogoutEvent.DISCONNECT_TEST);
-				d.dispatchEvent(e);
-			}
-			
-			private function showSettingsButton(e:SettingsEvent):void{
-				var b:Button = new Button();
-				b.label = ResourceUtil.getInstance().getString('bbb.mainToolbar.settingsBtn');
-				b.toolTip = ResourceUtil.getInstance().getString('bbb.mainToolbar.settingsBtn.toolTip');
-				b.addEventListener(MouseEvent.CLICK, openSettings);
-				this.addChild(b);
-			}
-			
-			private function openSettings(e:Event = null):void{
-				var d:Dispatcher = new Dispatcher();
-				d.dispatchEvent(new SettingsEvent(SettingsEvent.OPEN_SETTINGS_PANEL));
-			}
-			
-			private function onShortcutButtonClick(e:Event = null):void {
-				var d:Dispatcher = new Dispatcher();
-				d.dispatchEvent(new ShortcutEvent(ShortcutEvent.OPEN_SHORTCUT_WIN));
-			}
-			
+      private function onHelpButtonClicked():void {
+        navigateToURL(new URLRequest(DEFAULT_HELP_URL))
+      }
+      
+      private function doLogout():void {
+        dispatchEvent(new LogoutEvent(LogoutEvent.USER_LOGGED_OUT));
+      }
+      
+      private function onShortcutButtonClick():void {
+        
+      }
+      
 		]]>
 	</mx:Script>	
 	<mx:HBox id="addedBtns"/>
 	<mx:Spacer width="100%"/>
-	<views:LanguageSelector id="langSelector" visible="false" />
-	<mx:Button label="{ResourceUtil.getInstance().getString('bbb.mainToolbar.shortcutBtn')}" click="onShortcutButtonClick()" height="22" toolTip="{ResourceUtil.getInstance().getString('bbb.mainToolbar.shortcutBtn.toolTip')}" />
-	<mx:LinkButton id="helpBtn" label="{ResourceUtil.getInstance().getString('bbb.mainToolbar.helpBtn')}" visible="{showHelpBtn}" click="onHelpButtonClicked()" height="22"/>
-	<mx:Button label="{ResourceUtil.getInstance().getString('bbb.mainToolbar.logoutBtn')}" id="btnLogout" 
-			   toolTip="{ResourceUtil.getInstance().getString('bbb.mainToolbar.logoutBtn.toolTip')}" right="10" click="doLogout()" height="22"/>
+	<views:LanguageSelector id="langSelector" visible="{model.showLangSelector}" />
+	<mx:Button label="{model.shortcutBtnLabel}" click="onShortcutButtonClick()" height="22" toolTip="{model.shortcutBtnTooltip}" />
+	<mx:LinkButton id="helpBtn" label="{model.helpBtnLabel}" visible="{model.showHelpBtn}" click="onHelpButtonClicked()" height="22"/>
+	<mx:Button label="{model.logoutBtnLabel}" id="btnLogout" toolTip="{model.logoutBtnTooltip}" right="10" click="doLogout()" height="22"/>
 </mx:ApplicationControlBar>

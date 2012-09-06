@@ -21,15 +21,25 @@
 -->
 
 <containers:MDICanvas xmlns:mx="http://www.adobe.com/2006/mxml" 
-                      xmlns:containers="flexlib.mdi.containers.*" >
+                      xmlns:views="org.bigbluebutton.main.views.*"
+                      xmlns:containers="flexlib.mdi.containers.*" backgroundColor="blue"
+                      horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+                      effectsLib="{flexlib.mdi.effects.effectsLib.MDIVistaEffects}" 
+                      width="100%" height="100%" creationComplete="onCreationComplete()">
 	
 	<mx:Script>
 		<![CDATA[
-			import flexlib.mdi.containers.MDIWindow;			
-			import mx.controls.Alert;
-			import mx.utils.ArrayUtil;
-			import org.bigbluebutton.common.IBbbModuleWindow;
-			import org.bigbluebutton.common.LogUtil;
+      import flexlib.mdi.containers.MDIWindow;
+      import flexlib.mdi.effects.effectsLib.MDIVistaEffects;
+      
+      import mx.controls.Alert;
+      import mx.utils.ArrayUtil;
+      
+      import org.bigbluebutton.common.IBbbModuleWindow;
+      import org.bigbluebutton.common.LogUtil;
+      import org.bigbluebutton.main.events.LogWindowEvent;
+      import org.bigbluebutton.main.maps.MainAppShellMediator;
+      import org.bigbluebutton.util.logging.Logger;
 
 			public static const TOP_2_3:String = "top-two-thirds";
 			public static const BOTTOM_1_3:String = "bottom-one-third";
@@ -56,7 +66,45 @@
 			private var rightWindowHeight:Number;
 			
 			private static const MIN_HEIGHT:int = 768;
-			
+	
+      private var logs:Logger = new Logger();
+      private var logWindow:LogWindow;
+      
+      public var mainAppShellMediator:MainAppShellMediator;
+      
+      public function changeColor():void {
+        this.width = 500;
+        this.height = 500;
+      }
+      
+      public function openLogWindow(event:LogWindowEvent):void {
+        if (logWindow == null){
+          Alert.show("Creating log window");
+          logWindow = new LogWindow();
+          logWindow.logs = logs;
+        }
+        Alert.show("Add log window");
+        if (logWindow == null) Alert.show("Log window is null");
+//        if (mainCanvas == null) Alert.show("Main canvas is null");
+        
+        windowManager.add(logWindow);
+        windowManager.absPos(logWindow, 50, 50);
+          logWindow.width = this.width - 100;
+          logWindow.height = this.height - 100;
+ //       logWindow.width = 800;
+ //       logWindow.height = 600;
+        Alert.show("Added log window [" + logWindow.width + "x" + logWindow.height + "]");
+      }
+      
+      private function onCreationComplete():void {
+        Alert.show("MainCanvas created");
+ //       openLogWindow();
+      }
+      
+      public function logout(request:URLRequest):void {
+        navigateToURL(request, '_self');
+      }
+      
 			private function determineWindowSizes():void{
 				
 			}
@@ -82,7 +130,7 @@
 			
 			public function resetWindowLayout():void{
 				var windows:Array = this.windowManager.getOpenWindowList();
-				for (var i:Number=0; i<windows.length; i++){
+				for (var i:Number = 0; i < windows.length; i++){
 					var window:IBbbModuleWindow = windows[i] as IBbbModuleWindow;
 					positionWindow(window);
 				}
@@ -203,5 +251,9 @@
 			
 		]]>
 	</mx:Script>
-	
+  <!--  
+  <views:LoadingBar id="progressBar" visible="true" x="{this.width/2 - progressBar.width/2}" y="{this.height/2 - progressBar.height/2}" width="{this.width/2}" />
+
+  <views:BrandingLogo x="{this.width - 300}" y="{this.height - 300}" />	
+-->
 </containers:MDICanvas>

@@ -24,20 +24,37 @@
   <mx:Script>
     <![CDATA[
       import org.bigbluebutton.core.layout.model.LayoutModel;
+      import org.bigbluebutton.main.events.AppVersionEvent;
+      import org.bigbluebutton.main.events.LogWindowEvent;
       import org.bigbluebutton.main.views.MainApplicationShell;
+      import org.bigbluebutton.main.views.MainCanvas;
+      import org.bigbluebutton.main.views.MainFooterBar;
+      import org.bigbluebutton.main.views.model.vos.MainFooterBarModel;
+      
+      public var mainApp:BigBlueButton;
     ]]>
   </mx:Script>
 
-  
+  <EventHandlers type="{AppVersionEvent.APP_VERSION_EVENT}">
+    <!--
+    <ObjectBuilder generator="{MainCanvas}" cache="global"/>
+    -->
+    <MethodInvoker generator="{MainAppShellMediator}" cache="global" method="appVersionHandler" />
+  </EventHandlers>
+<!--  
+  <EventHandlers type="{LogWindowEvent.OPEN_LOG_WINDOW}">
+    <MethodInvoker generator="{MainCanvas}" cache="global" method="openLogWindow" />
+  </EventHandlers>
+-->  
   <!-- Injectors ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->  
-  <Injectors target="{ MainApplicationShell }">
-    <PropertyInjector targetKey="layoutModel" source="{ LayoutModel }"/>
+  <Injectors target="{ MainFooterBar }">
+    <PropertyInjector targetKey="model" source="{ MainFooterBarModel }"/>
+    <PropertyInjector targetKey="dispatcher" source="{ scope.dispatcher }"/>
   </Injectors>
-	
-	<mx:Script>
-	<![CDATA[
 
-	]]>
-	</mx:Script>
-		
+  <Injectors target="{ MainCanvas }">
+    <PropertyInjector targetKey="mainAppShellMediator" source="{ MainAppShellMediator }"/>
+    <ListenerInjector eventType="{LogWindowEvent.OPEN_LOG_WINDOW}" method="openLogWindow"/>
+  </Injectors>
+  	
 </EventMap>
