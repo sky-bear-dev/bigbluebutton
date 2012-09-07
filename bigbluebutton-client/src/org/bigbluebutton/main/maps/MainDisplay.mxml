@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns:MDICanvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+              xmlns:ns="http://code.google.com/p/flexlib/"
+              horizontalScrollPolicy="off" verticalScrollPolicy="off" >
+  <mx:Script>
+    <![CDATA[
+      import flexlib.mdi.containers.MDIWindow;
+      import flexlib.mdi.effects.effectsLib.MDIVistaEffects;
+      
+      import org.bigbluebutton.common.IBbbModuleWindow;
+      import org.bigbluebutton.common.LogUtil;
+      import org.bigbluebutton.main.events.LogWindowEvent;
+      import org.bigbluebutton.main.views.LogWindow;
+      import org.bigbluebutton.main.views.layout.LayoutManager;
+      import org.bigbluebutton.util.logging.Logger;
+      
+      public var layoutManager:LayoutManager;
+      
+      private var logs:Logger = new Logger();
+      private var logWindow:LogWindow;
+      
+      public static const TOP_2_3:String = "top-two-thirds";
+      public static const BOTTOM_1_3:String = "bottom-one-third";
+      public static const BOTTOM_1_3_RIGHT:String = "bottom-one-third-right";
+      public static const TOP_LEFT:String = "top-left";
+      public static const BOTTOM_LEFT:String = "bottom-left";
+      public static const MIDDLE:String = "middle";
+      public static const BOTTOM:String = "bottom";
+      public static const TOP_RIGHT:String = "top-right";
+      public static const BOTTOM_RIGHT:String = "bottom-right";
+      public static const POPUP:String = "popup";
+      public static const ABSOLUTE:String = "absolute";
+      
+      public static const DESKTOP_SHARING_VIEW:String = "POP_UP_DESKSHARE_VIEW";
+      public static const DESKTOP_SHARING_PUBLISH:String = "POP_UP_DESKSHARE_PUBLISH";      
+      
+      public function openLogWindow(event:LogWindowEvent):void {
+        if (logWindow == null){
+          logWindow = new LogWindow();
+          logWindow.logs = logs;
+        }
+        
+        windowManager.add(logWindow);
+        windowManager.absPos(logWindow, 50, 50);
+        logWindow.width = this.width - 100;
+        logWindow.height = this.height - 100;
+      }
+      
+      
+      
+      public function logout(request:URLRequest):void {
+        navigateToURL(request, '_self');
+      }      
+    ]]>
+  </mx:Script>
+</ns:MDICanvas>

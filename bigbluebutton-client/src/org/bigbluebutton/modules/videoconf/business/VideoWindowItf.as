@@ -19,23 +19,24 @@
 
 package org.bigbluebutton.modules.videoconf.business
 {
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	import flash.media.Video;
+	
 	import flexlib.mdi.containers.MDIWindow;
 	import flexlib.mdi.events.MDIWindowEvent;
 	
-	import org.bigbluebutton.common.LogUtil;
-	import org.bigbluebutton.common.Images;
+	import mx.controls.Button;
+	import mx.core.UIComponent;
+	
 	import org.bigbluebutton.common.IBbbModuleWindow;
-	import org.bigbluebutton.common.events.DragWindowEvent;
+	import org.bigbluebutton.common.Images;
+	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.common.events.CloseWindowEvent;
+	import org.bigbluebutton.common.events.DragWindowEvent;
+	import org.bigbluebutton.main.maps.MainDisplay;
 	import org.bigbluebutton.main.views.MainCanvas;
 	import org.bigbluebutton.util.i18n.ResourceUtil;
-	
-	import mx.core.UIComponent;
-	import mx.controls.Button;	
-	
-	import flash.events.MouseEvent;
-	import flash.media.Video;
-	import flash.geom.Point;
 	
 	public class VideoWindowItf extends MDIWindow implements IBbbModuleWindow
 	{
@@ -184,10 +185,10 @@ package org.bigbluebutton.modules.videoconf.business
 		
 		public function getPrefferedPosition():String{
 			if (_buttonsEnabled)
-				return MainCanvas.POPUP;
+				return MainDisplay.POPUP;
 			else
 				// the window is docked, so it should not be moved on reset layout
-				return MainCanvas.ABSOLUTE;
+				return MainDisplay.ABSOLUTE;
 		}
 		
 		public function onDrag(event:MDIWindowEvent = null):void {

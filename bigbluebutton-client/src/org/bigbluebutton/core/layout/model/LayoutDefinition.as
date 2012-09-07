@@ -37,23 +37,23 @@ package org.bigbluebutton.core.layout.model {
                                                           "DesktopViewWindow", "LogWindow");
     static private var _roles:Array = new Array(Role.VIEWER, Role.MODERATOR, Role.PRESENTER);
     
-    public function LayoutDefinition() {
-      
-    }
-    
     private function loadLayout(vxml:XML):void {
       if (vxml.@name != undefined) {
         name = vxml.@name.toString();
       }
+      
       if (vxml.@default != undefined) {
         defaultLayout = (vxml.@default.toString().toUpperCase() == "TRUE") ? true : false;
       }
+        
       var role:String = Role.VIEWER;
       if (vxml.@role != undefined && _roles.indexOf(vxml.@role.toString().toUpperCase()) != -1) {
         role = vxml.@role.toString().toUpperCase();
       }
+      
       if (!_windows.hasOwnProperty(role))
         _windows[role] = new Dictionary();
+      
       for each (var n:XML in vxml.window) {
         var window:WindowLayout = new WindowLayout();
         window.load(n);

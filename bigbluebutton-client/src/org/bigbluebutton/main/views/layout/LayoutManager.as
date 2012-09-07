@@ -29,7 +29,7 @@ package org.bigbluebutton.main.views.layout
   import org.bigbluebutton.util.i18n.ResourceUtil;
   import org.bigbluebutton.core.layout.managers.OrderManager;
   
-  public class LayoutManager extends EventDispatcher {
+  public class LayoutManager {
     private var _layouts:LayoutDefinitionFile = null;
     private var _canvas:MDICanvas = null;
     private var _globalDispatcher:Dispatcher = new Dispatcher();
@@ -41,7 +41,7 @@ package org.bigbluebutton.main.views.layout
     private var _applyCurrentLayoutTimer:Timer = new Timer(150,1);
     private var _customLayoutsCount:int = 0;
     private var _eventsToDelay:Array = new Array(MDIManagerEvent.WINDOW_RESTORE,
-                  MDIManagerEvent.WINDOW_MINIMIZE, MDIManagerEvent.WINDOW_MAXIMIZE);
+                                              MDIManagerEvent.WINDOW_MINIMIZE, MDIManagerEvent.WINDOW_MAXIMIZE);
        
     public function LayoutManager(canvas:MDICanvas) {
       _canvas = canvas;
@@ -55,82 +55,7 @@ package org.bigbluebutton.main.views.layout
       setupCanvasListeners();
     }
     
-    public function loadServerLayouts():void {
-      var layoutUrl:String = "conf/layout.xml";
-      LogUtil.debug("LayoutManager: loading server layouts from " + layoutUrl);
-      var loader:LayoutLoader = new LayoutLoader();
-      loader.addEventListener(LayoutsLoadedEvent.LAYOUTS_LOADED_EVENT, function(e:LayoutsLoadedEvent):void {
-        if (e.success) {
-          _layouts = e.layouts;
-          LogUtil.debug("LayoutManager: layouts loaded successfully");
-        } else {
-          LogUtil.error("LayoutManager: layouts not loaded (" + e.error.message + ")");
-        }
-      });
-      loader.loadFromUrl(layoutUrl);
-    }
-    
-    public function saveLayoutsToFile():void {
-      var _fileRef:FileReference = new FileReference();
-      _fileRef.addEventListener(Event.COMPLETE, function(e:Event):void {
-        Alert.show(ResourceUtil.getInstance().getString('bbb.layout.save.complete'), "", Alert.OK, _canvas);
-      });
-      _fileRef.save(_layouts.toXml().toXMLString(), "layouts.xml");
-    }
-    
-    public function loadLayoutsFromFile():void {
-      var loader:LayoutLoader = new LayoutLoader();
-      loader.addEventListener(LayoutsLoadedEvent.LAYOUTS_LOADED_EVENT, function(e:LayoutsLoadedEvent):void {
-        if (e.success) {
-          _layouts = e.layouts;
-          
-          /*
-          * \TODO why do I need to create a new Event for this?
-          */
-          var layoutsLoaded:LayoutsLoadedEvent = new LayoutsLoadedEvent();
-          layoutsLoaded.layouts = _layouts;
-          _globalDispatcher.dispatchEvent(layoutsLoaded);
-          /*
-          *  it will update the ComboBox label, and will go back to this class
-          *   to apply the default layout
-          */
-          _globalDispatcher.dispatchEvent(new LayoutEvent(LayoutEvent.APPLY_DEFAULT_LAYOUT_EVENT));
-          
-          Alert.show(ResourceUtil.getInstance().getString('bbb.layout.load.complete'), "", Alert.OK, _canvas);
-        } else
-          Alert.show(ResourceUtil.getInstance().getString('bbb.layout.load.failed'), "", Alert.OK, _canvas);
-      });
-      loader.loadFromLocalFile();
-    }
-    
-    public function addCurrentLayoutToList():void {
-      var remotePrefix:String = "[" + ResourceUtil.getInstance().getString('bbb.layout.combo.remote') + "] ";
-      // starts with
-      var isRemoteLayout:Boolean = (_currentLayout.name.indexOf(remotePrefix) == 0);
-      if (isRemoteLayout) {
-        // remove the remote prefix
-        _currentLayout.name = _currentLayout.name.substring(remotePrefix.length);
-        // if it's a remote custom layout, just remove the counter
-        if (_currentLayout.name.indexOf(ResourceUtil.getInstance().getString('bbb.layout.combo.customName')) == 0)
-          _currentLayout.name = ResourceUtil.getInstance().getString('bbb.layout.combo.customName');
-      }
-      
-      // only add a layout to the list if it's a custom layout
-      if (_currentLayout.name == ResourceUtil.getInstance().getString('bbb.layout.combo.customName')) {
-        _currentLayout.name += " " + (++_customLayoutsCount); 
-        _layouts.push(_currentLayout);
-        var layoutsLoaded:LayoutsLoadedEvent = new LayoutsLoadedEvent();
-        layoutsLoaded.layouts = _layouts;
-        _globalDispatcher.dispatchEvent(layoutsLoaded);
         
-        var redefineLayout:RedefineLayoutEvent = new RedefineLayoutEvent();
-        redefineLayout.layout = _currentLayout;
-        // this is to force LayoutCombo to update the current label
-        redefineLayout.remote = true;
-        _globalDispatcher.dispatchEvent(redefineLayout);
-      }
-    }
-    
     private function setupCanvasListeners():void {      
       // this is to detect changes on the container
       _canvas.windowManager.container.addEventListener(ResizeEvent.RESIZE, onContainerResized);

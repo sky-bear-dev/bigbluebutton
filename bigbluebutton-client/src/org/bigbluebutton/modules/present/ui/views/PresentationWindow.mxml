@@ -55,43 +55,44 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import flash.geom.Point;
-			
-			import flexlib.containers.DockableToolBar;
-			import flexlib.mdi.events.MDIWindowEvent;
-			
-			import mx.binding.utils.BindingUtils;
-			import mx.collections.ArrayCollection;
-			import mx.containers.TitleWindow;
-			import mx.core.Application;
-			import mx.effects.Move;
-			import mx.events.ListEvent;
-			import mx.events.ResizeEvent;
-			import mx.managers.PopUpManager;
-			import mx.rpc.events.*;
-			
-			import org.bigbluebutton.common.IBbbCanvas;
-			import org.bigbluebutton.common.Images;
-			import org.bigbluebutton.common.LogUtil;
-			import org.bigbluebutton.common.events.LocaleChangeEvent;
-			import org.bigbluebutton.main.events.MadePresenterEvent;
-			import org.bigbluebutton.main.views.MainCanvas;
-			import org.bigbluebutton.modules.present.api.IPresentationButton;
-			import org.bigbluebutton.modules.present.events.AddButtonToPresentationEvent;
-			import org.bigbluebutton.modules.present.events.AddOverlayCanvasEvent;
-			import org.bigbluebutton.modules.present.events.DisplaySlideEvent;
-			import org.bigbluebutton.modules.present.events.MoveEvent;
-			import org.bigbluebutton.modules.present.events.NavigationEvent;
-			import org.bigbluebutton.modules.present.events.PresentationEvent;
-			import org.bigbluebutton.modules.present.events.PresenterCommands;
-			import org.bigbluebutton.modules.present.events.SlideEvent;
-			import org.bigbluebutton.modules.present.events.SlideResizedEvent;
-			import org.bigbluebutton.modules.present.events.UploadEvent;
-			import org.bigbluebutton.modules.present.events.WindowResizedEvent;
-			import org.bigbluebutton.modules.present.events.ZoomEvent;
-			import org.bigbluebutton.modules.present.managers.Slide;
-			import org.bigbluebutton.modules.present.managers.SlideManager;
-			import org.bigbluebutton.util.i18n.ResourceUtil;
+      import flash.geom.Point;
+      
+      import flexlib.containers.DockableToolBar;
+      import flexlib.mdi.events.MDIWindowEvent;
+      
+      import mx.binding.utils.BindingUtils;
+      import mx.collections.ArrayCollection;
+      import mx.containers.TitleWindow;
+      import mx.core.Application;
+      import mx.effects.Move;
+      import mx.events.ListEvent;
+      import mx.events.ResizeEvent;
+      import mx.managers.PopUpManager;
+      import mx.rpc.events.*;
+      
+      import org.bigbluebutton.common.IBbbCanvas;
+      import org.bigbluebutton.common.Images;
+      import org.bigbluebutton.common.LogUtil;
+      import org.bigbluebutton.common.events.LocaleChangeEvent;
+      import org.bigbluebutton.main.events.MadePresenterEvent;
+      import org.bigbluebutton.main.maps.MainDisplay;
+      import org.bigbluebutton.main.views.MainCanvas;
+      import org.bigbluebutton.modules.present.api.IPresentationButton;
+      import org.bigbluebutton.modules.present.events.AddButtonToPresentationEvent;
+      import org.bigbluebutton.modules.present.events.AddOverlayCanvasEvent;
+      import org.bigbluebutton.modules.present.events.DisplaySlideEvent;
+      import org.bigbluebutton.modules.present.events.MoveEvent;
+      import org.bigbluebutton.modules.present.events.NavigationEvent;
+      import org.bigbluebutton.modules.present.events.PresentationEvent;
+      import org.bigbluebutton.modules.present.events.PresenterCommands;
+      import org.bigbluebutton.modules.present.events.SlideEvent;
+      import org.bigbluebutton.modules.present.events.SlideResizedEvent;
+      import org.bigbluebutton.modules.present.events.UploadEvent;
+      import org.bigbluebutton.modules.present.events.WindowResizedEvent;
+      import org.bigbluebutton.modules.present.events.ZoomEvent;
+      import org.bigbluebutton.modules.present.managers.Slide;
+      import org.bigbluebutton.modules.present.managers.SlideManager;
+      import org.bigbluebutton.util.i18n.ResourceUtil;
              			
             public static const TITLE:String = "Presentation";
 			private static const NEXT_BUTTON:String = "Next";
@@ -228,7 +229,7 @@
 			}
 			
 			public function getPrefferedPosition():String{
-				return MainCanvas.MIDDLE;
+				return MainDisplay.MIDDLE;
 			}
 			
 			/**

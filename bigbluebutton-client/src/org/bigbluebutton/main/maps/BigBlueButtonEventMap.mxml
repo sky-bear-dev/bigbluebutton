@@ -143,11 +143,7 @@
     <PropertyInjector targetKey="configModel" source="{ ConfigModel }"/>
     <PropertyInjector targetKey="layoutModel" source="{ LayoutModel }"/>
   </Injectors>
-  
-  <Injectors target="{ MainApplicationShell }">
-    <PropertyInjector targetKey="mainCanvas" source="{ MainCanvas }"/>
-  </Injectors>
-  
+   
 	<mx:Script>
 	<![CDATA[
 		import mx.events.FlexEvent;	

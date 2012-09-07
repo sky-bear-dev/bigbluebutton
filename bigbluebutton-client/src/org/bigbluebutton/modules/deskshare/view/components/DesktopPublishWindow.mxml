@@ -41,25 +41,26 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import com.asfusion.mate.events.Dispatcher;
-			
-			import flexlib.mdi.events.MDIWindowEvent;
-			import flexlib.scheduling.scheduleClasses.BackgroundItem;
-			
-			import mx.core.UIComponent;
-			
-			import org.bigbluebutton.common.Images;
-			import org.bigbluebutton.common.LogUtil;
-			import org.bigbluebutton.common.events.LocaleChangeEvent;
-			import org.bigbluebutton.main.events.BBBEvent;
-			import org.bigbluebutton.main.events.MadePresenterEvent;
-			import org.bigbluebutton.main.views.MainCanvas;
-			import org.bigbluebutton.modules.deskshare.events.AppletStartedEvent;
-			import org.bigbluebutton.modules.deskshare.events.CursorEvent;
-			import org.bigbluebutton.modules.deskshare.events.ShareWindowEvent;
-			import org.bigbluebutton.modules.deskshare.events.StreamEvent;
-			import org.bigbluebutton.modules.deskshare.events.ViewStreamEvent;
-			import org.bigbluebutton.util.i18n.ResourceUtil;
+      import com.asfusion.mate.events.Dispatcher;
+      
+      import flexlib.mdi.events.MDIWindowEvent;
+      import flexlib.scheduling.scheduleClasses.BackgroundItem;
+      
+      import mx.core.UIComponent;
+      
+      import org.bigbluebutton.common.Images;
+      import org.bigbluebutton.common.LogUtil;
+      import org.bigbluebutton.common.events.LocaleChangeEvent;
+      import org.bigbluebutton.main.events.BBBEvent;
+      import org.bigbluebutton.main.events.MadePresenterEvent;
+      import org.bigbluebutton.main.maps.MainDisplay;
+      import org.bigbluebutton.main.views.MainCanvas;
+      import org.bigbluebutton.modules.deskshare.events.AppletStartedEvent;
+      import org.bigbluebutton.modules.deskshare.events.CursorEvent;
+      import org.bigbluebutton.modules.deskshare.events.ShareWindowEvent;
+      import org.bigbluebutton.modules.deskshare.events.StreamEvent;
+      import org.bigbluebutton.modules.deskshare.events.ViewStreamEvent;
+      import org.bigbluebutton.util.i18n.ResourceUtil;
 			
 			public static const SCALE:Number = 5;
 			private static const VID_HEIGHT_PAD:Number = 73;
@@ -117,8 +118,10 @@
 				this.width = width;
 			}
 			
+      
+      
 			public function getPrefferedPosition():String{
-				return MainCanvas.DESKTOP_SHARING_PUBLISH;
+				return MainDisplay.DESKTOP_SHARING_PUBLISH;
 			}
 
 			/*

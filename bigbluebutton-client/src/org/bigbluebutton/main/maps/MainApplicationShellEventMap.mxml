@@ -27,7 +27,6 @@
       import org.bigbluebutton.main.events.AppVersionEvent;
       import org.bigbluebutton.main.events.LogWindowEvent;
       import org.bigbluebutton.main.views.MainApplicationShell;
-      import org.bigbluebutton.main.views.MainCanvas;
       import org.bigbluebutton.main.views.MainFooterBar;
       import org.bigbluebutton.main.views.model.vos.MainApplicationShellModel;
       import org.bigbluebutton.main.views.model.vos.MainFooterBarModel;      
@@ -56,8 +55,7 @@
     <PropertyInjector targetKey="model" source="{ MainApplicationShellModel }"/>
   </Injectors>
  
-  <Injectors target="{ MainCanvas }">
-    <PropertyInjector targetKey="mainAppShellMediator" source="{ MainAppShellMediator }"/>
+  <Injectors target="{ MainDisplay }">
     <ListenerInjector eventType="{LogWindowEvent.OPEN_LOG_WINDOW}" method="openLogWindow"/>
   </Injectors>
   	

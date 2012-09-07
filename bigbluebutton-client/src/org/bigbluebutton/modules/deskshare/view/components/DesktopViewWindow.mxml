@@ -36,22 +36,27 @@
 		
 	<mx:Script>
 		<![CDATA[
-			import com.asfusion.mate.events.Dispatcher;			
-			import flash.sampler.NewObjectSample;			
-			import flexlib.mdi.events.MDIWindowEvent;
-			import mx.core.UIComponent;			
-			import org.bigbluebutton.common.IUserListener;
-			import org.bigbluebutton.common.Images;
-			import org.bigbluebutton.common.LogUtil;
-			import org.bigbluebutton.core.managers.UserManager;
-			import org.bigbluebutton.common.events.LocaleChangeEvent;
-			import org.bigbluebutton.main.model.User;
-			import org.bigbluebutton.main.views.MainCanvas;
-			import org.bigbluebutton.modules.deskshare.events.CursorEvent;
-			import org.bigbluebutton.modules.deskshare.events.StartedViewingEvent;
-			import org.bigbluebutton.modules.deskshare.events.ViewStreamEvent;
-			import org.bigbluebutton.modules.deskshare.events.ViewWindowEvent;
-			import org.bigbluebutton.util.i18n.ResourceUtil;
+      import com.asfusion.mate.events.Dispatcher;
+      
+      import flash.sampler.NewObjectSample;
+      
+      import flexlib.mdi.events.MDIWindowEvent;
+      
+      import mx.core.UIComponent;
+      
+      import org.bigbluebutton.common.IUserListener;
+      import org.bigbluebutton.common.Images;
+      import org.bigbluebutton.common.LogUtil;
+      import org.bigbluebutton.common.events.LocaleChangeEvent;
+      import org.bigbluebutton.core.managers.UserManager;
+      import org.bigbluebutton.main.maps.MainDisplay;
+      import org.bigbluebutton.main.model.User;
+      import org.bigbluebutton.main.views.MainCanvas;
+      import org.bigbluebutton.modules.deskshare.events.CursorEvent;
+      import org.bigbluebutton.modules.deskshare.events.StartedViewingEvent;
+      import org.bigbluebutton.modules.deskshare.events.ViewStreamEvent;
+      import org.bigbluebutton.modules.deskshare.events.ViewWindowEvent;
+      import org.bigbluebutton.util.i18n.ResourceUtil;
 
 			private var screenHeight:Number = Capabilities.screenResolutionY;
 			private var screenWidth:Number = Capabilities.screenResolutionX;
@@ -168,8 +173,9 @@
 				}
 			}
 			
+
 			public function getPrefferedPosition():String{
-				return MainCanvas.DESKTOP_SHARING_VIEW;
+				return MainDisplay.DESKTOP_SHARING_VIEW;
 			}
 												
 			/**
