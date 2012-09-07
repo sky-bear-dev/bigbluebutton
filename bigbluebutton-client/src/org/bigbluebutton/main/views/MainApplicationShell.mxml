@@ -55,6 +55,11 @@
       <mx:AddChild>
         <views:LoadingStateView id="loadingStateView"/>
       </mx:AddChild>       
-    </mx:State>    
+    </mx:State>   
+    <mx:State name="LoggedOutState">
+      <mx:AddChild>
+        <views:LoggedOutStateView id="loggedOutStateView"/>
+      </mx:AddChild>       
+    </mx:State>
   </mx:states> 
 </mx:VBox>
