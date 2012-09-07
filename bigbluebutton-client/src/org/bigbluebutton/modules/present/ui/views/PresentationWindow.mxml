@@ -77,6 +77,7 @@
       import org.bigbluebutton.main.events.MadePresenterEvent;
       import org.bigbluebutton.main.maps.MainDisplay;
       import org.bigbluebutton.main.views.MainCanvas;
+      import org.bigbluebutton.main.views.layout.LayoutConstants;
       import org.bigbluebutton.modules.present.api.IPresentationButton;
       import org.bigbluebutton.modules.present.events.AddButtonToPresentationEvent;
       import org.bigbluebutton.modules.present.events.AddOverlayCanvasEvent;
@@ -229,7 +230,7 @@
 			}
 			
 			public function getPrefferedPosition():String{
-				return MainDisplay.MIDDLE;
+				return LayoutConstants.MIDDLE;
 			}
 			
 			/**

@@ -52,6 +52,7 @@
       import org.bigbluebutton.main.maps.MainDisplay;
       import org.bigbluebutton.main.model.User;
       import org.bigbluebutton.main.views.MainCanvas;
+      import org.bigbluebutton.main.views.layout.LayoutConstants;
       import org.bigbluebutton.modules.deskshare.events.CursorEvent;
       import org.bigbluebutton.modules.deskshare.events.StartedViewingEvent;
       import org.bigbluebutton.modules.deskshare.events.ViewStreamEvent;
@@ -175,7 +176,7 @@
 			
 
 			public function getPrefferedPosition():String{
-				return MainDisplay.DESKTOP_SHARING_VIEW;
+				return LayoutConstants.DESKTOP_SHARING_VIEW;
 			}
 												
 			/**

@@ -36,6 +36,7 @@ package org.bigbluebutton.modules.videoconf.business
 	import org.bigbluebutton.common.events.DragWindowEvent;
 	import org.bigbluebutton.main.maps.MainDisplay;
 	import org.bigbluebutton.main.views.MainCanvas;
+	import org.bigbluebutton.main.views.layout.LayoutConstants;
 	import org.bigbluebutton.util.i18n.ResourceUtil;
 	
 	public class VideoWindowItf extends MDIWindow implements IBbbModuleWindow
@@ -185,10 +186,10 @@ package org.bigbluebutton.modules.videoconf.business
 		
 		public function getPrefferedPosition():String{
 			if (_buttonsEnabled)
-				return MainDisplay.POPUP;
+				return LayoutConstants.POPUP;
 			else
 				// the window is docked, so it should not be moved on reset layout
-				return MainDisplay.ABSOLUTE;
+				return LayoutConstants.ABSOLUTE;
 		}
 		
 		public function onDrag(event:MDIWindowEvent = null):void {
