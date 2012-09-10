@@ -36,9 +36,7 @@ package org.bigbluebutton.main.views.layout
   import org.bigbluebutton.util.i18n.ResourceUtil;
   
   public class LayoutManager {
-//    private var _layouts:LayoutDefinitionFile = null;
     private var _canvas:MainDisplay = null;
-//    private var _globalDispatcher:Dispatcher = new Dispatcher();
     private var _locked:Boolean = false;
     private var _currentLayout:LayoutDefinition = null;
     private var _detectContainerChange:Boolean = true;

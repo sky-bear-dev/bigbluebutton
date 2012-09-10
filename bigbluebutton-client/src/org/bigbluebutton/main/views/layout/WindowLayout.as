@@ -18,18 +18,15 @@
  * Author: Felipe Cecagno <felipe@mconf.org>
  */
 package org.bigbluebutton.main.views.layout {
+  import org.bigbluebutton.main.views.MainDisplay;
 
   public class WindowLayout {
-
-    import flexlib.mdi.containers.MDICanvas;
     import flexlib.mdi.containers.MDIWindow;
-
     import mx.effects.Fade;
     import mx.effects.Move;
     import mx.effects.Parallel;
     import mx.effects.Resize;
     import mx.events.EffectEvent;
-
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
     import flash.utils.Dictionary;
@@ -84,7 +81,7 @@ package org.bigbluebutton.main.views.layout {
       }
     }
     
-    static public function getLayout(canvas:MDICanvas, window:MDIWindow):WindowLayout {
+    static public function getLayout(canvas:MainDisplay, window:MDIWindow):WindowLayout {
       var layout:WindowLayout = new WindowLayout();
       layout.name = getType(window);
       layout.width = window.width / canvas.width;
@@ -98,13 +95,13 @@ package org.bigbluebutton.main.views.layout {
       return layout;
     }
     
-    static public function setLayout(canvas:MDICanvas, window:MDIWindow, layout:WindowLayout):void {
+    static public function setLayout(canvas:MainDisplay, window:MDIWindow, layout:WindowLayout):void {
       if (layout == null) return;
       layout.applyToWindow(canvas, window);
     }
     
     private var _delayedEffects:Array = new Array();
-    private function delayEffect(canvas:MDICanvas, window:MDIWindow):void {
+    private function delayEffect(canvas:MainDisplay, window:MDIWindow):void {
       var obj:Object = {canvas:canvas, window:window};
       _delayedEffects.push(obj);
       var timer:Timer = new Timer(150,1);
@@ -117,7 +114,7 @@ package org.bigbluebutton.main.views.layout {
       applyToWindow(obj.canvas, obj.window);
     }
     
-    public function applyToWindow(canvas:MDICanvas, window:MDIWindow):void {
+    public function applyToWindow(canvas:MainDisplay, window:MDIWindow):void {
       var effect:Parallel = new Parallel();
       effect.duration = EVENT_DURATION;
       effect.target = window;
@@ -189,7 +186,7 @@ package org.bigbluebutton.main.views.layout {
       }
     }
     
-    public function toAbsoluteXml(canvas:MDICanvas):XML {
+    public function toAbsoluteXml(canvas:MainDisplay):XML {
       var xml:XML = <window/>;
       xml.@name = name;
       if (minimized)

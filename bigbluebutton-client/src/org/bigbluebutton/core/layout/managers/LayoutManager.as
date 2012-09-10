@@ -20,6 +20,7 @@
 package org.bigbluebutton.core.layout.managers
 {
   import com.asfusion.mate.events.Dispatcher;
+  
   import flash.events.Event;
   import flash.events.EventDispatcher;
   import flash.events.TimerEvent;
@@ -27,30 +28,33 @@ package org.bigbluebutton.core.layout.managers
   import flash.net.URLLoader;
   import flash.net.URLRequest;
   import flash.utils.Dictionary;
-  import flash.utils.Timer;  
-  import flexlib.mdi.containers.MDICanvas;
+  import flash.utils.Timer;
+  
   import flexlib.mdi.containers.MDIWindow;
   import flexlib.mdi.events.MDIManagerEvent;
+  
   import mx.controls.Alert;
   import mx.events.ResizeEvent;
+  
   import org.bigbluebutton.common.LogUtil;
   import org.bigbluebutton.core.EventBroadcaster;
-  import org.bigbluebutton.core.managers.UserManager;
-  import org.bigbluebutton.core.model.Config;
   import org.bigbluebutton.core.layout.events.LayoutEvent;
   import org.bigbluebutton.core.layout.events.LayoutsLoadedEvent;
+  import org.bigbluebutton.core.layout.events.RedefineLayoutEvent;
   import org.bigbluebutton.core.layout.events.UpdateLayoutEvent;
+  import org.bigbluebutton.core.layout.managers.OrderManager;
   import org.bigbluebutton.core.layout.model.LayoutDefinition;
   import org.bigbluebutton.core.layout.model.LayoutDefinitionFile;
   import org.bigbluebutton.core.layout.model.LayoutLoader;
+  import org.bigbluebutton.core.managers.UserManager;
+  import org.bigbluebutton.core.model.Config;
+  import org.bigbluebutton.main.views.MainDisplay;
   import org.bigbluebutton.main.views.layout.WindowLayout;
-  import org.bigbluebutton.core.layout.events.RedefineLayoutEvent;
   import org.bigbluebutton.util.i18n.ResourceUtil;
-  import org.bigbluebutton.core.layout.managers.OrderManager;
   
   public class LayoutManager extends EventDispatcher {
     private var _layouts:LayoutDefinitionFile = null;
-    private var _canvas:MDICanvas = null;
+    private var _canvas:MainDisplay = null;
     private var _globalDispatcher:Dispatcher = new Dispatcher();
     private var _locked:Boolean = false;
     private var _currentLayout:LayoutDefinition = null;
@@ -149,7 +153,7 @@ package org.bigbluebutton.core.layout.managers
       }
     }
     
-    public function setCanvas(canvas:MDICanvas):void {
+    public function setCanvas(canvas:MainDisplay):void {
       _canvas = canvas;
       //LogUtil.debug("CHAD: Canvas initialized");
       /*

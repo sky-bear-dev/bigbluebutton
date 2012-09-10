@@ -18,11 +18,11 @@
  * Author: Felipe Cecagno <felipe@mconf.org>
  */
 package org.bigbluebutton.core.layout.model {
+  import org.bigbluebutton.main.views.MainDisplay;
   import org.bigbluebutton.main.views.layout.WindowLayout;
 
   public class LayoutDefinition {
     import flash.utils.Dictionary;
-    import flexlib.mdi.containers.MDICanvas;
     import flexlib.mdi.containers.MDIWindow;    
     import org.bigbluebutton.common.LogUtil;
     import org.bigbluebutton.common.Role;
@@ -145,7 +145,7 @@ package org.bigbluebutton.core.layout.model {
       return (a.order < b.order? 1: -1);
     }
     
-    private function adjustWindowsOrder(canvas:MDICanvas):void {
+    private function adjustWindowsOrder(canvas:MainDisplay):void {
       var orderedList:Array = new Array();
       var type:String;
       var order:int;
@@ -175,7 +175,7 @@ package org.bigbluebutton.core.layout.model {
       }
     }
     
-    public function applyToCanvas(canvas:MDICanvas):void {
+    public function applyToCanvas(canvas:MainDisplay):void {
       if (canvas == null)
         return;
 
@@ -186,7 +186,7 @@ package org.bigbluebutton.core.layout.model {
       }
     }
     
-    public function applyToWindow(canvas:MDICanvas, window:MDIWindow, type:String=null):void {
+    public function applyToWindow(canvas:MainDisplay, window:MDIWindow, type:String=null):void {
       if (type == null)
         type = WindowLayout.getType(window);
 
@@ -203,7 +203,7 @@ package org.bigbluebutton.core.layout.model {
       return ignoreWindowByType(type);
     }
     
-    static public function getLayout(canvas:MDICanvas, name:String):LayoutDefinition {
+    static public function getLayout(canvas:MainDisplay, name:String):LayoutDefinition {
       //LogUtil.debug("CHAD: Canvas is " + (canvas == null ? "null" : "not null") + ", Name is " + (name == null ? "null" : "not null"));
       var layoutDefinition:LayoutDefinition = new LayoutDefinition();
       layoutDefinition.name = name;
