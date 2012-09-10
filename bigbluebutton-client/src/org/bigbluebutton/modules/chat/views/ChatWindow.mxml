@@ -45,7 +45,6 @@
 			import mx.resources.ResourceManager;			
 			import org.bigbluebutton.common.events.LocaleChangeEvent;
 			import org.bigbluebutton.main.events.ShortcutEvent;
-			import org.bigbluebutton.main.views.MainCanvas;
 			import org.bigbluebutton.modules.chat.events.TranscriptEvent;
 			import org.bigbluebutton.util.i18n.ResourceUtil;
 			import org.bigbluebutton.common.LogUtil;

@@ -32,7 +32,6 @@
       import org.bigbluebutton.core.layout.services.LayoutLoaderService;
       import org.bigbluebutton.main.events.LocaleEvent;
       import org.bigbluebutton.main.views.MainApplicationShell;
-      import org.bigbluebutton.main.views.MainCanvas;
     ]]>
   </mx:Script>
 	<!--

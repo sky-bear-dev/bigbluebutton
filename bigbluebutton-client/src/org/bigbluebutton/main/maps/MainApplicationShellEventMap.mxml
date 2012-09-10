@@ -65,6 +65,7 @@
  
   <Injectors target="{ LayoutManager }">   
     <PropertyInjector targetKey="layoutModel" source="{ LayoutModel }"/>
+    <PropertyInjector targetKey="dispatcher" source="{ scope.dispatcher }"/>
   </Injectors>
   
 </EventMap>

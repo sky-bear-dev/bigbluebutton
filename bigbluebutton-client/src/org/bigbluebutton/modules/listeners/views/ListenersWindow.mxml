@@ -47,12 +47,10 @@
 			import mx.controls.Label;
 			import mx.events.ListEvent;
 			import mx.messaging.channels.AMFChannel;
-			
 			import org.bigbluebutton.common.Images;
 			import org.bigbluebutton.common.events.LocaleChangeEvent;
 			import org.bigbluebutton.core.managers.UserManager;
 			import org.bigbluebutton.main.events.ShortcutEvent;
-			import org.bigbluebutton.main.views.MainCanvas;
 			import org.bigbluebutton.modules.listeners.events.ListenersCommand;
 			import org.bigbluebutton.modules.listeners.events.ListenersEvent;
 			import org.bigbluebutton.modules.listeners.model.ListenerOptions;

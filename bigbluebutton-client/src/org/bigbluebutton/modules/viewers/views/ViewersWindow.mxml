@@ -33,17 +33,14 @@
 	
     <mx:Script>
         <![CDATA[
-          import com.asfusion.mate.events.Dispatcher;
-          
-          import flexlib.mdi.events.MDIWindowEvent;
-          
+          import com.asfusion.mate.events.Dispatcher;         
+          import flexlib.mdi.events.MDIWindowEvent;         
           import mx.binding.utils.BindingUtils;
           import mx.collections.ArrayCollection;
           import mx.controls.Alert;
           import mx.controls.listClasses.IListItemRenderer;
           import mx.events.DataGridEvent;
-          import mx.events.ListEvent;
-          
+          import mx.events.ListEvent;         
           import org.bigbluebutton.common.Images;
           import org.bigbluebutton.common.Role;
           import org.bigbluebutton.common.events.LocaleChangeEvent;
@@ -56,7 +53,6 @@
           import org.bigbluebutton.main.model.users.events.KickUserEvent;
           import org.bigbluebutton.main.model.users.events.RaiseHandEvent;
           import org.bigbluebutton.main.model.users.events.RoleChangeEvent;
-          import org.bigbluebutton.main.views.MainCanvas;
           import org.bigbluebutton.main.views.layout.LayoutConstants;
           import org.bigbluebutton.modules.viewers.events.ChangeStatusEvent;
           import org.bigbluebutton.modules.viewers.model.ViewerOptions;

@@ -47,7 +47,6 @@
       import org.bigbluebutton.core.managers.UserManager;
       import org.bigbluebutton.main.views.MainDisplay;
       import org.bigbluebutton.main.model.User;
-      import org.bigbluebutton.main.views.MainCanvas;
       import org.bigbluebutton.main.views.layout.LayoutConstants;
       import org.bigbluebutton.modules.deskshare.events.CursorEvent;
       import org.bigbluebutton.modules.deskshare.events.StartedViewingEvent;

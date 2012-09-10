@@ -4,6 +4,7 @@ package org.bigbluebutton.main.views.layout
   
   import flash.events.Event;
   import flash.events.EventDispatcher;
+  import flash.events.IEventDispatcher;
   import flash.events.TimerEvent;
   import flash.net.FileReference;
   import flash.net.URLLoader;
@@ -35,9 +36,9 @@ package org.bigbluebutton.main.views.layout
   import org.bigbluebutton.util.i18n.ResourceUtil;
   
   public class LayoutManager {
-    private var _layouts:LayoutDefinitionFile = null;
-    private var _canvas:MDICanvas = null;
-    private var _globalDispatcher:Dispatcher = new Dispatcher();
+//    private var _layouts:LayoutDefinitionFile = null;
+    private var _canvas:MainDisplay = null;
+//    private var _globalDispatcher:Dispatcher = new Dispatcher();
     private var _locked:Boolean = false;
     private var _currentLayout:LayoutDefinition = null;
     private var _detectContainerChange:Boolean = true;
@@ -49,6 +50,7 @@ package org.bigbluebutton.main.views.layout
                                               MDIManagerEvent.WINDOW_MINIMIZE, MDIManagerEvent.WINDOW_MAXIMIZE);
     
     public var layoutModel:LayoutModel;
+    public var dispatcher:IEventDispatcher;
     
     public function LayoutManager() {
       LogUtil.debug("****************************** Layout Manager constructor! *************************");
@@ -89,7 +91,7 @@ package org.bigbluebutton.main.views.layout
     }
     
     public function applyDefaultLayout():void {
-      applyLayout(_layouts.getDefault());
+      applyLayout(layoutModel.getDefaultLayout());
       sendLayoutUpdate(_currentLayout);
     }
     
@@ -104,7 +106,7 @@ package org.bigbluebutton.main.views.layout
         LogUtil.debug("LayoutManager: sending layout to remotes");
         var e:UpdateLayoutEvent = new UpdateLayoutEvent();
         e.layout = layout;
-        _globalDispatcher.dispatchEvent(e);
+        dispatcher.dispatchEvent(e);
       }
     }
     
@@ -174,7 +176,7 @@ package org.bigbluebutton.main.views.layout
       
       checkPermissionsOverWindow(e.window);
       if (_detectContainerChange) {
-        _globalDispatcher.dispatchEvent(new LayoutEvent(LayoutEvent.INVALIDATE_LAYOUT_EVENT));
+        dispatcher.dispatchEvent(new LayoutEvent(LayoutEvent.INVALIDATE_LAYOUT_EVENT));
         /*
         *   some events related to animated actions must be delayed because if it's not the 
         *   current layout doesn't get properly updated

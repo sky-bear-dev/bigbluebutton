@@ -42,19 +42,15 @@
 	<mx:Script>
 		<![CDATA[
       import com.asfusion.mate.events.Dispatcher;
-      
       import flexlib.mdi.events.MDIWindowEvent;
       import flexlib.scheduling.scheduleClasses.BackgroundItem;
-      
       import mx.core.UIComponent;
-      
       import org.bigbluebutton.common.Images;
       import org.bigbluebutton.common.LogUtil;
       import org.bigbluebutton.common.events.LocaleChangeEvent;
       import org.bigbluebutton.main.events.BBBEvent;
       import org.bigbluebutton.main.events.MadePresenterEvent;
       import org.bigbluebutton.main.views.MainDisplay;
-      import org.bigbluebutton.main.views.MainCanvas;
       import org.bigbluebutton.main.views.layout.LayoutConstants;
       import org.bigbluebutton.modules.deskshare.events.AppletStartedEvent;
       import org.bigbluebutton.modules.deskshare.events.CursorEvent;

@@ -21,21 +21,17 @@ package org.bigbluebutton.modules.videoconf.business
 {
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-	import flash.media.Video;
-	
+	import flash.media.Video;	
 	import flexlib.mdi.containers.MDIWindow;
-	import flexlib.mdi.events.MDIWindowEvent;
-	
+	import flexlib.mdi.events.MDIWindowEvent;	
 	import mx.controls.Button;
-	import mx.core.UIComponent;
-	
+	import mx.core.UIComponent;	
 	import org.bigbluebutton.common.IBbbModuleWindow;
 	import org.bigbluebutton.common.Images;
 	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.common.events.CloseWindowEvent;
 	import org.bigbluebutton.common.events.DragWindowEvent;
 	import org.bigbluebutton.main.views.MainDisplay;
-	import org.bigbluebutton.main.views.MainCanvas;
 	import org.bigbluebutton.main.views.layout.LayoutConstants;
 	import org.bigbluebutton.util.i18n.ResourceUtil;
 	

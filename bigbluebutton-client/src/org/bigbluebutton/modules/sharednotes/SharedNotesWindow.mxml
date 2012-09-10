@@ -24,16 +24,11 @@
 	<mx:Script>
 		<![CDATA[
 			import com.asfusion.mate.events.Dispatcher;
-			
 			import flash.utils.getTimer;
-			
 			import flexlib.mdi.events.MDIWindowEvent;
-			
 			import mx.events.ResizeEvent;
 			import mx.events.SliderEvent;
-			
 			import org.bigbluebutton.common.IBbbModuleWindow;
-			import org.bigbluebutton.main.views.MainCanvas;
 			import org.bigbluebutton.modules.sharednotes.infrastructure.Client;
 			import org.bigbluebutton.modules.sharednotes.infrastructure.ServerConnection;
 			
