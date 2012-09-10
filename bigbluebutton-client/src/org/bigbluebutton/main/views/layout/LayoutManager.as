@@ -31,6 +31,7 @@ package org.bigbluebutton.main.views.layout
   import org.bigbluebutton.core.layout.model.LayoutModel;
   import org.bigbluebutton.core.managers.UserManager;
   import org.bigbluebutton.core.model.Config;
+  import org.bigbluebutton.main.views.MainDisplay;
   import org.bigbluebutton.util.i18n.ResourceUtil;
   
   public class LayoutManager {
@@ -49,20 +50,20 @@ package org.bigbluebutton.main.views.layout
     
     public var layoutModel:LayoutModel;
     
-    public function LayoutManager(canvas:MDICanvas) {
-      _canvas = canvas;
+    public function LayoutManager() {
+      LogUtil.debug("****************************** Layout Manager constructor! *************************");
       _applyCurrentLayoutTimer.addEventListener(TimerEvent.TIMER, function(e:TimerEvent):void {
         applyLayout(_currentLayout);
       });
       _sendCurrentLayoutUpdateTimer.addEventListener(TimerEvent.TIMER, function(e:TimerEvent):void {
         sendLayoutUpdate(updateCurrentLayout());
       });
-      
-      setupCanvasListeners();
     }
     
         
-    private function setupCanvasListeners():void {      
+    public function setupCanvasListeners(canvas:MainDisplay):void { 
+      LogUtil.debug("****************************** Layout Manager setupCanvasListeners! *************************");
+      _canvas = canvas;
       // this is to detect changes on the container
       _canvas.windowManager.container.addEventListener(ResizeEvent.RESIZE, onContainerResized);
       //          _canvas.windowManager.container.addEventListener(Event.ACTIVATE, onContainerActivated);

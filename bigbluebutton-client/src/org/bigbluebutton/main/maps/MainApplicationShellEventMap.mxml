@@ -30,6 +30,7 @@
       import org.bigbluebutton.main.views.MainApplicationShell;
       import org.bigbluebutton.main.views.MainDisplay;
       import org.bigbluebutton.main.views.MainFooterBar;
+      import org.bigbluebutton.main.views.layout.LayoutManager;
       import org.bigbluebutton.main.views.model.vos.MainApplicationShellModel;
       import org.bigbluebutton.main.views.model.vos.MainFooterBarModel;      
     ]]>
@@ -57,8 +58,13 @@
   </Injectors>
  
   <Injectors target="{ MainDisplay }">
+    <PropertyInjector targetKey="layoutManager" source="{ LayoutManager }"/>
     <ListenerInjector eventType="{LogWindowEvent.OPEN_LOG_WINDOW}" method="openLogWindow"/>
     <ListenerInjector eventType="{OpenWindowEvent.OPEN_WINDOW_EVENT}" method="openWindowEventHandler"/>                   
   </Injectors>
-  	
+ 
+  <Injectors target="{ LayoutManager }">   
+    <PropertyInjector targetKey="layoutModel" source="{ LayoutModel }"/>
+  </Injectors>
+  
 </EventMap>

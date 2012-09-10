@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ns:MDICanvas xmlns:mx="http://www.adobe.com/2006/mxml" 
               xmlns:ns="http://code.google.com/p/flexlib/"
-              horizontalScrollPolicy="off" verticalScrollPolicy="off" >
+              horizontalScrollPolicy="off" verticalScrollPolicy="off" creationComplete="onCreationComplete()" >
   <mx:Script>
     <![CDATA[
       import flexlib.mdi.containers.MDIWindow;
-      import flexlib.mdi.effects.effectsLib.MDIVistaEffects;     
+      import flexlib.mdi.effects.effectsLib.MDIVistaEffects;
+      
       import org.bigbluebutton.common.IBbbModuleWindow;
       import org.bigbluebutton.common.LogUtil;
       import org.bigbluebutton.common.events.OpenWindowEvent;
@@ -18,6 +19,13 @@
       private var logs:Logger = new Logger();
       private var logWindow:LogWindow;
       
+      private function onCreationComplete():void {
+        if (layoutManager == null) {
+          LogUtil.warn("Cannot setup layout manager!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        } else {
+          layoutManager.setupCanvasListeners(this);
+        }
+      }
       
       public function openLogWindow(event:LogWindowEvent):void {
         if (logWindow == null){
@@ -34,6 +42,7 @@
       public function openWindowEventHandler(event:OpenWindowEvent):void {
         LogUtil.debug("****************** Received Open Window Event *************************************");
       //  LogUtil.debug("Opening Window [" + event.window.getWindowID() + "]");
+        windowManager.add(event.window as MDIWindow);
       }
       
       public function logout(request:URLRequest):void {
