@@ -2,7 +2,7 @@
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:views="org.bigbluebutton.main.views.*" width="100%" height="100%" xmlns:maps="org.bigbluebutton.main.maps.*">
   <mx:VBox width="100%" height="100%">
     <views:MainToolbar/>
-    <maps:MainDisplay width="100%" height="100%"/>	
+    <views:MainDisplay width="100%" height="100%"/>	
     <views:MainFooterBar/>      
   </mx:VBox>
 </mx:Canvas>

@@ -23,6 +23,7 @@
 <EventMap xmlns="http://mate.asfusion.com/" xmlns:mx="http://www.adobe.com/2006/mxml">
   <mx:Script>
     <![CDATA[
+      import org.bigbluebutton.main.views.MainDisplay;
       import org.bigbluebutton.core.layout.model.LayoutModel;
       import org.bigbluebutton.main.events.AppVersionEvent;
       import org.bigbluebutton.main.events.LogWindowEvent;

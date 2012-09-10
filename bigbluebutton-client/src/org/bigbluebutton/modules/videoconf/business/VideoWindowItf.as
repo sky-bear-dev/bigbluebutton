@@ -34,7 +34,7 @@ package org.bigbluebutton.modules.videoconf.business
 	import org.bigbluebutton.common.LogUtil;
 	import org.bigbluebutton.common.events.CloseWindowEvent;
 	import org.bigbluebutton.common.events.DragWindowEvent;
-	import org.bigbluebutton.main.maps.MainDisplay;
+	import org.bigbluebutton.main.views.MainDisplay;
 	import org.bigbluebutton.main.views.MainCanvas;
 	import org.bigbluebutton.main.views.layout.LayoutConstants;
 	import org.bigbluebutton.util.i18n.ResourceUtil;

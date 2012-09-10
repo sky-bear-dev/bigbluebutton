@@ -49,7 +49,7 @@
       import org.bigbluebutton.common.LogUtil;
       import org.bigbluebutton.common.events.LocaleChangeEvent;
       import org.bigbluebutton.core.managers.UserManager;
-      import org.bigbluebutton.main.maps.MainDisplay;
+      import org.bigbluebutton.main.views.MainDisplay;
       import org.bigbluebutton.main.model.User;
       import org.bigbluebutton.main.views.MainCanvas;
       import org.bigbluebutton.main.views.layout.LayoutConstants;

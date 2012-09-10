@@ -49,7 +49,7 @@
           import org.bigbluebutton.common.events.LocaleChangeEvent;
           import org.bigbluebutton.core.managers.UserManager;
           import org.bigbluebutton.main.events.ParticipantJoinEvent;
-          import org.bigbluebutton.main.maps.MainDisplay;
+          import org.bigbluebutton.main.views.MainDisplay;
           import org.bigbluebutton.main.model.users.BBBUser;
           import org.bigbluebutton.main.model.users.Conference;
           import org.bigbluebutton.main.model.users.events.ConferenceCreatedEvent;

@@ -10,7 +10,6 @@
       import org.bigbluebutton.common.IBbbModuleWindow;
       import org.bigbluebutton.common.LogUtil;
       import org.bigbluebutton.main.events.LogWindowEvent;
-      import org.bigbluebutton.main.views.LogWindow;
       import org.bigbluebutton.main.views.layout.LayoutManager;
       import org.bigbluebutton.util.logging.Logger;
       
