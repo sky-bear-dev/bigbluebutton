@@ -205,6 +205,11 @@
 			private function muteMeHandler(e:ShortcutEvent):void{
 				toggleMuteMeState();
 			}
+      
+      public function getWindowID():String {
+        return "LISTENERS_WINDOW";
+      }
+      
 		]]>
 	</mx:Script>
     	<mx:List id="listenersList" height="100%" width="100%"

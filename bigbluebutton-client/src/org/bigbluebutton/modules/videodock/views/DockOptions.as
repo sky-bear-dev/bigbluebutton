@@ -27,10 +27,10 @@ package org.bigbluebutton.modules.videodock.views
 		
 		[Bindable]
 		public var oneAlwaysBigger:Boolean = false;
-		
+		    
 		public function DockOptions()
 		{
-			var vxml:XML = BBB.getConfigForModule("VideodockModule");
+/*			var vxml:XML = BBB.getConfigForModule("VideodockModule");
 			if (vxml != null) {
 				if (vxml.@autoDock != undefined) {
 					autoDock = (vxml.@autoDock.toString().toUpperCase() == "TRUE") ? true : false;
@@ -56,6 +56,6 @@ package org.bigbluebutton.modules.videodock.views
 					oneAlwaysBigger = (vxml.@oneAlwaysBigger.toString().toUpperCase() == "TRUE") ? true : false;
 				}
 			}
-		}
+*/		}
 	}
 }

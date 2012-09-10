@@ -17,7 +17,7 @@
  * 
  * Author: Felipe Cecagno <felipe@mconf.org>
  */
-package org.bigbluebutton.core.layout.model {
+package org.bigbluebutton.main.views.layout {
 
   public class WindowLayout {
 

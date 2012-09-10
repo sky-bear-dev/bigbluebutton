@@ -181,6 +181,10 @@
 			private function closeWindow(e:CloseAllWindowsEvent):void{
 				this.close();
 			}
+      
+      override public function getWindowID():String {
+        return "VIDEO_VIEW_WINDOW";
+      }
 												
 		]]>
 	</mx:Script>

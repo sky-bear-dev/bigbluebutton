@@ -18,6 +18,7 @@
  * Author: Felipe Cecagno <felipe@mconf.org>
  */
 package org.bigbluebutton.core.layout.model {
+  import org.bigbluebutton.main.views.layout.WindowLayout;
 
   public class LayoutDefinition {
     import flash.utils.Dictionary;

@@ -20,12 +20,12 @@
 package org.bigbluebutton.core.layout.model
 {
   import flash.events.EventDispatcher;
-
+  
   import org.bigbluebutton.common.LogUtil;
   import org.bigbluebutton.core.EventBroadcaster;
-  import org.bigbluebutton.core.model.Config;
   import org.bigbluebutton.core.layout.events.LayoutsLoadedEvent;
   import org.bigbluebutton.core.layout.model.LayoutDefinition;
+  import org.bigbluebutton.core.model.Config;
   
   public class LayoutDefinitionFile extends EventDispatcher {
     private var _layouts:Array = new Array();
@@ -35,6 +35,7 @@ package org.bigbluebutton.core.layout.model
     }
     
     public function pushXml(xml:XML):void {
+      LogUtil.debug("Layout : " + xml.toString());
       if (xml.@name == undefined)
         return;
         

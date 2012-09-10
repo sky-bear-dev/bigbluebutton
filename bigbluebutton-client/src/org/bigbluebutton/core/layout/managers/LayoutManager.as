@@ -20,7 +20,6 @@
 package org.bigbluebutton.core.layout.managers
 {
   import com.asfusion.mate.events.Dispatcher;
-
   import flash.events.Event;
   import flash.events.EventDispatcher;
   import flash.events.TimerEvent;
@@ -34,7 +33,6 @@ package org.bigbluebutton.core.layout.managers
   import flexlib.mdi.events.MDIManagerEvent;
   import mx.controls.Alert;
   import mx.events.ResizeEvent;
-
   import org.bigbluebutton.common.LogUtil;
   import org.bigbluebutton.core.EventBroadcaster;
   import org.bigbluebutton.core.managers.UserManager;
@@ -45,7 +43,7 @@ package org.bigbluebutton.core.layout.managers
   import org.bigbluebutton.core.layout.model.LayoutDefinition;
   import org.bigbluebutton.core.layout.model.LayoutDefinitionFile;
   import org.bigbluebutton.core.layout.model.LayoutLoader;
-  import org.bigbluebutton.core.layout.model.WindowLayout;
+  import org.bigbluebutton.main.views.layout.WindowLayout;
   import org.bigbluebutton.core.layout.events.RedefineLayoutEvent;
   import org.bigbluebutton.util.i18n.ResourceUtil;
   import org.bigbluebutton.core.layout.managers.OrderManager;

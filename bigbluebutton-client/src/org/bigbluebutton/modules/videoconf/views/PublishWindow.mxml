@@ -388,6 +388,10 @@
 			private function hideWarning(e:TimerEvent):void {
 				lblWarning.visible = false;
 			}
+      
+      override public function getWindowID():String {
+        return "VIDEO_PUBLISH_WINDOW";
+      }
 			
 		]]>
 	</mx:Script>

@@ -26,7 +26,7 @@ package org.bigbluebutton.core.layout.managers
 
   import org.bigbluebutton.common.LogUtil;
   import org.bigbluebutton.core.layout.model.LayoutDefinition;
-  import org.bigbluebutton.core.layout.model.WindowLayout;
+  import org.bigbluebutton.main.views.layout.WindowLayout;
 
   public class OrderManager {
     private static var _instance:OrderManager = null;

@@ -46,7 +46,9 @@ package org.bigbluebutton.core.modules.model
         var m:ModuleDescriptor = _sortedModules.getItemAt(i) as ModuleDescriptor;
         var bbb:IBigBlueButtonModule = m.module as IBigBlueButtonModule;
         bbb.start();	 
-        dispatcher.dispatchEvent(new ModuleEvent(ModuleEvent.MODULE_START));
+        var startEvent:ModuleEvent = new ModuleEvent(ModuleEvent.MODULE_START);
+        startEvent.name = m.getName();
+        dispatcher.dispatchEvent(startEvent);
       }
       return null;
     }

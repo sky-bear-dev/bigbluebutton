@@ -292,6 +292,10 @@
 				stopStream();
 				closeWindow();
 			}
+      
+      public function getWindowID():String {
+        return "DESKTOP_PUBLISH_WINDOW";
+      }
 			
 		]]>
 	</mx:Script>

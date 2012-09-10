@@ -163,6 +163,10 @@
 				rollEvent.userid = user.userid;
 				dispatcher.dispatchEvent(rollEvent);
 			}
+          
+          public function getWindowID():String {
+            return "VIEWERS_WINDOW";
+          }
 
         ]]>
     </mx:Script>

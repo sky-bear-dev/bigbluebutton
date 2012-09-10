@@ -5,10 +5,10 @@
   <mx:Script>
     <![CDATA[
       import flexlib.mdi.containers.MDIWindow;
-      import flexlib.mdi.effects.effectsLib.MDIVistaEffects;
-      
+      import flexlib.mdi.effects.effectsLib.MDIVistaEffects;     
       import org.bigbluebutton.common.IBbbModuleWindow;
       import org.bigbluebutton.common.LogUtil;
+      import org.bigbluebutton.common.events.OpenWindowEvent;
       import org.bigbluebutton.main.events.LogWindowEvent;
       import org.bigbluebutton.main.views.layout.LayoutManager;
       import org.bigbluebutton.util.logging.Logger;
@@ -18,7 +18,6 @@
       private var logs:Logger = new Logger();
       private var logWindow:LogWindow;
       
-
       
       public function openLogWindow(event:LogWindowEvent):void {
         if (logWindow == null){
@@ -32,7 +31,10 @@
         logWindow.height = this.height - 100;
       }
       
-      
+      public function openWindowEventHandler(event:OpenWindowEvent):void {
+        LogUtil.debug("****************** Received Open Window Event *************************************");
+      //  LogUtil.debug("Opening Window [" + event.window.getWindowID() + "]");
+      }
       
       public function logout(request:URLRequest):void {
         navigateToURL(request, '_self');

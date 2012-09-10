@@ -394,6 +394,10 @@ $Id: $
 				super.resourcesChanged();
 				this.title = ResourceUtil.getInstance().getString('bbb.videodock.title');
 			}			
+      
+      public function getWindowID():String {
+        return "VIDEO_DOCK_WINDOW";
+      }
 						
 		]]>
 	</mx:Script>

@@ -1,6 +1,7 @@
 package org.bigbluebutton.main.views.layout
 {
-  import com.asfusion.mate.events.Dispatcher;  
+  import com.asfusion.mate.events.Dispatcher;
+  
   import flash.events.Event;
   import flash.events.EventDispatcher;
   import flash.events.TimerEvent;
@@ -8,26 +9,29 @@ package org.bigbluebutton.main.views.layout
   import flash.net.URLLoader;
   import flash.net.URLRequest;
   import flash.utils.Dictionary;
-  import flash.utils.Timer;  
+  import flash.utils.Timer;
+  
   import flexlib.mdi.containers.MDICanvas;
   import flexlib.mdi.containers.MDIWindow;
-  import flexlib.mdi.events.MDIManagerEvent;  
+  import flexlib.mdi.events.MDIManagerEvent;
+  
   import mx.controls.Alert;
-  import mx.events.ResizeEvent;  
+  import mx.events.ResizeEvent;
+  
   import org.bigbluebutton.common.LogUtil;
   import org.bigbluebutton.core.EventBroadcaster;
-  import org.bigbluebutton.core.managers.UserManager;
-  import org.bigbluebutton.core.model.Config;
   import org.bigbluebutton.core.layout.events.LayoutEvent;
   import org.bigbluebutton.core.layout.events.LayoutsLoadedEvent;
+  import org.bigbluebutton.core.layout.events.RedefineLayoutEvent;
   import org.bigbluebutton.core.layout.events.UpdateLayoutEvent;
+  import org.bigbluebutton.core.layout.managers.OrderManager;
   import org.bigbluebutton.core.layout.model.LayoutDefinition;
   import org.bigbluebutton.core.layout.model.LayoutDefinitionFile;
   import org.bigbluebutton.core.layout.model.LayoutLoader;
-  import org.bigbluebutton.core.layout.model.WindowLayout;
-  import org.bigbluebutton.core.layout.events.RedefineLayoutEvent;
+  import org.bigbluebutton.core.layout.model.LayoutModel;
+  import org.bigbluebutton.core.managers.UserManager;
+  import org.bigbluebutton.core.model.Config;
   import org.bigbluebutton.util.i18n.ResourceUtil;
-  import org.bigbluebutton.core.layout.managers.OrderManager;
   
   public class LayoutManager {
     private var _layouts:LayoutDefinitionFile = null;
@@ -42,7 +46,9 @@ package org.bigbluebutton.main.views.layout
     private var _customLayoutsCount:int = 0;
     private var _eventsToDelay:Array = new Array(MDIManagerEvent.WINDOW_RESTORE,
                                               MDIManagerEvent.WINDOW_MINIMIZE, MDIManagerEvent.WINDOW_MAXIMIZE);
-       
+    
+    public var layoutModel:LayoutModel;
+    
     public function LayoutManager(canvas:MDICanvas) {
       _canvas = canvas;
       _applyCurrentLayoutTimer.addEventListener(TimerEvent.TIMER, function(e:TimerEvent):void {
@@ -132,12 +138,8 @@ package org.bigbluebutton.main.views.layout
     
     private function checkPermissionsOverWindow(window:MDIWindow=null):void {
       if (window != null) {
-        if (!UserManager.getInstance().getConference().amIModerator()
-              && !LayoutDefinition.ignoreWindow(window)) {
-          window.draggable 
-            = window.resizable
-            = window.showControls
-            = !_locked;
+        if (!UserManager.getInstance().getConference().amIModerator() && !LayoutDefinition.ignoreWindow(window)) {
+          window.draggable = window.resizable = window.showControls = !_locked;
         }
       } else {
         for each (window in _canvas.windowManager.windowList) {

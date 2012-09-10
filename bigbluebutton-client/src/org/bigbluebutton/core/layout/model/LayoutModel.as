@@ -11,5 +11,9 @@ package org.bigbluebutton.core.layout.model
     public function set layouts(l:LayoutDefinitionFile):void {
       _layouts = l;
     }
+    
+    public function getDefaultLayout():LayoutDefinition {
+      return _layouts.getDefault();
+    }
   }
 }

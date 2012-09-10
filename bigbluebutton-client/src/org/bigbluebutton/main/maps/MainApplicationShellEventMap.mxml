@@ -23,11 +23,12 @@
 <EventMap xmlns="http://mate.asfusion.com/" xmlns:mx="http://www.adobe.com/2006/mxml">
   <mx:Script>
     <![CDATA[
-      import org.bigbluebutton.main.views.MainDisplay;
+      import org.bigbluebutton.common.events.OpenWindowEvent;
       import org.bigbluebutton.core.layout.model.LayoutModel;
       import org.bigbluebutton.main.events.AppVersionEvent;
       import org.bigbluebutton.main.events.LogWindowEvent;
       import org.bigbluebutton.main.views.MainApplicationShell;
+      import org.bigbluebutton.main.views.MainDisplay;
       import org.bigbluebutton.main.views.MainFooterBar;
       import org.bigbluebutton.main.views.model.vos.MainApplicationShellModel;
       import org.bigbluebutton.main.views.model.vos.MainFooterBarModel;      
@@ -37,14 +38,13 @@
   <EventHandlers type="{AppVersionEvent.APP_VERSION_EVENT}">
     <ObjectBuilder generator="{MainApplicationShellModel}" cache="global"/>
     <MethodInvoker generator="{MainApplicationShellModel}" cache="global" method="switchToJoinedState" />
-    <MethodInvoker generator="{MainAppShellMediator}" cache="global" method="appVersionHandler" />
+    <MethodInvoker generator="{MainAppShellMediator}" cache="global" method="displayDefaultLayout" />
+  </EventHandlers>
+
+  <EventHandlers type="{OpenWindowEvent.OPEN_WINDOW_EVENT}">
+    <MethodInvoker generator="{MainAppShellMediator}" cache="global" method="openWindowEventHandler" arguments="{event}"/>
   </EventHandlers>
   
-<!--  
-  <EventHandlers type="{LogWindowEvent.OPEN_LOG_WINDOW}">
-    <MethodInvoker generator="{MainCanvas}" cache="global" method="openLogWindow" />
-  </EventHandlers>
--->  
   
   <!-- Injectors ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->  
   <Injectors target="{ MainFooterBar }">
@@ -58,6 +58,7 @@
  
   <Injectors target="{ MainDisplay }">
     <ListenerInjector eventType="{LogWindowEvent.OPEN_LOG_WINDOW}" method="openLogWindow"/>
+    <ListenerInjector eventType="{OpenWindowEvent.OPEN_WINDOW_EVENT}" method="openWindowEventHandler"/>                   
   </Injectors>
   	
 </EventMap>

@@ -498,6 +498,10 @@
 				slideView.switchToFitToPage(fitToPage);
 				fitSlideToWindowMaintainingAspectRatio();				
 			}
+      
+      public function getWindowID():String {
+        return "PRESENTATION_WINDOW";
+      }
 			          
 		]]>
 	</mx:Script>

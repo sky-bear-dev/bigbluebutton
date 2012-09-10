@@ -23,19 +23,19 @@ package org.bigbluebutton.core.layout.services
         layoutUrl = vxml.@layoutConfig.toString();
       }
             
-      LogUtil.debug("LayoutManager: loading server layouts from " + layoutUrl);
+      LogUtil.debug("LayoutLoaderService: loading server layouts from " + layoutUrl);
       var loader:LayoutLoader = new LayoutLoader();
-      loader.addEventListener(LayoutsLoadedEvent.LAYOUTS_LOADED_EVENT,onLayoutLoadedHandler);
+      loader.addEventListener(LayoutsLoadedEvent.LAYOUTS_LOADED_EVENT, onLayoutLoadedHandler);
       loader.loadFromUrl(layoutUrl);
     }
     
     private function onLayoutLoadedHandler(event:LayoutsLoadedEvent):void {
       if (event.success) {
         layoutModel.layouts = event.layouts;
-        LogUtil.debug("LayoutManager: layouts loaded successfully");
+        LogUtil.debug("LayoutLoaderService: layouts loaded successfully");
         dispatcher.dispatchEvent(new LayoutConfigEvent(LayoutConfigEvent.LAYOUT_CONFIG_LOADED));
       } else {
-        LogUtil.error("LayoutManager: layouts not loaded (" + event.error.message + ")");
+        LogUtil.error("LayoutLoaderService: layouts not loaded (" + event.error.message + ")");
       }      
     }   
   }

@@ -36,14 +36,10 @@
 		
 	<mx:Script>
 		<![CDATA[
-      import com.asfusion.mate.events.Dispatcher;
-      
+      import com.asfusion.mate.events.Dispatcher;      
       import flash.sampler.NewObjectSample;
-      
-      import flexlib.mdi.events.MDIWindowEvent;
-      
-      import mx.core.UIComponent;
-      
+      import flexlib.mdi.events.MDIWindowEvent;      
+      import mx.core.UIComponent;      
       import org.bigbluebutton.common.IUserListener;
       import org.bigbluebutton.common.Images;
       import org.bigbluebutton.common.LogUtil;
@@ -271,6 +267,10 @@
 			private function localeChanged(e:LocaleChangeEvent):void{
 				resourcesChanged();
 			}
+      
+      public function getWindowID():String {
+        return "DESKTOP_VIEW_WINDOW";
+      }
 			
 		]]>
 	</mx:Script>

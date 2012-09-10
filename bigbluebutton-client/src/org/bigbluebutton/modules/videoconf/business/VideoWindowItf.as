@@ -324,6 +324,10 @@ package org.bigbluebutton.modules.videoconf.business
 			
 			onFitVideoClick();
 		}
+    
+    public function getWindowID():String {
+      return "VIDEO_WINDOW_ITF";
+    }
 		
 	}
 }

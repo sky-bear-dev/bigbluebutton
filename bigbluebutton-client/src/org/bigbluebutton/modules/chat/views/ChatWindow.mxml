@@ -113,6 +113,10 @@
 				windowManager.bringToFront(this);
 				focusManager.setFocus(chatView.chatTabs);
 			}
+      
+      public function getWindowID():String {
+        return "CHAT_WINDOW";
+      }
 		]]>
 	</mx:Script>
 	

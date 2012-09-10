@@ -33,7 +33,7 @@ $Id: $
 	</mx:Script>
   
   <EventHandlers type="{ModuleEvent.MODULE_START}" >
-    <ObjectBuilder generator="{VideoDockEventMapDelegate}" cache="global"/>
+    <ObjectBuilder generator="{VideoDockEventMapDelegate}" cache="global" />
     <MethodInvoker generator="{VideoDockEventMapDelegate}" method="moduleStart" arguments="{event}" />
   </EventHandlers>	
   
