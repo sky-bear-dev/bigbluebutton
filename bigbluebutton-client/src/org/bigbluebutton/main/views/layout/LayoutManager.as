@@ -10,12 +10,16 @@ package org.bigbluebutton.main.views.layout
   import flash.net.URLLoader;
   import flash.net.URLRequest;
   import flash.utils.Dictionary;
-  import flash.utils.Timer;  
+  import flash.utils.Timer;
+  
   import flexlib.mdi.containers.MDICanvas;
   import flexlib.mdi.containers.MDIWindow;
-  import flexlib.mdi.events.MDIManagerEvent; 
+  import flexlib.mdi.events.MDIManagerEvent;
+  
   import mx.controls.Alert;
-  import mx.events.ResizeEvent;  
+  import mx.events.ResizeEvent;
+  
+  import org.bigbluebutton.common.IBbbModuleWindow;
   import org.bigbluebutton.common.LogUtil;
   import org.bigbluebutton.core.EventBroadcaster;
   import org.bigbluebutton.core.layout.events.LayoutEvent;
@@ -83,6 +87,11 @@ package org.bigbluebutton.main.views.layout
       for each (var window:MDIWindow in _canvas.windowManager.windowList.reverse()) {
         OrderManager.getInstance().bringToFront(window);
       }
+    }
+    
+    public function displayWindow(window:IBbbModuleWindow, display:MainDisplay):void {
+      var curLayout:LayoutDefinition = layoutModel.getCurrentLayout();
+      curLayout.displayWindow(window, display);
     }
     
     public function applyDefaultLayout():void {

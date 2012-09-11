@@ -42,7 +42,7 @@
       public function openWindowEventHandler(event:OpenWindowEvent):void {
         LogUtil.debug("****************** Received Open Window Event *************************************");
       //  LogUtil.debug("Opening Window [" + event.window.getWindowID() + "]");
-        windowManager.add(event.window as MDIWindow);
+        layoutManager.displayWindow(event.window as IBbbModuleWindow, this);
       }
       
       public function logout(request:URLRequest):void {

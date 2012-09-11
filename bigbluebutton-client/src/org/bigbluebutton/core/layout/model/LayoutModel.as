@@ -23,7 +23,7 @@ package org.bigbluebutton.core.layout.model
     }
     
     public function getCurrentLayout():LayoutDefinition {
-      return _currentLayout;
+      return _currentLayout = _layouts.getDefault();
     }
   }
 }

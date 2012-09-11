@@ -18,6 +18,7 @@
  * Author: Felipe Cecagno <felipe@mconf.org>
  */
 package org.bigbluebutton.core.layout.model {
+  import org.bigbluebutton.common.IBbbModuleWindow;
   import org.bigbluebutton.main.views.MainDisplay;
   import org.bigbluebutton.main.views.layout.WindowLayout;
 
@@ -37,6 +38,10 @@ package org.bigbluebutton.core.layout.model {
     static private var _ignoredWindows:Array = new Array("PublishWindow", "VideoWindow", "DesktopPublishWindow", 
                                                           "DesktopViewWindow", "LogWindow");
     static private var _roles:Array = new Array(Role.VIEWER, Role.MODERATOR, Role.PRESENTER);
+    
+    public function displayWindow(window:IBbbModuleWindow, display:MainDisplay):void {
+      LogUtil.warn("LayoutDefinition: Displaying Window [" + window.getWindowID() + "]");
+    }
     
     private function loadLayout(vxml:XML):void {
       if (vxml.@name != undefined) {
