@@ -41,6 +41,7 @@ package org.bigbluebutton.core.layout.model {
     
     public function displayWindow(window:IBbbModuleWindow, display:MainDisplay):void {
       LogUtil.warn("LayoutDefinition: Displaying Window [" + window.getWindowID() + "]");
+      applyToWindow(display, window as MDIWindow);
     }
     
     private function loadLayout(vxml:XML):void {
@@ -192,11 +193,19 @@ package org.bigbluebutton.core.layout.model {
     }
     
     public function applyToWindow(canvas:MainDisplay, window:MDIWindow, type:String=null):void {
-      if (type == null)
+      LogUtil.debug("LayoutDefinition: applyToWindow");
+      if (type == null) {
         type = WindowLayout.getType(window);
+      }
+        
 
-      if (!ignoreWindowByType(type))
+      LogUtil.debug("LayoutDefinition: applyToWindow - type=[" + type + "]");
+      
+      if (!ignoreWindowByType(type)) {
+        LogUtil.debug("LayoutDefinition: applyToWindow - setLayout [" + type + "]");
         WindowLayout.setLayout(canvas, window, myLayout[type]);
+      }
+        
     }
     
     static private function ignoreWindowByType(type:String):Boolean {

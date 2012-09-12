@@ -96,7 +96,11 @@ package org.bigbluebutton.main.views.layout {
     }
     
     static public function setLayout(canvas:MainDisplay, window:MDIWindow, layout:WindowLayout):void {
-      if (layout == null) return;
+      if (layout == null) {
+        LogUtil.info("WindowLayout: layout is null!");
+        return;
+      }
+      LogUtil.info("WindowLayout: layout is NOT null!");
       layout.applyToWindow(canvas, window);
     }
     
@@ -115,24 +119,36 @@ package org.bigbluebutton.main.views.layout {
     }
     
     public function applyToWindow(canvas:MainDisplay, window:MDIWindow):void {
+      LogUtil.info("WindowLayout: Try to display window!");
       var effect:Parallel = new Parallel();
       effect.duration = EVENT_DURATION;
       effect.target = window;
       
       if (this.minimized) {
-        if (!window.minimized) window.minimize();
+        LogUtil.info("WindowLayout: Window is minimized!");
+        if (!window.minimized) {
+          LogUtil.info("WindowLayout: Minimizing window!");
+          window.minimize();
+        }
       } else if (this.maximized) {
-        if (!window.maximized) window.maximize();
+        LogUtil.info("WindowLayout: Window is maximized!");
+        if (!window.maximized) {
+          LogUtil.info("WindowLayout: Maximizing window!");
+          window.maximize();
+        }
       } else if (window.minimized && !this.minimized && !this.hidden) {
+        LogUtil.info("WindowLayout: Unminimizing window!");
         window.unMinimize();
         delayEffect(canvas, window);
         return;
       } else if (window.maximized && !this.maximized && !this.hidden) {
+        LogUtil.info("WindowLayout: Restoring window!");
         window.maximizeRestore();
         delayEffect(canvas, window);
         return;
       } else {
         if (!this.hidden) {
+          LogUtil.info("WindowLayout: Window not hidden!");
           var newWidth:int = int(this.width * canvas.width);
           var newHeight:int = int(this.height * canvas.height);
           var newX:int = int(this.x * canvas.width);
@@ -146,6 +162,7 @@ package org.bigbluebutton.main.views.layout {
           }
           
           if (newWidth != window.width || newHeight != window.height) {
+            LogUtil.info("WindowLayout: Resizing window!");
             var resizer:Resize = new Resize();
             resizer.widthTo = newWidth;
             resizer.heightTo = newHeight;
@@ -158,6 +175,7 @@ package org.bigbluebutton.main.views.layout {
 //      var windowVisible:Boolean = (window.alpha == 1);
       var windowVisible:Boolean = window.visible;
       if (windowVisible == layoutHidden) {
+        LogUtil.info("WindowLayout: Layout hidden!");
         var fader:Fade = new Fade();
         fader.alphaFrom = (layoutHidden? 1: 0);
         fader.alphaTo = (layoutHidden? 0: 1);
