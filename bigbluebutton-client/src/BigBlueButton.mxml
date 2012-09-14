@@ -119,5 +119,4 @@
   <modulesMap:ModulesEventMap />
 
 	<views:MainApplicationShell id="mainShell"/>	
-	
 </mx:Application>

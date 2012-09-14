@@ -34,8 +34,8 @@ import org.red5.server.adapter.IApplication;
 import org.red5.server.adapter.MultiThreadedApplicationAdapter;
 import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
-import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
+import org.red5.server.api.scope.IScope;
 import org.slf4j.Logger;
 import org.bigbluebutton.conference.service.recorder.RecorderApplication;
 import org.bigbluebutton.conference.service.recorder.whiteboard.WhiteboardEventRecorder;
@@ -116,7 +116,7 @@ public class WhiteboardApplication extends MultiThreadedApplicationAdapter imple
 	public void sendAnnotation(Annotation annotation) {	
 		String status = annotation.getStatus();
 		
-		if("textCreated".equals(status) || "DRAW_START".equals(status)) {
+		if("textCreated".equals(status) || "DRAW_START".equals(status) || "DRAW_UPDATE".equals(status) || "DRAW_END".equals(status) ) {
 			roomManager.getRoom(getMeetingId()).addAnnotation(annotation);
 		} else {
 			if ("text".equals(annotation.getType())) {

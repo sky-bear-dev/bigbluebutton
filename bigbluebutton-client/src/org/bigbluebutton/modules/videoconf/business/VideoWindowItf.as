@@ -25,7 +25,7 @@ package org.bigbluebutton.modules.videoconf.business
 	import flexlib.mdi.containers.MDIWindow;
 	import flexlib.mdi.events.MDIWindowEvent;	
 	import mx.controls.Button;
-	import mx.core.UIComponent;	
+	import mx.core.UIComponent;
 	import org.bigbluebutton.common.IBbbModuleWindow;
 	import org.bigbluebutton.common.Images;
 	import org.bigbluebutton.common.LogUtil;
@@ -54,16 +54,17 @@ package org.bigbluebutton.modules.videoconf.business
 		protected var mousePositionOnDragStart:Point;
 		
 		public var streamName:String;
-		public var userId:int;
+
 		[Bindable] public var resolutions:Array;
 		
 		protected function getVideoResolution(stream:String):Array {
 			// streamname: <width>x<height><userId>-<timestamp>
 			// example: 320x2405-1329334829687
-			var pattern:RegExp = new RegExp("\\d+x\\d+-\\d+", "");
+			var pattern:RegExp = new RegExp("(\\d+x\\d+)-\\d+-\\d+", "");
 			if (pattern.test(stream)) {
-				LogUtil.debug("The stream name is well formatted");
-				return stream.substr(0, stream.split("-")[0].length - String(this.userId).length).split("x");
+				LogUtil.debug("The stream name is well formatted [" + stream + "]");
+        LogUtil.debug("Stream resolution is [" + pattern.exec(stream)[1] + "]");
+        return pattern.exec(stream)[1].split("x");
 			} else {
 				LogUtil.error("The stream name doesn't follow the pattern <width>x<height><userId>-<timestamp>. However, the video resolution will be set to the lowest defined resolution in the config.xml: " + resolutions[0]);
 				return resolutions[0].split("x");
