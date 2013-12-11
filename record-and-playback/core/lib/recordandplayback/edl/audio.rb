@@ -89,10 +89,13 @@ module BigBlueButton
           audio = entry[:audio]
           duration = edl[i][:next_timestamp] - edl[i][:timestamp]
           filename =  "#{output_basename}.temp-%03d.#{WF_EXT}" % i
+          info = audioinfo[audio[:filename]]
 
           if audio
             BigBlueButton.logger.info "  Using input #{audio[:filename]}"
-            sox_cmd += ['-m', *SOX_WF_AUDIO_ARGS, '-n', audio[:filename]]
+            sox_cmd += ['-m',
+                        '-b', '16', '-c', '1', '-e', 'signed', '-r', info[:sample_rate], '-L', '-n',
+                        audio[:filename]]
           else
             BigBlueButton.logger.info "  Generating silence"
             sox_cmd += [*SOX_WF_AUDIO_ARGS, '-n']
@@ -107,10 +110,10 @@ module BigBlueButton
             # adjust the speed to match up timing.
             # TODO: This should be part of the import logic somehow, since
             # render can be run after cutting.
-            if ((duration - audioinfo[audio[:filename]][:duration]).to_f / duration).abs < 0.05
-              speed = audioinfo[audio[:filename]][:duration].to_f / duration
+            if ((duration - info[:duration]).to_f / duration).abs < 0.05
+              speed = info[:duration].to_f / duration
               BigBlueButton.logger.warn "  Audio file length mismatch, adjusting speed to #{speed}"
-              sox_cmd += ['speed', speed.to_s, 'rate', '-h', audioinfo[audio[:filename]][:sample_rate].to_s]
+              sox_cmd += ['speed', speed.to_s, 'rate', '-h', '16000']
             end
 
             BigBlueButton.logger.info "  Trimming from #{audio[:timestamp]} to #{audio[:timestamp] + duration}"
