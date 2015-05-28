@@ -21,6 +21,7 @@ package org.bigbluebutton.web.controllers
 import grails.converters.*
 import org.bigbluebutton.api.MeetingService
 import org.bigbluebutton.api.Util
+import org.bigbluebutton.api.domain.Meeting
 import org.bigbluebutton.api.domain.UserSession
 import org.bigbluebutton.presentation.UploadedPresentation
 import org.bigbluebutton.web.services.PresentationService
