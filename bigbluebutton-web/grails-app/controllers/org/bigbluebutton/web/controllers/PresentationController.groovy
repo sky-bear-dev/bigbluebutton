@@ -19,10 +19,11 @@
 package org.bigbluebutton.web.controllers
 
 import grails.converters.*
-import org.bigbluebutton.web.services.PresentationService
+import org.bigbluebutton.api.MeetingService
+import org.bigbluebutton.api.Util
+import org.bigbluebutton.api.domain.UserSession
 import org.bigbluebutton.presentation.UploadedPresentation
-import org.bigbluebutton.api.MeetingService;
-import org.bigbluebutton.api.Util;
+import org.bigbluebutton.web.services.PresentationService
 
 class PresentationController {
   MeetingService meetingService
@@ -65,41 +66,88 @@ class PresentationController {
     redirect( action:list )
   }
 
-  def upload = {		
-    println 'PresentationController:upload'
+  def uploadPreflight = {
+    log.info("PresentationController:uploadPreflight")
 
-    def meetingId = params.conference
-    def meeting = meetingService.getNotEndedMeetingWithId(meetingId);
-    if (meeting == null) {
-      println "Presentation uploaded to non-existant meeting ${meetingId}, ignoring"
-      flash.message = 'meeting is not running'
-      return [];
+    boolean reject = false
+
+    UserSession us = null
+    Meeting meeting = null
+
+    if (!session["user-token"]) {
+      log.debug("Upload rejected: missing user-token in session")
+      reject = true
+    } else {
+      us = meetingService.getUserSession(session["user-token"])
+      if (us == null) {
+        log.debug("Upload rejected: could not find session for user-token")
+        reject = true
+      } else {
+        meeting = meetingService.getMeeting(us.meetingID)
+        if (meeting == null || meeting.isForciblyEnded()) {
+          log.debug("Upload rejected: meeting is not present or ended")
+          reject = true
+        }
+      }
+    }
+
+    if (reject) {
+      return render(status: 403, text: "Presentation upload not permitted")
+    }
+
+    return render(status: 200, text: "Presentation upload permitted")
+  }
+
+  def upload = {
+    log.info("PresentationController:upload")
+
+    boolean reject = false
+
+    UserSession us = null
+    Meeting meeting = null
+
+    if (!session["user-token"]) {
+      log.debug("Upload rejected: missing user-token in session")
+      reject = true
+    } else {
+      us = meetingService.getUserSession(session["user-token"])
+      if (us == null) {
+        log.debug("Upload rejected: could not find session for user-token")
+        reject = true
+      } else {
+        meeting = meetingService.getMeeting(us.meetingID)
+        if (meeting == null || meeting.isForciblyEnded()) {
+          log.debug("Upload rejected: meeting is not present or ended")
+          reject = true
+        }
+      }
+    }
+
+    if (reject) {
+      return render(status: 403, text: "Cannot upload presentation")
     }
 
     def file = request.getFile('fileUpload')
-		if(file && !file.empty) {
-			flash.message = 'Your file has been uploaded'
-			
-			def presFilename = file.getOriginalFilename()
-			def filenameExt = Util.getFilenameExt(presFilename);
-      String presentationDir = presentationService.getPresentationDir()
-      def presId = Util.generatePresentationId(presFilename)
-      File uploadDir = Util.createPresentationDirectory(meetingId, presentationDir, presId) 
-      if (uploadDir != null) {
-         def newFilename = Util.createNewFilename(presId, filenameExt)
-         def pres = new File(uploadDir.absolutePath + File.separatorChar + newFilename )
-         file.transferTo(pres)
-         
-         def presentationBaseUrl = presentationService.presentationBaseUrl
-			   UploadedPresentation uploadedPres = new UploadedPresentation(meetingId, presId, presFilename, presentationBaseUrl);
-			   uploadedPres.setUploadedFile(pres);
-			   presentationService.processUploadedPresentation(uploadedPres)
-			 }							             			     	
-		} else {
-			flash.message = 'file cannot be empty'
-		}
+    if (!file || file.empty) {
+      return render(status: 400, text: 'Presentation file cannot be empty')
+    }
 
-    return [];
+    def presFilename = file.getOriginalFilename()
+    def filenameExt = Util.getFilenameExt(presFilename);
+    String presentationDir = presentationService.getPresentationDir()
+    def presId = Util.generatePresentationId(presFilename)
+    File uploadDir = Util.createPresentationDirectory(meetingId, presentationDir, presId)
+    if (uploadDir != null) {
+      def newFilename = Util.createNewFilename(presId, filenameExt)
+      def pres = new File(uploadDir.absolutePath + File.separatorChar + newFilename )
+      file.transferTo(pres)
+
+      def presentationBaseUrl = presentationService.presentationBaseUrl
+      UploadedPresentation uploadedPres = new UploadedPresentation(meetingId, presId, presFilename, presentationBaseUrl);
+      uploadedPres.setUploadedFile(pres);
+      presentationService.processUploadedPresentation(uploadedPres)
+    }
+    return render(status: 202, text: "Presentation uploaded, now processing")
   }
 
   def testConversion = {
