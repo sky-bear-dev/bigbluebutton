@@ -1,0 +1,162 @@
+$scrollbar-fudge: 20px;
+
+$header-height: 48px;
+$controls-height: 48px;
+
+$sidebar-width: 240px;
+
+$thumbnail-padding: 4px;
+$thumbnail-img-width: 128px;
+$thumbnail-img-height: 96px;
+$thumbnails-inner-width: $thumbnail-img-width + 3 * $thumbnail-padding;
+$thumbnails-width: $thumbnails-inner-width + $scrollbar-fudge;
+
+@mixin visually-hidden {
+  position: absolute !important;
+  /* IE6, IE7 */
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#playback-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+#header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $header-height;
+  overflow: hidden;
+}
+#presentation {
+  position: absolute;
+  top: $header-height;
+  left: 0;
+  right: 0;
+  bottom: $controls-height;
+  overflow: hidden;
+}
+.thumbnails #presentation {
+  left: $thumbnails-width;
+}
+.sidebar #presentation {
+  right: $sidebar-width;
+}
+#controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: $controls-height;
+  display: table;
+}
+#controls > .button-wrap {
+  display: table-cell;
+}
+#controls button {
+  display: block;
+  height: $controls-height;
+  width: $controls-height;
+}
+#playpause-button {
+}
+#sidebar {
+  display: none;
+}
+.sidebar #sidebar {
+  display: block;
+  position: absolute;
+  top: $header-height;
+  right: 0;
+  bottom: $controls-height;
+  width: $sidebar-width;
+}
+#thumbnails {
+  display: none;
+}
+.thumbnails #thumbnails {
+  display: block;
+  position: absolute;
+  top: $header-height;
+  left: 0;
+  bottom: $controls-height;
+  width: $thumbnails-width;
+}
+#thumbnails .scroll-region {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: $thumbnail-padding;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+#thumbnails .header {
+  @include visually-hidden;
+}
+#thumbnails .thumbnail {
+  display: block;
+  width: $thumbnail-img-width + 2 * $thumbnail-padding;
+  padding: $thumbnail-padding;
+}
+#thumbnails .thumbnail + .thumbnail {
+  margin-top: $thumbnail-padding;
+}
+#thumbnails .thumbnail > img {
+  width: $thumbnail-img-width;
+  max-height: $thumbnail-img-height;
+  display: block;
+}
+#thumbnails .thumbnail > .label {
+  display: block;
+}
+#caption-overlay {
+  position: absolute;
+  top: $header-height;
+  bottom: $controls-height;
+  left: 0;
+  right: 0;
+}
+.thumbnails #caption-overlay {
+  left: $thumbnails-width;
+}
+.sidebar #caption-overlay {
+  right: $sidebar-width;
+}
+#loading-overlay {
+  display: none;
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: $header-height;
+}
+.loading #loading-overlay {
+  display: block;
+  visibility: visible;
+}
+#loading-overlay #loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}

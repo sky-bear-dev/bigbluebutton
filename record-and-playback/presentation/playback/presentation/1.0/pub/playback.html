@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2016 BigBlueButton Inc. and by respective authors.
+
+This file is part of BigBlueButton.
+
+BigBlueButton is free software; you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+BigBlueButton is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with BigBlueButton. If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BigBlueButton Recording Playback</title>
+  <link rel="stylesheet" href="css/playback.css">
+  <link rel="stylesheet" href="css/playback-theme.css">
+</head>
+<body class="loading">
+  <div id="playback-content" class="thumbnails">
+    <div id="header">
+      <h1 id="title">BigBlueButton Recording Playback</h1>
+    </div>
+    <div id="sidebar">
+    </div>
+    <div id="video">
+    </div>
+    <div id="presentation">
+      <div class="circle" id="cursor" style="visibility:hidden;"></div>
+      <div id="slide" role="img" aria-labelledby="slideText"></div>
+      <div id="slideText" class="visually-hidden" aria-live="polite"></div>
+    </div>
+    <div id="controls">
+    </div>
+    <div id="thumbnails">
+      <div class="header">
+        <h2>Slide Thumbnails</h2>
+      </div>
+      <div class="scroll-region">
+        <a class="thumbnail active" href="playback.html?t=0s">
+          <img src="http://calvin-bbb-dev.novalocal/presentation/6e35e3b2778883f5db637d7a5dba0a427f692e91-1452035098085/presentation/d2d9a672040fbde2a47a10bf6c37b6a4b5ae187f-1452035098254/slide-1.png" alt="Slide 1" width="128" height="96" alt="">
+          <span class="label">00:00:00</span>
+        </a>
+      </div>
+    </div>
+    <div id="caption-overlay" role="region" aria-live="assertive">
+    </div>
+    <div id="loading-overlay">
+      <div id="loading-indicator">Loading…</div>
+      <noscript>
+        <p>Playback of BigBlueButton recordings requires Javascript. Please enable Javascript, or try a different browser.</p>
+      </noscript>
+    </div>
+  </div>
+  <script src="lib/vtt.js"></script>
+  <script src="lib/playback.js"></script>
+</body>
+</html>

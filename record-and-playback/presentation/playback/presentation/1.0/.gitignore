@@ -1,0 +1,6 @@
+.sass-cache
+*.min.*
+*.map
+src/css/playback.css
+src/js/playback.js
+node_modules

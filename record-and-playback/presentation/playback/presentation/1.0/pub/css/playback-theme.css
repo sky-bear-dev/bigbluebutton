@@ -1,0 +1,71 @@
+body {
+  background: white;
+  color: rgba(0,0,0,0.87);
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1.5;
+}
+a:link {
+  color: #0d47a1;
+}
+#header {
+  background: white;
+  color: inherit;
+  border-bottom: 1px solid #d7d7d7;
+  padding: 0 24px;
+}
+#header #title {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 48px;
+}
+#presentation {
+  background: white;
+}
+#controls {
+  border-top: 1px solid #d7d7d7;
+  background: #eeeeee;
+}
+#controls button {
+  margin-top: -1px;
+  border: 2px outset silver;
+  background: silver;
+}
+#controls button:active {
+  border-style: inset;
+}
+#sidebar {
+  background: white;
+  border-left: 1px solid #d7d7d7;
+}
+#thumbnails {
+  background: white;
+  border-right: 1px solid #d7d7d7;
+}
+#thumbnails .thumbnail {
+  border-radius: 4px;
+  color: rgba(0,0,0,0.87);
+  text-decoration: none;
+}
+#thumbnails .thumbnail > .label {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 16px;
+  text-align: center;
+}
+#thumbnails .thumbnail:hover, #thumbnails .thumbnail:focus {
+  background: #eeeeee;
+}
+#thumbnails .thumbnail:active, #thumbnails .thumbnail.active {
+  background: #90caf9;
+}
+#loading-overlay {
+  background: #eeeeee;
+  padding: 8px;
+}
+#loading-overlay #loading-indicator {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
