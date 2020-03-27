@@ -97,9 +97,11 @@ remove_raw_of_published_recordings(){
     #TYPES=$(cd /usr/local/bigbluebutton/core/scripts/process; ls *.rb | sed s/.rb//g)
     logger "Removing raw directory of old recordings:"
     TYPES="presentation"
-    old_meetings=$(find /var/bigbluebutton/recording/raw/*/events.xml  -mtime +$published_days | cut -d"/" -f6 )
-    for meeting in $old_meetings
+    while read -r -d '' meeting
     do
+        meeting=${meeting%/events.xml}
+        meeting=${meeting##*/}
+
         PROPERLY_PUBLISHED="true"
         FAILED_TYPES=""
         for type in $TYPES
@@ -112,11 +114,11 @@ remove_raw_of_published_recordings(){
         done
         if [ "$PROPERLY_PUBLISHED" == "true" ]; then
             logger "$meeting properly published, removing raw dir."
-            rm -r /var/bigbluebutton/recording/raw/$meeting/
+            rm -r "/var/bigbluebutton/recording/raw/$meeting"
         else
             logger "$meeting was not properly published in [ $FAILED_TYPES ]"
         fi
-    done
+    done < <(find /var/bigbluebutton/recording/raw -name events.xml -mtime +$published_days -print0)
 }
 
 #remove_raw_of_published_recordings
